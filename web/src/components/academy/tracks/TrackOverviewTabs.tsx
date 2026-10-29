@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
-import { useSolvedExercisesQuery } from "@/hooks/queries/use-academy.queries";
+import React from "react";
+import Link from "next/link";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SlugHeader } from "@/components/academy/tracks/slug/slug-header";
 import { SlugAboutTab } from "@/components/academy/tracks/slug/slug-about-tab";
@@ -12,50 +12,17 @@ import { SlugAboutGraphPreview } from "@/components/academy/tracks/slug/slug-abo
 import { SlugAboutPracticePreview } from "@/components/academy/tracks/slug/slug-about-practice-preview";
 import { SlugLearnTab } from "@/components/academy/tracks/learn/slug-learn-tab";
 import { PracticeProblemsSection } from "@/components/academy/tracks/practice/practice-problem-card";
-import { useRouter, useSearchParams } from "next/navigation";
 import type { TrackConfigResponse } from "@/types/academy";
+import { useTrackOverviewTabs } from "./hooks";
 
-type Props = {
+export interface TrackOverviewTabsProps {
   config: TrackConfigResponse;
   slug: string;
-};
+}
 
-export const TrackOverviewTabs = ({ config, slug }: Props) => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
-  // Fetch user-specific progress on the client side
-  const { data: solvedExercises } = useSolvedExercisesQuery(slug);
-
-  const allowedTabs = useMemo(
-    () => new Set(["about", "learn", "practice"]),
-    [],
-  );
-  const initialTab = searchParams.get("tab");
-  const [activeTab, setActiveTab] = useState<string>(
-    allowedTabs.has(initialTab ?? "") ? (initialTab as string) : "about",
-  );
-
-  // Fix Next.js scroll preservation bug when navigating with loading.tsx
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  useEffect(() => {
-    const urlTab = searchParams.get("tab");
-    if (urlTab && allowedTabs.has(urlTab) && urlTab !== activeTab) {
-      setActiveTab(urlTab);
-    }
-  }, [activeTab, allowedTabs, searchParams]);
-
-  const handleTabChange = (tab: string) => {
-    const nextTab = allowedTabs.has(tab) ? tab : "about";
-    setActiveTab(nextTab);
-
-    const newParams = new URLSearchParams(searchParams.toString());
-    newParams.set("tab", nextTab);
-    router.replace(`?${newParams.toString()}`, { scroll: false });
-  };
+export const TrackOverviewTabs = ({ config, slug }: TrackOverviewTabsProps) => {
+  const { activeTab, solvedExercises, handleTabChange } =
+    useTrackOverviewTabs(slug);
 
   return (
     <div className="flex flex-col min-h-screen bg-background py-24">
@@ -70,14 +37,15 @@ export const TrackOverviewTabs = ({ config, slug }: Props) => {
             <SlugHeader config={config} />
 
             <TabsList className="w-full justify-start border-none rounded-none h-auto p-0 bg-transparent gap-8 mt-1">
-              <TabsTrigger
-                value="back"
-                onClick={() => router.push("/academy/tracks")}
-                className="rounded-none border-b-[3px] border-transparent data-[state=active]:border-primary data-[state=active]:text-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none px-0 py-4 font-bold text-[15px] transition-all flex items-center gap-2 text-muted-foreground hover:text-foreground"
+              <Link
+                href="/academy/tracks"
+                prefetch={true}
+                id="track-overview-back-btn"
+                className="rounded-none border-b-[3px] border-transparent px-0 py-4 font-bold text-[15px] transition-all flex items-center gap-2 text-muted-foreground hover:text-foreground cursor-pointer focus-visible:outline-none"
               >
                 <ArrowLeft className="h-5 w-5" />{" "}
                 <span className="hidden md:block">Back</span>
-              </TabsTrigger>
+              </Link>
               <TabsTrigger
                 value="about"
                 className="rounded-none border-b-[3px] border-transparent data-[state=active]:border-primary data-[state=active]:text-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none px-0 py-4 font-bold text-[15px] transition-all flex items-center gap-2 text-muted-foreground hover:text-foreground"
@@ -103,13 +71,14 @@ export const TrackOverviewTabs = ({ config, slug }: Props) => {
           </div>
         </div>
 
-        {/* Tab Contents */}
+        {/* Tab Contents - Kept mounted in DOM for instant 0ms switching */}
         <div className="w-full">
           <TabsContent
             value="about"
-            className="m-0 border-none p-0 focus-visible:ring-0"
+            forceMount
+            className="m-0 border-none p-0 focus-visible:ring-0 data-[state=inactive]:hidden"
           >
-            <SlugAboutTab config={config} />
+            <SlugAboutTab config={config} onTabChange={handleTabChange} />
             <SlugAboutContent
               content={config.about_content}
               language={config.language}
@@ -119,32 +88,35 @@ export const TrackOverviewTabs = ({ config, slug }: Props) => {
               icon={config.icon_url}
               language={config.language}
             />
-            <SlugAboutGraphPreview config={config} />
+            <SlugAboutGraphPreview config={config} onTabChange={handleTabChange} />
             <SlugAboutPracticePreview
               config={config}
-              solvedExercises={solvedExercises || []}
+              solvedExercises={solvedExercises}
+              onTabChange={handleTabChange}
             />
           </TabsContent>
 
           {config.concepts && config.concepts.length > 0 && (
             <TabsContent
               value="learn"
-              className="m-0 border-none p-0 focus-visible:ring-0 container mx-auto px-4 md:px-6 max-w-7xl mt-12 mb-24"
+              forceMount
+              className="m-0 border-none p-0 focus-visible:ring-0 container mx-auto px-4 md:px-6 max-w-7xl mt-12 mb-24 data-[state=inactive]:hidden"
             >
               <SlugLearnTab
                 config={config}
-                solvedExercises={solvedExercises || []}
+                solvedExercises={solvedExercises}
               />
             </TabsContent>
           )}
 
           <TabsContent
             value="practice"
-            className="m-0 border-none p-0 focus-visible:ring-0 container mx-auto px-4 md:px-6 max-w-7xl mt-12"
+            forceMount
+            className="m-0 border-none p-0 focus-visible:ring-0 container mx-auto px-4 md:px-6 max-w-7xl mt-12 data-[state=inactive]:hidden"
           >
             <PracticeProblemsSection
               exercises={config.exercises}
-              solvedExercises={solvedExercises || []}
+              solvedExercises={solvedExercises}
             />
           </TabsContent>
         </div>

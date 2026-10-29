@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import type { ProblemFiltersProps } from "@/types/component.types";
 import { ButtonGroup } from "../ui/button-group";
 import type { Problem } from "@/types/api";
+import { Search } from "lucide-react";
 
 export type DifficultyFilter = "All" | Problem["difficulty"];
 
@@ -55,13 +56,16 @@ export const ProblemFilters: React.FC<ProblemFiltersProps> = ({
         </div>
       </div>
 
-      <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
-        <div className="flex-1 flex gap-2">
+      <div className="flex flex-col sm:flex-row gap-2 sm:items-center">
+        <div className="relative w-full">
+           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+          <Search className="h-4 w-4 text-muted-foreground" />
+        </div>
           <Input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search by title or slug or number"
-            className="h-10 flex-1 border border-border bg-background px-3 text-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary"
+            className="pl-9 pr-9 bg-card/50 border-border h-10"
           />
         </div>
         <div className="flex items-center gap-2">
@@ -69,7 +73,7 @@ export const ProblemFilters: React.FC<ProblemFiltersProps> = ({
             value={topicFilter}
             onChange={(e) => setTopicFilter(e.target.value)}
             placeholder="Topic (e.g. Array)"
-            className="h-10 w-40 border border-border bg-background px-3 text-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary"
+            className="bg-card/50 border-border h-10"
           />
           <Button
             type="button"

@@ -15,11 +15,13 @@ interface QueryGuardProps<T> {
   errorMessage?: string;
   onRetry?: () => void;
   retryText?: string;
+  errorClassName?: string;
   
   emptyIcon?: LucideIcon;
   emptyTitle?: string;
   emptyMessage?: string;
   emptyAction?: React.ReactNode;
+  emptyClassName?: string;
 }
 
 /**
@@ -38,10 +40,12 @@ export function QueryGuard<T>({
   errorMessage,
   onRetry,
   retryText,
+  errorClassName,
   emptyIcon,
   emptyTitle,
   emptyMessage,
   emptyAction,
+  emptyClassName,
 }: QueryGuardProps<T>) {
   // 1. Loading Path: Render high-fidelity skeleton if we have no data yet
   // We check for !data OR an empty array to ensure initial fetches show the skeleton, not the empty state.
@@ -84,6 +88,7 @@ export function QueryGuard<T>({
         message={displayMessage}
         onRetry={onRetry}
         retryText={retryText}
+        className={errorClassName}
       />
     );
   }
@@ -98,6 +103,7 @@ export function QueryGuard<T>({
         title={emptyTitle}
         message={emptyMessage}
         action={emptyAction}
+        className={emptyClassName}
       />
     );
   }

@@ -22,11 +22,11 @@ export const ContestFilters: React.FC = () => {
   const activeFiltersCount = filters.platforms.length;
 
   return (
-    <div className="flex flex-col gap-4 justify-between pb-2 mt-4 md:my-8 border-b pb-6">
-      <div className="space-y-1">
+    <div className="flex flex-col gap-4 justify-between border-b pb-6">
+      {/* <div className="space-y-1">
        <h3 className="text-2xl font-semibold tracking-tight text-foreground">All Contests</h3>
         <p className="text-sm text-muted-foreground">Filter by platform or search for specific rounds.</p>
-      </div>
+      </div> */}
       
       <div className="flex flex-col md:flex-row md:items-center gap-4">
         <div className="relative w-full md:max-w-md">

@@ -17,6 +17,7 @@ RUN bun install
 COPY api/src ./api/src
 COPY driver ./driver
 COPY cloud ./cloud
+COPY data ./data
 
 # 4. Final step: run from the API directory
 WORKDIR /app/api

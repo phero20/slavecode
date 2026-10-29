@@ -78,8 +78,8 @@ interface EnvConfig {
   judge0VmIdleTimeoutHours: number;
 
   // AI
-  oneApiToken: string;
-  oneApiBaseUrl: string;
+  newApiToken: string;
+  newApiBaseUrl: string;
   geminiApiKeys: string[];
 
   // Redis
@@ -139,9 +139,9 @@ export const config: EnvConfig = {
   judge0VmIdleTimeoutHours: parseNumber(Bun.env.JUDGE0_VM_IDLE_TIMEOUT_HOURS, 2),
 
   // AI
-  oneApiToken: requireEnv("ONE_API_TOKEN"),
-  oneApiBaseUrl: (() => {
-    const url = Bun.env.ONE_API_BASE_URL || "http://localhost:3000";
+  newApiToken: Bun.env.NEW_API_TOKEN || requireEnv("NEW_API_TOKEN"),
+  newApiBaseUrl: (() => {
+    const url = Bun.env.NEW_API_BASE_URL || Bun.env.ONE_API_BASE_URL || "http://localhost:3000";
     return url.endsWith("/v1") ? url : `${url.replace(/\/$/, "")}/v1`;
   })(),
   geminiApiKeys: parseStringList(Bun.env.GEMINI_API_KEYS) || (Bun.env.GEMINI_API_KEY ? [Bun.env.GEMINI_API_KEY] : []),

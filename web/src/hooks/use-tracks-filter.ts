@@ -1,10 +1,14 @@
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 import type { Track } from "@/types/academy";
+import { useAcademyStore } from "@/store/use-academy-store";
 
 export function useTracksFilter(tracks: Track[]) {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [sortBy, setSortBy] = useState("popular");
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const searchQuery = useAcademyStore((s) => s.searchQuery);
+  const setSearchQuery = useAcademyStore((s) => s.setSearchQuery);
+  const sortBy = useAcademyStore((s) => s.sortBy);
+  const setSortBy = useAcademyStore((s) => s.setSortBy);
+  const selectedTags = useAcademyStore((s) => s.selectedTags);
+  const setSelectedTags = useAcademyStore((s) => s.setSelectedTags);
 
   // Compute all unique tags from tracks
   const allTags = useMemo(() => {

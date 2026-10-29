@@ -25,7 +25,7 @@ export default async function ContestHubPage() {
 
   return (
     <div className="relative bg-background text-foreground">
-      <main className="py-28">
+      <main className="py-26">
         <div className="border-b">
           <div className="mb-10 flex flex-col gap-2 border-b pb-4 mx-auto max-w-7xl px-4 2xl:px-0 ">
             <div className="flex items-center gap-1">

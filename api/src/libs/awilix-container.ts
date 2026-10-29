@@ -133,9 +133,24 @@ import { type IReportBugService } from "../services/report-bug/report-bug.servic
 import { type ReportBugAdminService } from "../services/report-bug/report-bug.admin.service";
 import { type ReportBugController } from "../controllers/report-bug/report-bug.controller";
 import { type ReportBugAdminController } from "../controllers/report-bug/report-bug.admin.controller";
+import { type IResourceRepository } from "../repositories/resources/resource.repository";
+import { type IRoadmapTopicRepository } from "../repositories/resources/roadmap-topic.repository";
+import { type IRoadmapProjectRepository } from "../repositories/resources/roadmap-project.repository";
+import { type IResourceService, type ResourceService } from "../services/resources/resource.service";
+import {
+  type IRoadmapProjectService,
+  type RoadmapProjectService,
+} from "../services/resources/roadmap-project.service";
+import { type ResourceCache } from "../cache/resources/resource.cache";
+import { type RoadmapProjectCache } from "../cache/resources/roadmap-project.cache";
+import { type ResourceController } from "../controllers/resources/resource.controller";
+import { type UploadController } from "../controllers/common/upload.controller";
 import { type ICloudinaryService } from "../services/common/cloudinary.service";
 import { type CacheAdminService } from "../services/system/cache.admin.service";
 import { type CacheAdminController } from "../controllers/system/cache.admin.controller";
+import { type IVoteRepository } from "../repositories/votes/vote.repository";
+import { type IVoteService } from "../services/votes/vote.service";
+import { type VoteController } from "../controllers/votes/vote.controller";
 
 // --- Infrastructure ---
 import { submissionQueue, arenaCleanupQueue } from "./core/queue";
@@ -197,6 +212,10 @@ export interface ICradle {
   seoRepository: SeoRepository;
   reportBugRepository: ReportBugRepository;
   reportBugAdminRepository: ReportBugAdminRepository;
+  resourceRepository: IResourceRepository;
+  roadmapTopicRepository: IRoadmapTopicRepository;
+  roadmapProjectRepository: IRoadmapProjectRepository;
+  voteRepository: IVoteRepository;
 
   // Services (Primary/Cached)
   authService: AuthService;
@@ -254,6 +273,9 @@ export interface ICradle {
   reportBugService: IReportBugService;
   reportBugAdminService: ReportBugAdminService;
   cacheAdminService: CacheAdminService;
+  resourceService: IResourceService;
+  roadmapProjectService: IRoadmapProjectService;
+  voteService: IVoteService;
 
   // Raw Services
   rawProblemService: ProblemService;
@@ -268,6 +290,8 @@ export interface ICradle {
   rawAcademyService: AcademyService;
   rawSystemDesignService: import("../services/system-design/system-design.service").SystemDesignService;
   rawCompanyService: import("../services/company/company.service").CompanyService;
+  rawResourceService: ResourceService;
+  rawRoadmapProjectService: RoadmapProjectService;
 
   // Middlewares
   authMiddleware: AuthMiddleware;
@@ -295,6 +319,8 @@ export interface ICradle {
   academyCache: AcademyCache;
   systemDesignCache: SystemDesignCache;
   companyCache: CompanyCache;
+  resourceCache: ResourceCache;
+  roadmapProjectCache: RoadmapProjectCache;
 
   // Controllers
   authController: AuthController;
@@ -327,6 +353,9 @@ export interface ICradle {
   reportBugController: ReportBugController;
   reportBugAdminController: ReportBugAdminController;
   cacheAdminController: CacheAdminController;
+  resourceController: ResourceController;
+  uploadController: UploadController;
+  voteController: VoteController;
 
   // Third Party
   clerkClient: ReturnType<typeof createClerkClient>;

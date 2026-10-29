@@ -8,6 +8,7 @@ import { SocialTab } from "./SocialTab";
 import { ProfileSidebar } from "./ProfileSidebar";
 import { ArenaHistoryTab } from "./ArenaHistoryTab";
 import { SolutionsTab } from "./SolutionsTab";
+import { ProjectsTab } from "./ProjectsTab";
 import { useProfileStore } from "@/store/use-profile-store";
 import { RecentActivities } from "../stats/RecentActivities";
 import { useActivityPagination } from "@/hooks/stats/use-activity-pagination";
@@ -105,6 +106,10 @@ export function ProfileLayout({
 
         <TabsContent value="solutions" className="mt-0 focus-visible:ring-0">
           <SolutionsTab username={username} />
+        </TabsContent>
+
+        <TabsContent value="projects" className="mt-0 focus-visible:ring-0">
+          <ProjectsTab username={username} />
         </TabsContent>
 
         <TabsContent value="submissions" className="mt-0 focus-visible:ring-0">

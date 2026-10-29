@@ -2,7 +2,7 @@ export interface ReportBugPayload {
   title: string;
   description: string;
   type: string;
-  images?: File[];
+  images?: string[];
 }
 
 export interface BugReport {

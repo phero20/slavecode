@@ -9,11 +9,14 @@ services:
     env_file:
       - ./api/.env
     ports:
-      - "3000:3000"
+      - "4000:3000"
     restart: unless-stopped
     environment:
       - REDIS_URL=redis://redis:6379
       - LOG_PRETTY=true
+    volumes:
+      - ./data:/app/data
+      - ./api/src:/app/api/src
     depends_on:
       - redis
 

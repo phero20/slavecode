@@ -7,7 +7,15 @@ import { ArrowRight } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { PracticeProblemCard } from "@/components/academy/tracks/practice/practice-problem-card";
 
-export const SlugAboutPracticePreview = ({ config, solvedExercises = [] }: { config: TrackConfigResponse, solvedExercises?: string[] }) => {
+export const SlugAboutPracticePreview = ({
+  config,
+  solvedExercises = [],
+  onTabChange,
+}: {
+  config: TrackConfigResponse;
+  solvedExercises?: string[];
+  onTabChange?: (tab: string) => void;
+}) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -21,6 +29,10 @@ export const SlugAboutPracticePreview = ({ config, solvedExercises = [] }: { con
   const displayExercises = practiceExercises.slice(0, 6);
 
   const goToPracticeTab = () => {
+    if (onTabChange) {
+      onTabChange("practice");
+      return;
+    }
     const params = new URLSearchParams(searchParams.toString());
     params.set("tab", "practice");
     router.push(`?${params.toString()}`, { scroll: false });

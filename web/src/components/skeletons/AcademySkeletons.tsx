@@ -47,35 +47,49 @@ export function TrackDetailsSkeleton() {
           <div className="container mx-auto px-4 md:px-6 max-w-7xl">
             {/* SlugHeader Ghost */}
             <div className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-10 py-6">
+              {/* Left side: Icon & Title */}
               <div className="flex items-center gap-3 shrink-0">
-                <Skeleton width={56} height={56} className="rounded-xl opacity-20" />
-                <Skeleton width={180} height={40} className="rounded-md" />
+                <Skeleton width={64} height={64} className="rounded-xl opacity-20" />
+                <Skeleton width={180} height={42} className="rounded-md opacity-40" />
               </div>
-              <div className="flex-1 flex flex-wrap items-center gap-4 lg:gap-8 justify-start lg:justify-end opacity-60">
-                <Skeleton width={100} height={20} className="rounded-sm" />
-                <Skeleton width={100} height={20} className="rounded-sm" />
-                <Skeleton width={100} height={20} className="rounded-sm" />
+              {/* Right side: Blurb border-l */}
+              <div className="flex-1 max-w-3xl border-l-[3px] border-border/70 pl-5 py-0.5">
+                <Skeleton width="90%" height={16} className="rounded-sm opacity-30" />
+                <Skeleton width="60%" height={16} className="rounded-sm opacity-20 mt-1.5" />
               </div>
             </div>
-            
+
             {/* TabsList Ghost */}
-            <div className="flex gap-8 mt-1 pb-4">
-              <Skeleton width={80} height={24} className="rounded-sm opacity-40" />
-              <Skeleton width={80} height={24} className="rounded-sm opacity-40" />
-              <Skeleton width={80} height={24} className="rounded-sm opacity-40" />
+            <div className="flex items-center gap-8 py-4">
+              <Skeleton width={60} height={20} className="rounded-sm opacity-30" />
+              <Skeleton width={120} height={20} className="rounded-sm opacity-30" />
+              <Skeleton width={70} height={20} className="rounded-sm opacity-30" />
+              <Skeleton width={80} height={20} className="rounded-sm opacity-30" />
             </div>
           </div>
         </div>
-        
-        {/* Content Ghost */}
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl py-20 flex flex-col lg:flex-row gap-12 lg:gap-16 items-center border-t-2 border-border/50">
-          <div className="flex-1 min-w-0 max-w-[850px] w-full">
-            <Skeleton width="40%" height={32} className="mb-8 rounded-sm" />
-            <Skeleton count={5} className="mb-4 rounded-sm opacity-40" />
-            <Skeleton count={3} width="80%" className="mb-4 rounded-sm opacity-40" />
-          </div>
-          <div className="hidden lg:flex w-[350px] shrink-0 justify-center">
-            <Skeleton circle width={224} height={224} className="opacity-10" />
+
+        {/* Content Ghost: About Page Hero Layout */}
+        <div className="container mx-auto px-4 md:px-6 max-w-7xl py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content Ghost */}
+            <div className="space-y-6">
+              <Skeleton width="85%" height={48} className="rounded-md opacity-40" />
+              <Skeleton width="65%" height={48} className="rounded-md opacity-30 -mt-2" />
+              <div className="space-y-2 pt-2">
+                <Skeleton count={3} height={16} className="rounded-sm opacity-30" />
+                <Skeleton width="75%" height={16} className="rounded-sm opacity-20" />
+              </div>
+              <div className="flex gap-4 pt-4">
+                <Skeleton width={200} height={52} className="rounded-lg opacity-40" />
+                <Skeleton width={160} height={52} className="rounded-lg opacity-25" />
+              </div>
+            </div>
+
+            {/* Right Visual Ghost */}
+            <div className="hidden lg:flex items-center justify-center min-h-[300px]">
+              <Skeleton circle width={220} height={220} className="opacity-15" />
+            </div>
           </div>
         </div>
       </div>

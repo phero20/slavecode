@@ -1,4 +1,7 @@
 export * from "./BaseSkeleton";
+export * from "./CategorySkeletons";
+export * from "./ProjectsSkeletons";
+export * from "./ResourcesSkeletons";
 export * from "./WorkspaceSkeletons";
 export * from "./ContestSkeletons";
 export * from "./AcademySkeletons";
@@ -7,3 +10,6 @@ export * from "./ListSkeletons";
 export * from "./ArenaSkeletons";
 export * from "./workspace";
 export * from "./AuthSkeletons";
+export * from "./RoadmapSkeletons";
+export * from "./RoadmapSkeleton";
+export * from "./companies-skeleton";

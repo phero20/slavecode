@@ -64,17 +64,17 @@ const TopicsList = ({ isMobile }: { isMobile?: boolean }) => {
 
 export const LearnMobileHeader = () => {
   return (
-    <div className="md:hidden fixed top-0 left-0 right-0 z-40 flex items-center justify-between border-b border-border/40 bg-background p-4 pt-20">
-      <Button variant="outline" size="sm" className="text-muted-foreground hover:text-foreground shadow-none" asChild>
+    <div className="lg:hidden fixed top-0 left-0 right-0 z-40 flex items-center justify-between border-b border-border/40 bg-background p-4 pt-20">
+      <Button variant="outline" size="sm" className="text-muted-foreground hover:text-foreground shadow-none text-xs h-8" asChild>
         <Link href="/systemdesign" className="flex items-center">
-          <ArrowLeft className="h-4 w-4 mr-2" />
+          <ArrowLeft className="h-4 w-4 mr-1.5" />
           Back
         </Link>
       </Button>
 
       <Sheet>
         <SheetTrigger asChild>
-          <div className="flex items-center gap-2 cursor-pointer">
+          <div className="flex items-center gap-2 cursor-pointer shrink-0">
             <span className="font-bold text-sm tracking-tight">Topics</span>
             <Button variant="ghost" className="p-2 -mr-2 text-foreground" asChild>
               <div><Menu className="h-5 w-5" /></div>
@@ -100,12 +100,12 @@ export const LearnMobileHeader = () => {
 
 export const LearnDesktopSidebar = () => {
   return (
-    <aside className="hidden md:block w-64 lg:w-72 shrink-0 border-r border-border/40 bg-card/30">
+    <aside className="hidden lg:block w-64 xl:w-72 shrink-0 border-r border-border/40 bg-card/30">
       <div className="sticky top-20 overflow-hidden flex flex-col h-[calc(100vh-5rem)]">
         <div className="px-3 py-2 border-b border-border/40 flex items-center justify-between gap-2">
-          <Button variant="outline" size="sm" className="text-muted-foreground hover:text-foreground shadow-none" asChild>
+          <Button variant="outline" size="sm" className="text-muted-foreground hover:text-foreground shadow-none text-xs h-7" asChild>
             <Link href="/systemdesign" className="flex items-center">
-              <ArrowLeft className="h-4 w-4 mr-2" />
+              <ArrowLeft className="h-3.5 w-3.5 mr-1.5" />
               Back
             </Link>
           </Button>

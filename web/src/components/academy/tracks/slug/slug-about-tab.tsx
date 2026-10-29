@@ -5,13 +5,23 @@ import { TrackConfigResponse } from "@/types/academy";
 import { Button } from "@/components/ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export const SlugAboutTab = ({ config }: { config: TrackConfigResponse }) => {
+export const SlugAboutTab = ({
+  config,
+  onTabChange,
+}: {
+  config: TrackConfigResponse;
+  onTabChange?: (tab: string) => void;
+}) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const totalExercises = (config.exercises?.concept?.length || 0) + (config.exercises?.practice?.length || 0);
   const totalConcepts = config.exercises?.concept?.length || 0;
 
   const goToTab = (tab: "learn" | "practice") => {
+    if (onTabChange) {
+      onTabChange(tab);
+      return;
+    }
     const params = new URLSearchParams(searchParams.toString());
     params.set("tab", tab);
     router.push(`?${params.toString()}`);

@@ -195,16 +195,16 @@ export const SocialTab: React.FC<SocialTabProps> = ({
             </Button>
           </div>
 
-          <TabsList className="p-1 h-10 w-full md:w-auto">
+          <TabsList className="p-1 h-auto w-full md:w-auto gap-1 border">
             <TabsTrigger
               value="followers"
-              className="data-[state=active]:text-primary"
+              className="data-[state=active]:text-primary h-9 px-4"
             >
               Followers
             </TabsTrigger>
             <TabsTrigger
               value="following"
-              className="data-[state=active]:text-primary"
+              className="data-[state=active]:text-primary h-9 px-4"
             >
               Following
             </TabsTrigger>

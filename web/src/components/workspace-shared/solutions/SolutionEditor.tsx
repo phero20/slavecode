@@ -1,45 +1,15 @@
 "use client";
 
 import React, { useState, useCallback } from "react";
-import dynamic from "next/dynamic";
 import { useCreateSolution, useUpdateSolution } from "@/hooks/mutations/use-solution.mutations";
 import { toast } from "sonner";
-import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
+import { MarkdownEditor } from "@/components/shared/markdown";
 
 // Components
 import { SolutionEditorHeader } from "./components/SolutionEditorHeader";
-import { SolutionEditorStyles } from "./components/SolutionEditorStyles";
 
-// Hooks & Constants
-import { useSolutionMdeOptions } from "./hooks/use-solution-mde-options";
+// Constants
 import { INITIAL_SOLUTION_TEMPLATE } from "./constants/solution.constants";
-
-// Register languages for PrismLight
-import cpp from "react-syntax-highlighter/dist/esm/languages/prism/cpp";
-import python from "react-syntax-highlighter/dist/esm/languages/prism/python";
-import java from "react-syntax-highlighter/dist/esm/languages/prism/java";
-import javascript from "react-syntax-highlighter/dist/esm/languages/prism/javascript";
-import typescript from "react-syntax-highlighter/dist/esm/languages/prism/typescript";
-import sql from "react-syntax-highlighter/dist/esm/languages/prism/sql";
-
-SyntaxHighlighter.registerLanguage("cpp", cpp);
-SyntaxHighlighter.registerLanguage("c++", cpp);
-SyntaxHighlighter.registerLanguage("python", python);
-SyntaxHighlighter.registerLanguage("py", python);
-SyntaxHighlighter.registerLanguage("java", java);
-SyntaxHighlighter.registerLanguage("javascript", javascript);
-SyntaxHighlighter.registerLanguage("js", javascript);
-SyntaxHighlighter.registerLanguage("typescript", typescript);
-SyntaxHighlighter.registerLanguage("ts", typescript);
-SyntaxHighlighter.registerLanguage("sql", sql);
-
-// Import EasyMDE CSS
-import "easymde/dist/easymde.min.css";
-
-// Dynamic import for SimpleMDE to avoid SSR issues
-const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
-  ssr: false,
-});
 
 interface SolutionEditorProps {
   problemId: string;
@@ -67,8 +37,6 @@ export const SolutionEditor: React.FC<SolutionEditorProps> = ({
   const { mutate: updateSolution, isPending: isUpdating } = useUpdateSolution(problemId);
   const isPending = isCreating || isUpdating;
   const isEditMode = !!solutionId;
-
-  const mdeOptions = useSolutionMdeOptions();
 
   const handleSubmit = useCallback(() => {
     const trimmedTitle = title.trim();
@@ -124,8 +92,6 @@ export const SolutionEditor: React.FC<SolutionEditorProps> = ({
 
   return (
     <div className="solution-editor-root p-4">
-      <SolutionEditorStyles />
-      
       <SolutionEditorHeader
         title={title}
         setTitle={setTitle}
@@ -134,7 +100,14 @@ export const SolutionEditor: React.FC<SolutionEditorProps> = ({
         onPublish={handleSubmit}
       />
 
-      <SimpleMDE value={content} onChange={setContent} options={mdeOptions as any} />
+      <MarkdownEditor
+        value={content}
+        onChange={setContent}
+        placeholder="Write your solution..."
+        defaultCodeLanguage="java"
+        minHeight="400px"
+        autofocus
+      />
     </div>
   );
 };

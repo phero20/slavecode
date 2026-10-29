@@ -3,6 +3,7 @@
 import React from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { UploadCloud, X, Send, Bug, Palette, Lightbulb, MessageSquare, ChevronLeft, Loader2, CheckCircle2, ArrowLeft, ArrowRight } from "lucide-react";
@@ -126,11 +127,11 @@ export function ReportBugForm() {
         {/* Description (Textarea) */}
         <div className="space-y-4">
           <Label htmlFor="description" className="text-sm font-semibold text-foreground/80">Description</Label>
-          <textarea
+          <Textarea
             id="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="flex min-h-[300px] w-full rounded-md border border-input bg-background/50 px-4 py-3 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 resize-y custom-scrollbar"
+            className="min-h-[300px] w-full bg-background/50 px-4 py-3 text-sm resize-y custom-scrollbar"
             placeholder={`• Bug/Issue: What happened? Include steps to reproduce if possible.\n• Feature Request: What should we add and why?\n• UI/Feedback: Any design tweaks or general thoughts you'd like to share?`}
           />
         </div>

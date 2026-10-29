@@ -25,16 +25,16 @@ export interface ILlmService {
 export class LlmService implements ILlmService {
   private readonly clock: IClockService;
   private readonly apiKey: string;
-  private readonly baseUrl: string = config.oneApiBaseUrl;
+  private readonly baseUrl: string = config.newApiBaseUrl;
   private circuitBreaker = new CircuitBreaker("LLM API Gateway", 3, 1, 60000);
 
   constructor({ clockService }: ICradle) {
     this.clock = clockService;
-    this.apiKey = config.oneApiToken;
+    this.apiKey = config.newApiToken;
   }
 
   /**
-   * Calls the OneAPI gateway with system + user prompts and returns parsed JSON.
+   * Calls the NewAPI gateway with system + user prompts and returns parsed JSON.
    */
   async generateJson<T>(opts: {
     systemPrompt: string;

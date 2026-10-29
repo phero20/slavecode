@@ -1,6 +1,7 @@
 import { type ICradle } from "../../libs/awilix-container";
 import { type ILlmService } from "./llm.service";
 import { createLogger } from "../../libs/utils/logger";
+import { AI_CONFIG, type LlmStep } from "../../configs/ai.config";
 
 const logger = createLogger("unified-llm.service");
 
@@ -18,32 +19,7 @@ export interface GenerateJsonOptions {
   order?: "order1" | "order2";
 }
 
-interface LlmStep {
-  provider: "groq" | "gemini";
-  model: string;
-}
 
-const ORDER1: LlmStep[] = [
-  // { provider: "groq", model: "llama-3.3-70b-versatile" },
-  { provider: "groq", model: "openai/gpt-oss-120b" },
-
-  { provider: "gemini", model: "gemini-3.1-flash-lite" },
-  { provider: "gemini", model: "gemini-2.5-flash" },
-  { provider: "gemini", model: "gemini-2.5-flash-lite" },
-  { provider: "gemini", model: "gemini-3-flash-preview" },
-  { provider: "groq", model: "openai/gpt-oss-20b" },
-];
-
-
-const ORDER2: LlmStep[] = [
-  { provider: "gemini", model: "gemini-2.5-flash" },
-  // { provider: "groq", model: "llama-3.3-70b-versatile" },
-  { provider: "groq", model: "openai/gpt-oss-120b" },
-  { provider: "gemini", model: "gemini-3.1-flash-lite" },
-  { provider: "gemini", model: "gemini-2.5-flash-lite" },
-  { provider: "gemini", model: "gemini-3-flash-preview" },
-  { provider: "groq", model: "openai/gpt-oss-20b" },
-];
 
 /**
  * Unified LLM Gateway Service
@@ -63,7 +39,7 @@ export class UnifiedLlmService {
     opts: GenerateJsonOptions,
   ): Promise<UnifiedJsonResponse<T>> {
     const order = opts.order || "order1";
-    const steps = order === "order2" ? ORDER2 : ORDER1;
+    const steps = order === "order2" ? AI_CONFIG.order2 : AI_CONFIG.order1;
 
     for (let i = 0; i < steps.length; i++) {
       const step = steps[i];

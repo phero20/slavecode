@@ -200,6 +200,7 @@ export const AcademyEditorPanel: React.FC<AcademyEditorPanelProps> = ({
       {/* ── Code tab: Monaco editor ── */}
       <TabsContent
         value="code"
+        forceMount
         className="flex-1 m-0 min-h-0 data-[state=inactive]:hidden"
       >
         <div className="h-[590px] md:h-full w-full ">
@@ -221,6 +222,7 @@ export const AcademyEditorPanel: React.FC<AcademyEditorPanelProps> = ({
 
       <TabsContent
         value="testcase"
+        forceMount
         className="flex-1 m-0 min-h-0 overflow-hidden data-[state=inactive]:hidden"
       >
         <AcademyConsolePanel
@@ -235,6 +237,7 @@ export const AcademyEditorPanel: React.FC<AcademyEditorPanelProps> = ({
 
       <TabsContent
         value="result"
+        forceMount
         className="flex-1 m-0 min-h-0 overflow-hidden data-[state=inactive]:hidden"
       >
         <AcademyConsolePanel

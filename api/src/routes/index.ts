@@ -32,6 +32,9 @@ import { registerCompanyAdminRoutes } from "./company/company.admin.routes";
 import { registerSeoRoutes } from "./seo/seo.routes";
 import { registerReportBugRoutes } from "./report-bug/report-bug.routes";
 import { registerReportBugAdminRoutes } from "./report-bug/report-bug.admin.routes";
+import { registerResourceRoutes } from "./resources/resource.routes";
+import { registerUploadRoutes } from "./common/upload.routes";
+import { registerVoteRoutes } from "./votes/vote.routes";
 
 import { healthRoutes } from "./system/health.routes";
 import { registerCacheAdminRoutes } from "./system/cache.admin.routes";
@@ -71,6 +74,9 @@ export const registerRoutes = (app: Hono<AppEnv>) => {
     reportBugController,
     reportBugAdminController,
     cacheAdminController,
+    resourceController,
+    uploadController,
+    voteController,
     authMiddleware,
     authorizationMiddleware,
     rateLimitMiddleware,
@@ -258,6 +264,21 @@ export const registerRoutes = (app: Hono<AppEnv>) => {
     reportBugAdminController,
     authMiddleware,
     authorizationMiddleware,
+  });
+
+  registerResourceRoutes(v1, {
+    resourceController,
+    authMiddleware,
+  });
+
+  registerUploadRoutes(v1, {
+    uploadController,
+    authMiddleware,
+  });
+
+  registerVoteRoutes(v1, {
+    voteController,
+    authMiddleware,
   });
  
   registerCacheAdminRoutes(v1, {

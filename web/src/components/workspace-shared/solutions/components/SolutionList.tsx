@@ -3,7 +3,7 @@
 import React from "react";
 import { Solution } from "@/types/api";
 import { formatDistanceToNow } from "date-fns";
-import { ThumbsUp, ChevronRight, Edit, ShieldCheck } from "lucide-react";
+import { ChevronRight, Edit, ShieldCheck } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { QueryGuard } from "@/components/shared/QueryGuard";
@@ -17,6 +17,7 @@ import {
   TableHeader, 
   TableRow 
 } from "@/components/ui/table";
+import { VoteBadge } from "@/components/shared/VoteBadge";
 
 interface SolutionListProps {
   type: "community" | "my-solutions";
@@ -135,17 +136,11 @@ export const SolutionList: React.FC<SolutionListProps> = ({
                         <TableCell className="py-4 text-right pr-6">
                           <div className="flex items-center justify-end gap-6 text-muted-foreground/60">
                             {!isOfficial && (
-                              <div className="flex flex-col items-end gap-1">
-                                <div className="flex items-center gap-1.5 text-primary">
-                                  <ThumbsUp className="size-3.5" />
-                                  <span className="text-xs font-black tabular-nums">
-                                    {solution.upvotes}
-                                  </span>
-                                </div>
-                                <span className="text-[8px] font-black uppercase tracking-widest opacity-40">
-                                  Votes
-                                </span>
-                              </div>
+                              <VoteBadge
+                                targetType="solution"
+                                targetId={solution.id}
+                                fallbackScore={(solution.upvotes ?? 0) - (solution.downvotes ?? 0)}
+                              />
                             )}
                             <ChevronRight className="size-4 group-hover:text-primary transition-colors" />
                           </div>

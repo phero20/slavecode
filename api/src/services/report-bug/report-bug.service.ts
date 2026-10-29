@@ -39,19 +39,15 @@ export class ReportBugService implements IReportBugService {
       throw AppError.badRequest("Missing required fields: title, description, and type are mandatory.");
     }
 
-    // Normalize images to an array so the controller doesn't have to worry about it
-    let imageArray: (File | string)[] = [];
-    if (images) {
-      imageArray = Array.isArray(images) ? images : [images];
-    }
-
-    // Upload images in parallel if they exist
+    // Upload images in parallel via universal uploadMedia service if provided
     let uploadedUrls: string[] = [];
-    if (imageArray.length > 0) {
-      const uploadPromises = imageArray.map(img => 
-        this.cloudinaryService.uploadImage(img, "slavecode/bug_reports")
-      );
-      uploadedUrls = await Promise.all(uploadPromises);
+    const hasImages = Array.isArray(images) ? images.length > 0 : Boolean(images);
+    if (hasImages) {
+      const uploadResult = await this.cloudinaryService.uploadMedia({
+        files: images,
+        folder: "slavecode/bug_reports",
+      });
+      uploadedUrls = uploadResult.urls;
     }
 
     return this.reportBugRepository.createReport({

@@ -1,12 +1,12 @@
 import { apiClient } from "@/lib/api-client";
 import type { ApiResponse } from "@/types/api";
-import type { BugReport } from "@/types/report-bug";
+import type { BugReport, ReportBugPayload } from "@/types/report-bug";
 
 export class ReportBugService {
-  static async submitReportBug(formData: FormData): Promise<BugReport> {
+  static async submitReportBug(payload: ReportBugPayload): Promise<BugReport> {
     const response = await apiClient.post<ApiResponse<BugReport>>(
       "/report-bug",
-      formData
+      payload
     );
 
     if (!response.data.success || !response.data.data) {

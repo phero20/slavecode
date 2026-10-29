@@ -27,6 +27,10 @@ import { CompanyAdminRepository } from "../../repositories/company/company.admin
 import { SeoRepository } from "../../repositories/seo/seo.repository";
 import { ReportBugRepository } from "../../repositories/report-bug/report-bug.repository";
 import { ReportBugAdminRepository } from "../../repositories/report-bug/report-bug.admin.repository";
+import { ResourceRepository } from "../../repositories/resources/resource.repository";
+import { RoadmapTopicRepository } from "../../repositories/resources/roadmap-topic.repository";
+import { RoadmapProjectRepository } from "../../repositories/resources/roadmap-project.repository";
+import { VoteRepository } from "../../repositories/votes/vote.repository";
 
 /**
  * Repository layer registrations.
@@ -61,5 +65,9 @@ export const repositoriesRegistry = {
   seoRepository: asClass(SeoRepository).singleton(),
   reportBugRepository: asClass(ReportBugRepository).singleton(),
   reportBugAdminRepository: asClass(ReportBugAdminRepository).singleton(),
+  resourceRepository: asClass(ResourceRepository).singleton(),
+  roadmapTopicRepository: asClass(RoadmapTopicRepository).singleton(),
+  roadmapProjectRepository: asClass(RoadmapProjectRepository).singleton(),
+  voteRepository: asClass(VoteRepository).singleton(),
 };
 

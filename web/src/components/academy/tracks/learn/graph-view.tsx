@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import Xarrow, { Xwrapper } from "react-xarrows";
 import { ConceptNode } from "./concept-node";
 
@@ -7,10 +7,49 @@ interface GraphViewProps {
   edges: { source: string; target: string }[];
   onConceptClick?: (slug: string, name: string) => void;
   conceptProgressMap?: Record<string, { status: "COMPLETED" | "IN_PROGRESS" | "LOCKED"; progress: number; total: number }>;
+  idPrefix?: string;
 }
 
-export function GraphView({ levels, edges, onConceptClick, conceptProgressMap = {} }: GraphViewProps) {
+export function GraphView({
+  levels,
+  edges,
+  onConceptClick,
+  conceptProgressMap = {},
+  idPrefix = "graph",
+}: GraphViewProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
+
+  const getNodeId = (rawId: string) => (idPrefix ? `${idPrefix}-${rawId}` : rawId);
+
+  // Re-sync SVG arrow positions when the container becomes visible or resizes
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const timer = setTimeout(() => {
+      window.dispatchEvent(new Event("resize"));
+    }, 60);
+
+    let wasHidden = true;
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.contentRect.width > 0 && wasHidden) {
+          wasHidden = false;
+          window.dispatchEvent(new Event("resize"));
+        } else if (entry.contentRect.width === 0) {
+          wasHidden = true;
+        }
+      }
+    });
+
+    observer.observe(el);
+
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+    };
+  }, []);
 
   const edgePalette = ["#60a5fa", "#34d399", "#facc15", "#f472b6", "#a78bfa"];
 
@@ -56,7 +95,7 @@ export function GraphView({ levels, edges, onConceptClick, conceptProgressMap = 
   }, [hoveredNode, edges]);
 
   return (
-    <div className="relative py-10">
+    <div ref={containerRef} className="relative py-10">
       <Xwrapper>
         <div className="flex flex-col items-center gap-12 md:gap-24 w-full relative z-10">
           {levels.map((level, i) => (
@@ -77,7 +116,7 @@ export function GraphView({ levels, edges, onConceptClick, conceptProgressMap = 
                     }`}
                   >
                     <ConceptNode
-                      id={node.id}
+                      id={getNodeId(node.id)}
                       label={node.label}
                       toneSeed={`${i}-${node.id}`}
                       progressData={conceptProgressMap[node.id]}
@@ -102,8 +141,8 @@ export function GraphView({ levels, edges, onConceptClick, conceptProgressMap = 
           return (
             <Xarrow
               key={`${e.source}-${e.target}`}
-              start={e.source}
-              end={e.target}
+              start={getNodeId(e.source)}
+              end={getNodeId(e.target)}
               color={isEdgeConnected ? edgeColorFor(e.source) : "#64748b"}
               strokeWidth={isEdgeConnected ? 2.6 : 1.8}
               // If connected, animate the dashed line to flow toward the descendants!

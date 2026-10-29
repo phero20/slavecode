@@ -12,7 +12,7 @@ interface TracksHeaderProps {
 export function TracksHeader({ totalTracks, sampleTracks, as = 'h1' }: TracksHeaderProps) {
   const Heading = as;
   return (
-    <section className="flex flex-col items-center justify-center text-center space-y-12">
+    <section className="flex flex-col items-center justify-center text-center space-y-8">
       {/* Overlapping Hexagon Icons */}
       {sampleTracks.length > 0 && (
         <div className="flex items-center justify-center -space-x-3 sm:-space-x-4">

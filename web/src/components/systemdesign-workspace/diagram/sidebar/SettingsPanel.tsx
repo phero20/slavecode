@@ -1,7 +1,21 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Grid3X3, Eye, Zap, Keyboard, HelpCircle } from "lucide-react";
+import {
+  Grid3X3,
+  Eye,
+  Zap,
+  Keyboard,
+  Hand,
+  Palette,
+  Settings2,
+  ZoomIn,
+  History,
+  Move,
+  Shapes,
+  Type,
+  Crosshair,
+} from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
 
@@ -182,7 +196,7 @@ export function SettingsPanel({ editor }: SettingsPanelProps) {
         {/* Board Preferences */}
         <div className="space-y-3.5">
           <div className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground select-none">
-            <Eye className="h-3.5 w-3.5" />
+            <Eye className="h-3.5 w-3.5 text-metric-views" />
             Preferences
           </div>
 
@@ -191,7 +205,7 @@ export function SettingsPanel({ editor }: SettingsPanelProps) {
             <div className="flex items-center justify-between gap-4 p-2 rounded border bg-muted/20">
               <div className="flex flex-col gap-0.5">
                 <span className="text-xs font-semibold flex items-center gap-1.5">
-                  <Grid3X3 className="h-3.5 w-3.5 text-muted-foreground" />
+                  <Grid3X3 className="h-3.5 w-3.5 text-metric-views" />
                   Grid Alignment
                 </span>
                 <span className="text-[10px] text-muted-foreground leading-normal">
@@ -205,7 +219,7 @@ export function SettingsPanel({ editor }: SettingsPanelProps) {
             <div className="flex items-center justify-between gap-4 p-2 rounded border bg-muted/20">
               <div className="flex flex-col gap-0.5">
                 <span className="text-xs font-semibold flex items-center gap-1.5">
-                  <Zap className="h-3.5 w-3.5 text-muted-foreground" />
+                  <Zap className="h-3.5 w-3.5 text-difficulty-medium" />
                   Object Snapping
                 </span>
                 <span className="text-[10px] text-muted-foreground leading-normal">
@@ -219,7 +233,7 @@ export function SettingsPanel({ editor }: SettingsPanelProps) {
             <div className="flex items-center justify-between gap-4 p-2 rounded border bg-muted/20">
               <div className="flex flex-col gap-0.5">
                 <span className="text-xs font-semibold flex items-center gap-1.5">
-                  <HelpCircle className="h-3.5 w-3.5 text-muted-foreground" />
+                  <Hand className="h-3.5 w-3.5 text-status-accepted" />
                   Hand Tool Mode
                 </span>
                 <span className="text-[10px] text-muted-foreground leading-normal">
@@ -236,16 +250,19 @@ export function SettingsPanel({ editor }: SettingsPanelProps) {
         {/* Shortcuts Reference */}
         <div className="space-y-4 select-none">
           <div className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
-            <Keyboard className="h-3.5 w-3.5" />
+            <Keyboard className="h-3.5 w-3.5 text-metric-reputation" />
             Keyboard Shortcuts Reference
           </div>
 
           <div className="space-y-4">
             {/* Tools Group */}
             <div className="space-y-1.5">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground block border-b pb-0.5">
-                🎨 Tools
-              </span>
+              <div className="flex items-center gap-1.5 border-b pb-1">
+                <Palette className="h-3 w-3 text-metric-views" />
+                <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                  Tools
+                </span>
+              </div>
               <div className="border rounded bg-muted/10 divide-y overflow-hidden">
                 {toolsShortcuts.map((s) => (
                   <div key={s.desc} className="flex items-center justify-between gap-3 p-1.5 text-[10px] hover:bg-muted/30 transition-colors">
@@ -260,9 +277,12 @@ export function SettingsPanel({ editor }: SettingsPanelProps) {
 
             {/* Preferences Group */}
             <div className="space-y-1.5">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground block border-b pb-0.5">
-                ⚙️ Preferences
-              </span>
+              <div className="flex items-center gap-1.5 border-b pb-1">
+                <Settings2 className="h-3 w-3 text-difficulty-medium" />
+                <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                  Preferences
+                </span>
+              </div>
               <div className="border rounded bg-muted/10 divide-y overflow-hidden">
                 {preferencesShortcuts.map((s) => (
                   <div key={s.desc} className="flex items-center justify-between gap-3 p-1.5 text-[10px] hover:bg-muted/30 transition-colors">
@@ -277,9 +297,12 @@ export function SettingsPanel({ editor }: SettingsPanelProps) {
 
             {/* View Group */}
             <div className="space-y-1.5">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground block border-b pb-0.5">
-                🔍 View & Zoom
-              </span>
+              <div className="flex items-center gap-1.5 border-b pb-1">
+                <ZoomIn className="h-3 w-3 text-metric-views" />
+                <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                  View & Zoom
+                </span>
+              </div>
               <div className="border rounded bg-muted/10 divide-y overflow-hidden">
                 {viewShortcutsList.map((s) => (
                   <div key={s.desc} className="flex items-center justify-between gap-3 p-1.5 text-[10px] hover:bg-muted/30 transition-colors">
@@ -294,9 +317,12 @@ export function SettingsPanel({ editor }: SettingsPanelProps) {
 
             {/* Edit Group */}
             <div className="space-y-1.5">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground block border-b pb-0.5">
-                ✏️ Edit & History
-              </span>
+              <div className="flex items-center gap-1.5 border-b pb-1">
+                <History className="h-3 w-3 text-status-accepted" />
+                <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                  Edit & History
+                </span>
+              </div>
               <div className="border rounded bg-muted/10 divide-y overflow-hidden">
                 {editShortcuts.map((s) => (
                   <div key={s.desc} className="flex items-center justify-between gap-3 p-1.5 text-[10px] hover:bg-muted/30 transition-colors">
@@ -311,9 +337,12 @@ export function SettingsPanel({ editor }: SettingsPanelProps) {
 
             {/* Transform Group */}
             <div className="space-y-1.5">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground block border-b pb-0.5">
-                ⚡ Transform & Align
-              </span>
+              <div className="flex items-center gap-1.5 border-b pb-1">
+                <Move className="h-3 w-3 text-metric-reputation" />
+                <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                  Transform & Align
+                </span>
+              </div>
               <div className="border rounded bg-muted/10 divide-y overflow-hidden">
                 {transformShortcuts.map((s) => (
                   <div key={s.desc} className="flex items-center justify-between gap-3 p-1.5 text-[10px] hover:bg-muted/30 transition-colors">
@@ -328,9 +357,12 @@ export function SettingsPanel({ editor }: SettingsPanelProps) {
 
             {/* Shape Actions Group */}
             <div className="space-y-1.5">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground block border-b pb-0.5">
-                📦 Shape Actions
-              </span>
+              <div className="flex items-center gap-1.5 border-b pb-1">
+                <Shapes className="h-3 w-3 text-rank-1" />
+                <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                  Shape Actions
+                </span>
+              </div>
               <div className="border rounded bg-muted/10 divide-y overflow-hidden">
                 {shapeActionShortcuts.map((s) => (
                   <div key={s.desc} className="flex items-center justify-between gap-3 p-1.5 text-[10px] hover:bg-muted/30 transition-colors">
@@ -345,9 +377,12 @@ export function SettingsPanel({ editor }: SettingsPanelProps) {
 
             {/* Formatting Group */}
             <div className="space-y-1.5">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground block border-b pb-0.5">
-                📝 Text Formatting
-              </span>
+              <div className="flex items-center gap-1.5 border-b pb-1">
+                <Type className="h-3 w-3 text-metric-discuss" />
+                <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                  Text Formatting
+                </span>
+              </div>
               <div className="border rounded bg-muted/10 divide-y overflow-hidden">
                 {formattingShortcuts.map((s) => (
                   <div key={s.desc} className="flex items-center justify-between gap-3 p-1.5 text-[10px] hover:bg-muted/30 transition-colors">
@@ -362,9 +397,12 @@ export function SettingsPanel({ editor }: SettingsPanelProps) {
 
             {/* Accessibility Group */}
             <div className="space-y-1.5">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground block border-b pb-0.5">
-                ♿ Focus & Camera
-              </span>
+              <div className="flex items-center gap-1.5 border-b pb-1">
+                <Crosshair className="h-3 w-3 text-difficulty-easy" />
+                <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                  Focus & Camera
+                </span>
+              </div>
               <div className="border rounded bg-muted/10 divide-y overflow-hidden">
                 {accessibilityShortcuts.map((s) => (
                   <div key={s.desc} className="flex items-center justify-between gap-3 p-1.5 text-[10px] hover:bg-muted/30 transition-colors">

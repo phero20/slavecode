@@ -6,7 +6,7 @@ export default function CompaniesPageSkeleton() {
   return (
     <SkeletonProvider noWrapper>
       {/* Simple Full Width Header Skeleton */}
-      <div className="w-full border-b border-border/40 pt-24 pb-8 lg:pt-28 lg:pb-16">
+      <div className="w-full border-b border-border/40 pt-24 pb-8">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <Skeleton height={100} className="w-full rounded-2xl opacity-40" />
         </div>

@@ -28,7 +28,7 @@ async function TracksData() {
   return (
     <>
       {/* Full-width container for Header */}
-      <div className="w-full border-b border-border/40 pt-24 pb-8 lg:pt-28 lg:pb-16">
+      <div className="w-full border-b border-border/60 pt-24 pb-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <TracksHeader 
             totalTracks={tracks?.length || 0} 

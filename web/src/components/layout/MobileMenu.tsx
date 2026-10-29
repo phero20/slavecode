@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -15,9 +15,11 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useRoadmapStore } from "@/store/use-roadmap-store";
 import { cn } from "@/lib/utils";
 import { UserSearch } from "./UserSearch";
+import { navSections, type NavSection, type NavItem } from "./NavLinks";
 
 interface MobileMenuProps {
-  navItems: { name: string; href: string; icon: any }[];
+  sections?: NavSection[];
+  navItems?: NavItem[];
   pathname: string;
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
@@ -36,12 +38,34 @@ const Show = ({
   return isMatch ? <>{children}</> : null;
 };
 
-export const MobileMenu = ({ navItems, pathname, isOpen, setIsOpen }: MobileMenuProps) => {
+export const MobileMenu = ({
+  sections,
+  navItems,
+  pathname,
+  isOpen,
+  setIsOpen,
+}: MobileMenuProps) => {
   const { user } = useUser();
   const { signOut } = useClerk();
   const router = useRouter();
   const queryClient = useQueryClient();
   const { resetRoadmap } = useRoadmapStore();
+
+  const effectiveSections =
+    sections ||
+    (navItems && navItems.length > 0 ? [{ items: navItems }] : navSections);
+
+  // Prevent background scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
   const handleSignOut = async () => {
     // 1. Purge all cached API data
@@ -74,9 +98,9 @@ export const MobileMenu = ({ navItems, pathname, isOpen, setIsOpen }: MobileMenu
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="absolute top-full left-0 right-0 bg-background border-b border-border xl:hidden overflow-hidden z-50"
+            className="absolute top-full left-0 right-0 h-[calc(100dvh-100%)] max-h-[calc(100dvh-100%)] bg-background border-b border-border xl:hidden flex flex-col z-50 overflow-hidden shadow-2xl"
           >
-            <div className="p-4 flex flex-col gap-6 max-h-screen overflow-y-auto">
+            <div className="p-4 pb-20 flex-1 overflow-y-auto overscroll-contain flex flex-col gap-6">
               {/* Search at the Top */}
               <div className="space-y-2">
                 <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/40 ml-1">
@@ -114,33 +138,51 @@ export const MobileMenu = ({ navItems, pathname, isOpen, setIsOpen }: MobileMenu
                 </div>
               </Show>
 
-              {/* Main Links */}
-              <div className="space-y-2">
-                <div className="grid grid-cols-1 gap-1">
-                  {navItems.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      onClick={() => setIsOpen(false)}
-                      className={cn(
-                        "flex items-center gap-4 p-3 rounded-xl transition-all duration-200",
-                        pathname === item.href
-                          ? "bg-primary/10 text-primary"
-                          : "text-muted-foreground hover:bg-muted hover:text-foreground",
-                      )}
-                    >
-                      <item.icon
-                        className={cn(
-                          "h-4 w-4",
-                          pathname === item.href
-                            ? "text-primary"
-                            : "text-muted-foreground/60",
-                        )}
-                      />
-                      <span className="font-bold text-sm">{item.name}</span>
-                    </Link>
-                  ))}
-                </div>
+              {/* Navigation Sections */}
+              <div className="space-y-4">
+                {effectiveSections.map((section, idx) => (
+                  <div key={section.title || idx} className="space-y-1">
+                    {section.title && (
+                      <div className="px-3 pt-2 pb-1">
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground/60 select-none">
+                          {section.title}
+                        </span>
+                      </div>
+                    )}
+                    <div className="grid grid-cols-1 gap-1">
+                      {section.items.map((item) => {
+                        const isActive =
+                          pathname === item.href ||
+                          (item.href !== "/" && pathname.startsWith(item.href));
+                        const linkId = `mobile-nav-${item.name.toLowerCase().replace(/\s+/g, "-")}`;
+                        return (
+                          <Link
+                            key={item.href}
+                            id={linkId}
+                            href={item.href}
+                            onClick={() => setIsOpen(false)}
+                            className={cn(
+                              "flex items-center gap-3.5 px-3 py-2.5 rounded-xl transition-all duration-200",
+                              isActive
+                                ? "bg-primary/10 text-primary font-semibold"
+                                : "text-muted-foreground hover:bg-muted hover:text-foreground",
+                            )}
+                          >
+                            <item.icon
+                              className={cn(
+                                "h-4 w-4 shrink-0",
+                                isActive
+                                  ? "text-primary"
+                                  : "text-muted-foreground/60",
+                              )}
+                            />
+                            <span className="font-semibold text-sm">{item.name}</span>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ))}
               </div>
 
               {/* Auth Actions */}

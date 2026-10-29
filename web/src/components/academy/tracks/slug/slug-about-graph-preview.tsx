@@ -8,7 +8,13 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export const SlugAboutGraphPreview = ({ config }: { config: TrackConfigResponse }) => {
+export const SlugAboutGraphPreview = ({
+  config,
+  onTabChange,
+}: {
+  config: TrackConfigResponse;
+  onTabChange?: (tab: string) => void;
+}) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { levels, edges, showGraph } = useCurriculumLayout(config);
@@ -16,6 +22,10 @@ export const SlugAboutGraphPreview = ({ config }: { config: TrackConfigResponse 
   if (!showGraph || !levels || levels.length === 0) return null;
 
   const goToLearnTab = () => {
+    if (onTabChange) {
+      onTabChange("learn");
+      return;
+    }
     const params = new URLSearchParams(searchParams.toString());
     params.set("tab", "learn");
     router.push(`?${params.toString()}`, { scroll: false });
@@ -35,7 +45,7 @@ export const SlugAboutGraphPreview = ({ config }: { config: TrackConfigResponse 
         
         {/* Render the actual graph */}
         <div className="absolute top-0 w-full opacity-80 pointer-events-none">
-          <GraphView levels={levels} edges={edges} />
+          <GraphView levels={levels} edges={edges} idPrefix="preview" />
         </div>
 
         {/* Gradient Overlay to fade the bottom */}

@@ -20,6 +20,7 @@ import {
   Code2,
   Trophy,
   CheckCircle2,
+  FolderGit2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { type UserStats } from "@/types/stats";
@@ -75,6 +76,7 @@ export function ProfileSidebar({
     { value: "arena", label: "Arena Records", icon: Trophy },
     { value: "submissions", label: "Submissions", icon: Code2 },
     { value: "solutions", label: "Solutions", icon: CheckCircle2 },
+    { value: "projects", label: "Projects", icon: FolderGit2 },
     {
       value: "social",
       label: `Social`,

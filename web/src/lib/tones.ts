@@ -4,9 +4,10 @@ export const tones = [
     hoverAccent: 'group-hover:text-yellow-400',
     chipBg: 'bg-yellow-500/15',
     chipBorder: 'border-yellow-400/50',
+    hoverBorder: 'hover:border-yellow-400/60',
     ring: 'hover:ring-yellow-400/40',
     fill: '#facc15',
-    text:'text-slate-900',
+    text: 'text-slate-900',
     icon: 'circle' as const,
   },
   {
@@ -14,9 +15,10 @@ export const tones = [
     hoverAccent: 'group-hover:text-emerald-400',
     chipBg: 'bg-emerald-500/15',
     chipBorder: 'border-emerald-400/50',
+    hoverBorder: 'hover:border-emerald-400/60',
     ring: 'hover:ring-emerald-400/40',
     fill: '#34d399',
-    text:'text-slate-900',
+    text: 'text-slate-900',
     icon: 'diamond' as const,
   },
   {
@@ -24,9 +26,11 @@ export const tones = [
     hoverAccent: 'group-hover:text-sky-400',
     chipBg: 'bg-sky-500/15',
     chipBorder: 'border-sky-400/50',
+    hoverBorder: 'hover:border-sky-400/60',
     ring: 'hover:ring-sky-400/40',
     fill: '#60a5fa',
-    text:'text-slate-900',
+    text: 'text-slate-900',
     icon: 'hex' as const,
   },
 ];
+

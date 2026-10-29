@@ -44,6 +44,9 @@ import { SeoController } from "../../controllers/seo/seo.controller";
 import { ReportBugController } from "../../controllers/report-bug/report-bug.controller";
 import { ReportBugAdminController } from "../../controllers/report-bug/report-bug.admin.controller";
 import { CacheAdminController } from "../../controllers/system/cache.admin.controller";
+import { ResourceController } from "../../controllers/resources/resource.controller";
+import { UploadController } from "../../controllers/common/upload.controller";
+import { VoteController } from "../../controllers/votes/vote.controller";
 
 /**
  * Controller and Middleware layer registrations.
@@ -94,4 +97,7 @@ export const controllersRegistry = {
   academyAdminController: asClass(AcademyAdminController).singleton(),
   taxonomyAdminController: asClass(TaxonomyAdminController).singleton(),
   cacheAdminController: asClass(CacheAdminController).singleton(),
+  resourceController: asClass(ResourceController).singleton(),
+  uploadController: asClass(UploadController).singleton(),
+  voteController: asClass(VoteController).singleton(),
 };

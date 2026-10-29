@@ -42,7 +42,7 @@ export const UserSearch = ({ onSelect }: UserSearchProps) => {
   };
 
   return (
-    <div className="relative w-full lg:w-80">
+    <div className="relative w-full lg:w-48 xl:w-64 2xl:w-80 transition-all duration-200">
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <div className="relative group cursor-pointer w-full">
@@ -58,7 +58,7 @@ export const UserSearch = ({ onSelect }: UserSearchProps) => {
               readOnly
               placeholder="Search users..."
               value={query}
-              className="pl-9 cursor-pointer bg-muted/40 border-transparent hover:bg-muted/60 hover:border-border/40 transition-all truncate"
+              className="pl-9 cursor-pointer bg-muted/60 border-border/70  hover:bg-muted/60 hover:border-border/40 transition-all truncate"
             />
           </div>
         </PopoverTrigger>

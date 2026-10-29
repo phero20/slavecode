@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useSubmitReportBugMutation } from "./mutations/use-report-bug.mutations";
-import { toast } from "sonner"; // Assuming sonner is used for toasts, or we can just navigate away
+import { useUploadMedia } from "./mutations/use-upload.mutations";
+import { toast } from "sonner";
 
 export interface PreviewFile {
   id: string;
@@ -15,8 +16,19 @@ export function useReportBugForm() {
   
   const [dragActive, setDragActive] = useState(false);
   const [files, setFiles] = useState<PreviewFile[]>([]);
+  const [isUploading, setIsUploading] = useState(false);
 
-  const { mutateAsync: submitReport, isPending, isError, error, isSuccess, reset } = useSubmitReportBugMutation();
+  const { mutateAsync: uploadMediaAsync } = useUploadMedia();
+  const {
+    mutateAsync: submitReport,
+    isPending: isSubmittingReport,
+    isError,
+    error,
+    isSuccess,
+    reset,
+  } = useSubmitReportBugMutation();
+
+  const isPending = isUploading || isSubmittingReport;
 
   // Cleanup object URLs when component unmounts
   const filesRef = useRef(files);
@@ -41,7 +53,18 @@ export function useReportBugForm() {
   };
 
   const processFiles = (newFilesList: FileList | File[]) => {
-    const validFiles = Array.from(newFilesList).filter((f) => f.type.startsWith("image/"));
+    const rawFiles = Array.from(newFilesList);
+    const validFiles = rawFiles.filter((f) => f.type.startsWith("image/"));
+
+    // Check 10MB limit (Cloudinary max limit)
+    const oversizedFiles = validFiles.filter((f) => f.size > 10 * 1024 * 1024);
+    if (oversizedFiles.length > 0) {
+      const names = oversizedFiles
+        .map((f) => `"${f.name}" (${(f.size / (1024 * 1024)).toFixed(1)}MB)`)
+        .join(", ");
+      toast.error(`File size too large: ${names}. Maximum allowed size is 10MB.`);
+      return;
+    }
     
     setFiles((prev) => {
       if (prev.length >= 5) return prev;
@@ -84,14 +107,30 @@ export function useReportBugForm() {
   };
 
   const handleSubmit = async () => {
-    if (!title || !description || !type) return;
+    if (!title || !description || !type || isPending) return;
 
+    setIsUploading(true);
     try {
+      let imageUrls: string[] = [];
+
+      // 1st call: If images are attached, upload them to Cloudinary first
+      if (files.length > 0) {
+        const rawFiles = files.map((f) => f.file);
+        const uploadResult = await uploadMediaAsync({
+          files: rawFiles,
+          folder: "slavecode/bug_reports",
+        });
+        imageUrls = uploadResult.urls;
+      }
+
+      setIsUploading(false);
+
+      // 2nd call: Submit bug report with Cloudinary image URLs
       await submitReport({
         title,
         description,
         type,
-        images: files.map((f) => f.file),
+        images: imageUrls,
       });
 
       // Reset form on success
@@ -100,10 +139,16 @@ export function useReportBugForm() {
       setType("bug");
       files.forEach((f) => URL.revokeObjectURL(f.preview));
       setFiles([]);
-      
-      toast?.success?.("Bug report submitted successfully!");
-    } catch (error: any) {
-      toast?.error?.(error.message || "Failed to submit bug report");
+
+      toast.success("Bug report submitted successfully!");
+    } catch (err: any) {
+      setIsUploading(false);
+      const errorMessage =
+        err?.response?.data?.error?.message ||
+        err?.response?.data?.message ||
+        err?.message ||
+        "Failed to submit bug report";
+      toast.error(errorMessage);
     }
   };
 

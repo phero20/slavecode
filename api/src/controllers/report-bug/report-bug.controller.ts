@@ -12,7 +12,10 @@ export class ReportBugController extends BaseController {
   }
 
   submitReport = async (c: Context) => {
-    const body = await c.req.parseBody({ all: true });
+    const contentType = c.req.header("content-type") || "";
+    const body = contentType.includes("application/json")
+      ? await c.req.json().catch(() => ({}))
+      : await c.req.parseBody({ all: true });
 
     const report = await this.reportBugService.submitReport({
       title: body["title"] as string,

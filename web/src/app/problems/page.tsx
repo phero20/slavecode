@@ -36,7 +36,7 @@ async function PracticeData() {
 export default function PracticePage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <main className="pt-28 pb-16">
+      <main className="pt-24 pb-16">
         <Suspense fallback={<ProblemsPageSkeleton />}>
           <PracticeData />
         </Suspense>

@@ -19,7 +19,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Search, Filter, Check, ChevronsUpDown } from "lucide-react";
+import { Search, Filter } from "lucide-react";
 
 interface TracksToolbarProps {
   searchQuery: string;
@@ -34,24 +34,21 @@ interface TracksToolbarProps {
 export function TracksToolbar({
   searchQuery,
   setSearchQuery,
-  sortBy,
-  setSortBy,
   allTags,
   selectedTags,
   setSelectedTags,
 }: TracksToolbarProps) {
-  const [openSort, setOpenSort] = useState(false);
 
   return (
-    <div className="flex flex-col items-center justify-between gap-4 border-b border-border/70 pb-6 sm:flex-row">
+    <div className="flex flex-col items-center justify-between gap-2 border-b border-border/70 pb-6 sm:flex-row">
       {/* Search Bar */}
-      <div className="relative w-full max-w-sm">
+      <div className="relative w-full">
         <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
           <Search className="h-4 w-4 text-muted-foreground" />
         </div>
         <Input
           type="text"
-          className="pl-9 bg-card/40 border-border focus-visible:ring-primary"
+          className="pl-9 pr-9 bg-card/50 border-border h-10"
           placeholder="Search language tracks..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
@@ -59,11 +56,11 @@ export function TracksToolbar({
         />
       </div>
 
-      <div className="flex w-full gap-4 flex-row items-center sm:w-auto sm:justify-end">
+      <div className="flex w-full gap-2 flex-row items-center sm:w-auto sm:justify-end">
         {/* Tags Filter (Popover + Command) */}
         <Popover>
           <PopoverTrigger asChild>
-            <Button variant="outline" className="flex-1 sm:flex-none sm:w-32 flex items-center justify-between gap-2 overflow-hidden px-3 bg-card/40">
+            <Button variant="outline" className="h-10 flex-1 sm:flex-none sm:w-32 flex items-center justify-between gap-2 overflow-hidden px-3 bg-card/40">
               <div className="flex items-center gap-3 truncate">
                 <Filter className="h-4 w-4 shrink-0" />
                 <span className="truncate">Filter</span>
@@ -81,7 +78,7 @@ export function TracksToolbar({
               <CommandList>
                 <CommandEmpty>No tags found.</CommandEmpty>
                 <CommandGroup heading="Tags">
-                  <div className="grid grid-cols-2 gap-1 p-1">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-1 p-1">
                     {allTags.map((tag) => {
                       const isSelected = selectedTags.includes(tag);
                       return (
@@ -117,79 +114,6 @@ export function TracksToolbar({
                     </CommandGroup>
                   </>
                 )}
-              </CommandList>
-            </Command>
-          </PopoverContent>
-        </Popover>
-
-        {/* Sort Select (Popover + Command without search) */}
-        <Popover open={openSort} onOpenChange={setOpenSort}>
-          <PopoverTrigger asChild>
-            <Button
-              variant="outline"
-              role="combobox"
-              aria-expanded={openSort}
-              className="flex-1 sm:flex-none sm:w-45 bg-card/40 justify-between overflow-hidden px-3"
-            >
-              <span className="truncate">
-                {sortBy === "name"
-                  ? "Name (A-Z)"
-                  : sortBy === "exercises"
-                    ? "Exercises (High to Low)"
-                    : sortBy === "exercises-asc"
-                      ? "Exercises (Low to High)"
-                      : "Sort"}
-              </span>
-              <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="p-0" align="end" sideOffset={8}>
-            <Command>
-              <CommandList>
-                <CommandGroup>
-                  <CommandItem
-                    value="name"
-                    onSelect={() => {
-                      setSortBy("name");
-                      setOpenSort(false);
-                    }}
-                    className="cursor-pointer"
-                  >
-                    <Check
-                      className={`mr-2 h-4 w-4 shrink-0 ${sortBy === "name" ? "opacity-100" : "opacity-0"
-                        }`}
-                    />
-                    <span className="truncate">Name (A-Z)</span>
-                  </CommandItem>
-                  <CommandItem
-                    value="exercises"
-                    onSelect={() => {
-                      setSortBy("exercises");
-                      setOpenSort(false);
-                    }}
-                    className="cursor-pointer"
-                  >
-                    <Check
-                      className={`mr-2 h-4 w-4 shrink-0 ${sortBy === "exercises" ? "opacity-100" : "opacity-0"
-                        }`}
-                    />
-                    <span className="truncate">Exercises (High to Low)</span>
-                  </CommandItem>
-                  <CommandItem
-                    value="exercises-asc"
-                    onSelect={() => {
-                      setSortBy("exercises-asc");
-                      setOpenSort(false);
-                    }}
-                    className="cursor-pointer"
-                  >
-                    <Check
-                      className={`mr-2 h-4 w-4 shrink-0 ${sortBy === "exercises-asc" ? "opacity-100" : "opacity-0"
-                        }`}
-                    />
-                    <span className="truncate">Exercises (Low to High)</span>
-                  </CommandItem>
-                </CommandGroup>
               </CommandList>
             </Command>
           </PopoverContent>

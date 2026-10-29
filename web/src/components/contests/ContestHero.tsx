@@ -124,8 +124,8 @@ export const ContestHero: React.FC<ContestHeroProps> = ({ featuredContest }) => 
   const isOngoing = new Date(featuredContest.startTime) <= new Date() && new Date(featuredContest.endTime) >= new Date();
 
   return (
-    <Card className="relative mb-10 overflow-hidden border-border bg-transparent shadow-none border-none">
-      <CardContent className="relative z-10 flex flex-col items-start gap-6 p-5 sm:p-6 lg:flex-row lg:items-start">
+    <Card className="relative overflow-hidden border-border bg-transparent shadow-none border-none">
+      <CardContent className="relative pb-0 z-10 flex flex-col items-start gap-6  lg:flex-row lg:items-start">
         <div className="flex w-full items-start gap-5">
           {/* Platform Icon and Info side-by-side on mobile */}
           <PlatformIcon

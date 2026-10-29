@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
 import { ChevronLeft, Play, Send, RefreshCw, X, Pencil, Bug } from "lucide-react";
 import type { WorkspaceHeaderProps } from "@/types/component.types";
-import { useAuth } from "@clerk/nextjs";
+import { useAuth, useClerk } from "@clerk/nextjs";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import { MatchTimer } from "@/components/arena/MatchTimer";
@@ -50,12 +50,13 @@ export const WorkspaceHeader: React.FC<WorkspaceHeaderProps> = ({
   allowUnauthenticatedRun,
 }) => {
   const { isLoaded, userId } = useAuth();
+  const { openSignIn } = useClerk();
   const router = useRouter();
   const pathname = usePathname();
 
   const handleRun = () => {
     if (!userId && !allowUnauthenticatedRun) {
-      router.push(`/auth/login?redirect_url=${encodeURIComponent(pathname)}`);
+      openSignIn();
       return;
     }
     onRun?.();
@@ -115,7 +116,7 @@ export const WorkspaceHeader: React.FC<WorkspaceHeaderProps> = ({
         onClick={(e) => {
           if (!userId) {
             e.preventDefault();
-            router.push(`/auth/login?redirect_url=${encodeURIComponent(pathname)}`);
+            openSignIn();
             return;
           }
           if (!confirmSubmit && onSubmit) onSubmit();

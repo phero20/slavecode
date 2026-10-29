@@ -7,7 +7,7 @@ import { Github } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { Container } from "@/components/shared/Container";
 import { cn } from "@/lib/utils";
-import { NavLinks, navItems } from "./NavLinks";
+import { NavLinks, navItems, navSections } from "./NavLinks";
 import { NavbarActions } from "./NavbarActions";
 import { MobileMenu } from "./MobileMenu";
 import { UserSearch } from "./UserSearch";
@@ -32,7 +32,7 @@ export const Navbar = () => {
     <>
       <nav
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-100",
+          "fixed top-0 left-0 right-0 z-999 transition-all duration-100",
           pathname === "/" && !scrolled && !isMobileMenuOpen ? "bg-transparent" : "bg-background",
           scrolled
             ? "py-2  border-b border-border"
@@ -55,7 +55,7 @@ export const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden xl:flex items-center gap-2 2xl:gap-5">
+          <div className="hidden lg:flex items-center gap-2 2xl:gap-5">
             <NavLinks />
             <div className="h-4 w-px bg-border/50" />
             <UserSearch />
@@ -63,7 +63,7 @@ export const Navbar = () => {
           </div>
 
           {/* Mobile Profile/Menu Trigger */}
-          <div className="xl:hidden flex items-center gap-1">
+          <div className="lg:hidden flex items-center gap-1">
             <Link
               href="https://github.com/phero20/slavecode"
               target="_blank"
@@ -75,6 +75,7 @@ export const Navbar = () => {
             </Link>
 
             <MobileMenu 
+              sections={navSections}
               navItems={navItems} 
               pathname={pathname} 
               isOpen={isMobileMenuOpen} 

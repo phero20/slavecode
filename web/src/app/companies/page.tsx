@@ -46,7 +46,7 @@ async function CompaniesData() {
   return (
     <>
       {/* Full-width container for Header */}
-      <div className="w-full border-b border-border/90 pt-24 pb-8 lg:pt-28 lg:pb-16">
+      <div className="w-full border-b border-border/90 pt-24 pb-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <CompaniesHeader 
             totalCompanies={companies.length} 
@@ -56,7 +56,7 @@ async function CompaniesData() {
       </div>
 
       {/* Main Content Area */}
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
         <CompaniesClient companies={companies} />
       </div>
     </>

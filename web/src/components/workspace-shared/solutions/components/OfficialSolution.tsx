@@ -1,13 +1,8 @@
 import React from "react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import remarkMath from "remark-math";
-import rehypeRaw from "rehype-raw";
-import rehypeKatex from "rehype-katex";
-import { Separator } from "@/components/ui/separator";
 import { CheckCircle2, Clock, MemoryStick } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { QueryGuard } from "@/components/shared/QueryGuard";
+import { MarkdownRenderer } from "@/components/shared/markdown";
 import { SolutionCodeBlock } from "./SolutionCodeBlock";
 
 // ---------------------------------------------------------
@@ -32,88 +27,6 @@ interface OfficialSolutionProps {
   /** Raw DB string — either a JSON array of AiSolution objects or a legacy markdown string */
   officialSolution: string | null | undefined;
 }
-
-// ---------------------------------------------------------
-// Markdown renderer (shared across all approach tabs)
-// ---------------------------------------------------------
-const renderMarkdown = (md: string) => (
-  <ReactMarkdown
-    remarkPlugins={[remarkGfm, remarkMath]}
-    rehypePlugins={[rehypeRaw, rehypeKatex]}
-    components={{
-      img: () => null,
-      h1: ({ node, ...props }) => (
-        <h1
-          className="text-xl md:text-2xl font-bold mb-4 text-foreground/90 whitespace-normal uppercase tracking-tight"
-          {...props}
-        />
-      ),
-      h2: ({ node, ...props }) => (
-        <div className="mt-8 mb-4 group not-prose w-full">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="size-2 rounded-full bg-primary shrink-0" />
-            <h2
-              className="text-base md:text-lg font-bold tracking-tight text-foreground/90 wrap-break-word uppercase"
-              {...props}
-            />
-          </div>
-          <Separator className="bg-primary/20 h-[2px] w-full" />
-        </div>
-      ),
-      h3: ({ node, ...props }) => (
-        <h3
-          className="text-sm md:text-md font-bold text-primary mt-6 mb-3 border-l-4 border-primary pl-4 not-prose wrap-break-word uppercase"
-          {...props}
-        />
-      ),
-      p: ({ node, ...props }) => (
-        <p
-          className="text-[13px] md:text-sm leading-relaxed text-foreground/70 mb-3 wrap-break-word"
-          {...props}
-        />
-      ),
-      ul: ({ node, ...props }) => (
-        <ul className="list-disc list-inside space-y-2 mb-6 ml-2" {...props} />
-      ),
-      ol: ({ node, ...props }) => (
-        <ol className="list-decimal list-inside space-y-2 mb-6 ml-2" {...props} />
-      ),
-      li: ({ node, ...props }) => (
-        <li
-          className="text-[13px] md:text-sm text-foreground/70 wrap-break-word"
-          {...props}
-        />
-      ),
-      blockquote: ({ node, ...props }) => (
-        <blockquote
-          className="border-l-4 border-muted bg-muted/30 p-4 my-6 rounded-r-lg italic text-foreground/70 text-sm"
-          {...props}
-        />
-      ),
-      code({ node, inline, className, children, ...props }: any) {
-        const match = /language-(\w+)/.exec(className || "");
-        return !inline && match ? (
-          <div className="my-6">
-            <SolutionCodeBlock
-              language={match[1]}
-              code={String(children).replace(/\n$/, "")}
-            />
-          </div>
-        ) : (
-          <code
-            className="px-1.5 py-0.5 rounded-md bg-muted text-primary text-[12px] md:text-[13px] border border-border/40 break-all font-mono"
-            {...props}
-          >
-            {children}
-          </code>
-        );
-      },
-      hr: () => <Separator className="my-6 bg-border/20 not-prose" />,
-    }}
-  >
-    {md}
-  </ReactMarkdown>
-);
 
 // ---------------------------------------------------------
 // Main Component
@@ -211,8 +124,8 @@ export const OfficialSolution: React.FC<OfficialSolutionProps> = ({
                 </div>
 
                 {/* Editorial explanation (markdown) */}
-                <div className="prose prose-invert max-w-none prose-p:max-w-none prose-li:max-w-none overflow-x-hidden w-full min-w-0 mb-6">
-                  {renderMarkdown(app.editorial_explanation)}
+                <div className="overflow-x-hidden w-full min-w-0 mb-6">
+                  <MarkdownRenderer content={app.editorial_explanation} />
                 </div>
 
                 {/* Code blocks — one per language implementation */}

@@ -201,6 +201,26 @@ export type NewSolution = typeof solutions.$inferInsert
 export type SolutionVote = typeof solutionVotes.$inferSelect
 export type NewSolutionVote = typeof solutionVotes.$inferInsert
 
+// --- Polymorphic Voting Layer (Solutions, Projects, Roadmaps) ---
+
+export const votes = pgTable('votes', {
+  userId: uuid('user_id').references(() => users.id, { onDelete: 'cascade' }).notNull(),
+  targetType: text('target_type').notNull(), // 'project' | 'solution' | 'roadmap'
+  targetId: text('target_id').notNull(),     // UUID, MongoDB ObjectId, or Slug
+  voteType: integer('vote_type').notNull(),   // 1 for upvote / like, -1 for downvote
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+}, (table) => {
+  return {
+    pk: primaryKey({ columns: [table.userId, table.targetType, table.targetId] }),
+    targetIdx: index('votes_target_idx').on(table.targetType, table.targetId),
+    userIdx: index('votes_user_id_idx').on(table.userId),
+  }
+})
+
+export type Vote = typeof votes.$inferSelect
+export type NewVote = typeof votes.$inferInsert
+
 // --- System Design Workspaces & Diagrams Layer ---
 
 export const workspaces = pgTable('workspaces', {

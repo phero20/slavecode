@@ -26,11 +26,11 @@ const HEX_ICONS = [
 
 export default function SystemDesignHubPage() {
     return (
-        <div className="flex min-h-screen flex-col bg-background py-20">
-            <div className="space-y-8">
+        <div className="flex min-h-screen flex-col bg-background py-14">
+            <div className="space-y-6">
 
                 {/* Creative Centered Header */}
-                <header className="flex flex-col items-center justify-center text-center space-y-12 py-8">
+                <header className="flex flex-col items-center justify-center text-center space-y-8 py-8">
 
                     {/* Overlapping Hexagon Arc */}
                     <div className="flex items-center justify-center -space-x-5 sm:-space-x-6">

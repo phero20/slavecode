@@ -58,6 +58,9 @@ import { ReportBugService } from "../../services/report-bug/report-bug.service";
 import { ReportBugAdminService } from "../../services/report-bug/report-bug.admin.service";
 import { AcademyAdminService } from "../../services/academy/academy.admin.service";
 import { CacheAdminService } from "../../services/system/cache.admin.service";
+import { ResourceService } from "../../services/resources/resource.service";
+import { RoadmapProjectService } from "../../services/resources/roadmap-project.service";
+import { VoteService } from "../../services/votes/vote.service";
 // --- Caches (Decorators) ---
 import { ProblemCache } from "../../cache/problems/problem.cache";
 import { ProblemTestCache } from "../../cache/problems/problem-test.cache";
@@ -74,6 +77,8 @@ import { WorkspaceCache } from "../../cache/workspace/workspace.cache";
 import { AcademyCache } from "../../cache/academy/academy.cache";
 import { SystemDesignCache } from "../../cache/system-design/system-design.cache";
 import { CompanyCache } from "../../cache/company/company.cache";
+import { ResourceCache } from "../../cache/resources/resource.cache";
+import { RoadmapProjectCache } from "../../cache/resources/roadmap-project.cache";
 
 /**
  * Service layer registrations.
@@ -110,6 +115,8 @@ export const servicesRegistry = {
   rawSystemDesignService: asClass(SystemDesignService).singleton(),
   systemDesignAdminService: asClass(SystemDesignAdminService).singleton(),
   rawCompanyService: asClass(CompanyService).singleton(),
+  rawResourceService: asClass(ResourceService).singleton(),
+  rawRoadmapProjectService: asClass(RoadmapProjectService).singleton(),
   companyAdminService: asClass(CompanyAdminService).singleton(),
   chatService: asClass(ChatService).singleton(),
   diagramResolverService: asClass(DiagramResolverService).singleton(),
@@ -147,6 +154,8 @@ export const servicesRegistry = {
   academyCache: asClass(AcademyCache).singleton(),
   systemDesignCache: asClass(SystemDesignCache).singleton(),
   companyCache: asClass(CompanyCache).singleton(),
+  resourceCache: asClass(ResourceCache).singleton(),
+  roadmapProjectCache: asClass(RoadmapProjectCache).singleton(),
 
   // Primary service endpoints (pointing to caches)
   problemService: asFunction(
@@ -203,4 +212,11 @@ export const servicesRegistry = {
   academyAdminService: asClass(AcademyAdminService).singleton(),
   taxonomyAdminService: asClass(TaxonomyAdminService).singleton(),
   cacheAdminService: asClass(CacheAdminService).singleton(),
+  resourceService: asFunction(
+    ({ resourceCache }: ICradle) => resourceCache,
+  ).singleton(),
+  roadmapProjectService: asFunction(
+    ({ roadmapProjectCache }: ICradle) => roadmapProjectCache,
+  ).singleton(),
+  voteService: asClass(VoteService).singleton(),
 };

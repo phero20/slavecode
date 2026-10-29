@@ -47,7 +47,7 @@ function PracticeProblemCardContent({
 
 
   return (
-    <Link href={`/academy/tracks/${langSlug}/exercises/${slug}`} className="block h-full">
+    <Link href={`/academy/tracks/${langSlug}/exercises/${slug}`} prefetch={true} className="block h-full">
       <Card className={cn(
         "group relative flex h-full min-h-32  overflow-hidden px-5 py-4 hover:ring-1",
         tone.chipBorder,
