@@ -1,7 +1,6 @@
 export const revalidate = 86400; // Cache projects list for 24 hours
 
 import { Suspense } from "react";
-import type { Metadata } from "next";
 import {
   getProjectCategories,
   getProjects,
@@ -10,11 +9,7 @@ import { ProjectsClient } from "@/components/projects/ProjectsClient";
 import { ErrorDisplay } from "@/components/shared/StatusState";
 import ProjectsPageSkeleton from "./ProjectsPageSkeleton";
 
-export const metadata: Metadata = {
-  title: "Explore Developer Projects | SlaveCode Projects",
-  description:
-    "Explore 112+ curated developer projects across Frontend, Backend, DevOps, AI, Python, Node.js, and more to build your portfolio and master your craft.",
-};
+export { projectsHubMeta as metadata } from "@/meta/projects/static";
 
 async function ProjectsData() {
   try {

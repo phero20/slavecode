@@ -1,48 +1,23 @@
 export const dynamic = "force-dynamic";
 
-import React, { Suspense, cache } from "react";
-import type { Metadata } from "next";
-import { getProjectBySlug } from "@/services/queries/project.queries";
+import React, { Suspense } from "react";
+import { getCachedProject } from "@/meta/projects/dynamic";
 import { ProjectDetailView } from "@/components/projects/ProjectDetailView";
 import ProjectDetailSkeleton from "./ProjectDetailSkeleton";
 
-const getProject = cache(async (slug: string) => {
+export { generateProjectMetadata as generateMetadata } from "@/meta/projects/dynamic";
+
+const getProject = async (slug: string) => {
   try {
-    return await getProjectBySlug(slug);
+    return await getCachedProject(slug);
   } catch {
     return null;
   }
-});
+};
 
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
-
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const project = await getProject(slug);
-
-  if (!project) {
-    const formattedSlug = slug
-      .split("-")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
-
-    return {
-      title: `${formattedSlug} - Developer Project | SlaveCode`,
-      description: "Explore project specifications, requirements, and guides on SlaveCode.",
-    };
-  }
-
-  return {
-    title: `${project.title} - Developer Project | SlaveCode`,
-    description:
-      project.description ||
-      `Build ${project.title} and master practical coding skills with real-world requirements on SlaveCode.`,
-  };
-}
 
 async function ProjectData({
   paramsPromise,

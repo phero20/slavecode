@@ -1,55 +1,25 @@
 export const revalidate = 86400; // Cache roadmap detail for 24 hours
 
-import React, { Suspense, cache } from "react";
-import type { Metadata } from "next";
-import { getRoadmapBySlug } from "@/services/queries/resource.queries";
+import React, { Suspense } from "react";
+import { getCachedResourceRoadmap } from "@/meta/resources/dynamic";
 import { RoadmapDetailClient } from "@/components/resources/detail/RoadmapDetailClient";
 import { ErrorDisplay } from "@/components/shared/StatusState";
 import RoadmapDetailSkeleton from "./RoadmapDetailSkeleton";
 
-const getRoadmap = cache(async (slug: string) => {
+export { generateResourceRoadmapMetadata as generateMetadata } from "@/meta/resources/dynamic";
+
+const getRoadmap = async (slug: string) => {
   try {
-    return await getRoadmapBySlug(slug);
-  } catch (error) {
+    return await getCachedResourceRoadmap(slug);
+  } catch {
     return null;
   }
-});
+};
 
 type PageProps = {
   params: Promise<{ slug: string }>;
   searchParams?: Promise<{ r?: string; tab?: string }>;
 };
-
-export async function generateMetadata({
-  params,
-  searchParams,
-}: PageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const sp = searchParams ? await searchParams : undefined;
-  const targetSlug = sp?.r || slug;
-  const roadmap = await getRoadmap(targetSlug);
-
-  if (!roadmap) {
-    return {
-      title: "Roadmap Not Found | SlaveCode Resources",
-      description: "The requested developer roadmap could not be found.",
-    };
-  }
-
-  const title = roadmap.title?.page || roadmap.title?.card || roadmap.slug;
-  const currentYear = new Date().getFullYear().toString();
-  const description = (roadmap.description || "").replace(
-    /@currentYear@/g,
-    currentYear
-  );
-
-  return {
-    title: `${title} Roadmap | SlaveCode Resources`,
-    description:
-      description ||
-      `Interactive ${title} developer roadmap with step-by-step career milestones.`,
-  };
-}
 
 async function RoadmapData({
   paramsPromise,

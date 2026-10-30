@@ -2,14 +2,17 @@
 
 import React, { memo } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ExternalLink, Globe } from "lucide-react";
 import {
   Card,
   CardHeader,
   CardTitle,
   CardDescription,
+  CardFooter,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { VoteControl } from "@/components/shared/VoteControl";
 import { ResourceOwnerActions } from "./ResourceOwnerActions";
 import { useResourcePreview } from "./use-resource-preview";
@@ -147,10 +150,48 @@ export const RoadmapResourceCard = memo(function RoadmapResourceCard({
               </CardDescription>
             ) : null}
           </div>
-
-          <ResourceOwnerActions resource={resource} />
         </div>
       </CardHeader>
+
+      {resource.submittedBy?.username || resource.origin === "community" ? (
+        <CardFooter className="py-3 mt-auto flex items-center justify-between gap-2 border-t">
+          {resource.submittedBy?.username ? (
+            <Link
+              href={`/u/${resource.submittedBy.username}`}
+              onClick={(e) => e.stopPropagation()}
+              className="group/provider flex items-center gap-2 min-w-0"
+            >
+              <Avatar className="size-6 border border-border shrink-0">
+                {resource.submittedBy.avatarUrl ? (
+                  <AvatarImage
+                    src={resource.submittedBy.avatarUrl}
+                    alt={
+                      resource.submittedBy.fullName ||
+                      resource.submittedBy.username
+                    }
+                  />
+                ) : null}
+                <AvatarFallback className="text-[10px] font-semibold uppercase bg-muted text-muted-foreground">
+                  {(
+                    resource.submittedBy.username[0] ||
+                    resource.submittedBy.fullName?.[0] ||
+                    "U"
+                  ).toUpperCase()}
+                </AvatarFallback>
+              </Avatar>
+              <span className="text-[11px] text-muted-foreground truncate">
+                Provided by{" "}
+                <span className="font-medium text-foreground group-hover/provider:text-primary group-hover/provider:underline underline-offset-2">
+                  {resource.submittedBy.username}
+                </span>
+              </span>
+            </Link>
+          ) : (
+            <span />
+          )}
+          <ResourceOwnerActions resource={resource} />
+        </CardFooter>
+      ) : null}
     </Card>
   );
 });

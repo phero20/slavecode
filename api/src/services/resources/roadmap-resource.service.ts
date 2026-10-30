@@ -52,11 +52,13 @@ export class RoadmapResourceService implements IRoadmapResourceService {
     }
 
     try {
-      return await this.roadmapResourceRepository.getResourcesByRoadmap(
-        roadmapSlug,
-        type,
-        sort,
-      );
+      const resources =
+        await this.roadmapResourceRepository.getResourcesByRoadmap(
+          roadmapSlug,
+          type,
+          sort,
+        );
+      return await this.hydrateAuthors(resources);
     } catch (error: any) {
       if (error instanceof AppError) throw error;
       logger.error(
@@ -134,7 +136,7 @@ export class RoadmapResourceService implements IRoadmapResourceService {
         await this.roadmapResourceRepository.getAllResources(filter);
 
       return {
-        resources,
+        resources: await this.hydrateAuthors(resources),
         total,
         page,
         limit,
@@ -194,12 +196,8 @@ export class RoadmapResourceService implements IRoadmapResourceService {
           { page, limit },
         );
 
-      const hydratedResources = await Promise.all(
-        resources.map((r) => this.hydrateAuthor(r)),
-      );
-
       return {
-        resources: hydratedResources,
+        resources: await this.hydrateAuthors(resources),
         total,
         page,
         limit,
@@ -252,6 +250,34 @@ export class RoadmapResourceService implements IRoadmapResourceService {
           ? input.thumbnailUrl.trim()
           : null;
 
+      let submitter = {
+        userId: input.userId,
+        username: null as string | null,
+        fullName: null as string | null,
+        avatarUrl: null as string | null,
+        submittedAt: new Date(),
+      };
+      try {
+        let user = await this.userRepository.findById(input.userId);
+        if (!user && input.userId.startsWith("user_")) {
+          user = await this.userRepository.findByClerkId(input.userId);
+        }
+        if (user) {
+          submitter = {
+            userId: user.id,
+            username: user.username || null,
+            fullName: user.fullName || null,
+            avatarUrl: user.avatarUrl || null,
+            submittedAt: submitter.submittedAt,
+          };
+        }
+      } catch (userErr) {
+        logger.warn(
+          { err: userErr, userId: input.userId },
+          "Failed to attach submitter profile on resource create",
+        );
+      }
+
       const newResource: Partial<RoadmapResource> = {
         title: input.title.trim(),
         description: input.description?.trim() || "",
@@ -263,10 +289,7 @@ export class RoadmapResourceService implements IRoadmapResourceService {
         order: 0,
         origin: "community",
         status: "pending",
-        submittedBy: {
-          userId: input.userId,
-          submittedAt: new Date(),
-        },
+        submittedBy: submitter,
         stats: {
           upvotesCount: 0,
           viewsCount: 0,
@@ -407,32 +430,58 @@ export class RoadmapResourceService implements IRoadmapResourceService {
   private async hydrateAuthor(
     resource: RoadmapResource,
   ): Promise<RoadmapResource> {
-    if (resource.submittedBy?.userId) {
-      try {
-        let user = await this.userRepository.findById(
-          resource.submittedBy.userId,
-        );
-        if (!user && resource.submittedBy.userId.startsWith("user_")) {
-          user = await this.userRepository.findByClerkId(
-            resource.submittedBy.userId,
+    const [hydrated] = await this.hydrateAuthors([resource]);
+    return hydrated;
+  }
+
+  private async hydrateAuthors(
+    resources: RoadmapResource[],
+  ): Promise<RoadmapResource[]> {
+    const uniqueIds = [
+      ...new Set(
+        resources
+          .map((resource) => resource.submittedBy?.userId)
+          .filter((id): id is string => Boolean(id)),
+      ),
+    ];
+
+    if (uniqueIds.length === 0) return resources;
+
+    const userEntries = await Promise.all(
+      uniqueIds.map(async (id) => {
+        try {
+          let user = await this.userRepository.findById(id);
+          if (!user && id.startsWith("user_")) {
+            user = await this.userRepository.findByClerkId(id);
+          }
+          return [id, user] as const;
+        } catch (userErr) {
+          logger.warn(
+            { err: userErr, userId: id },
+            "Failed to hydrate resource author details from user repository",
           );
+          return [id, null] as const;
         }
-        if (user) {
-          resource.submittedBy = {
-            userId: user.id,
-            username: user.username,
-            fullName: user.fullName || null,
-            avatarUrl: user.avatarUrl || null,
-            submittedAt: resource.submittedBy.submittedAt,
-          };
-        }
-      } catch (userErr) {
-        logger.warn(
-          { err: userErr, userId: resource.submittedBy.userId },
-          "Failed to hydrate resource author details from user repository",
-        );
-      }
-    }
-    return resource;
+      }),
+    );
+
+    const usersById = new Map(
+      userEntries.filter((entry) => entry[1] != null),
+    );
+
+    return resources.map((resource) => {
+      const userId = resource.submittedBy?.userId;
+      if (!userId) return resource;
+      const user = usersById.get(userId);
+      if (!user) return resource;
+      resource.submittedBy = {
+        userId: user.id,
+        username: user.username,
+        fullName: user.fullName || null,
+        avatarUrl: user.avatarUrl || null,
+        submittedAt: resource.submittedBy?.submittedAt,
+      };
+      return resource;
+    });
   }
 }
