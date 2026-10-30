@@ -9,6 +9,7 @@ import {
   Sparkles,
   GitFork,
   FolderGit2,
+  Library,
   Bot,
   BookOpen,
   X,
@@ -46,9 +47,8 @@ export const RoadmapDetailHeader = ({
   const currentYear = new Date().getFullYear().toString();
   const description = (roadmap.description || "").replace(
     /@currentYear@/g,
-    currentYear
+    currentYear,
   );
-
 
   return (
     <div className="w-full bg-background relative z-10 border-b">
@@ -87,8 +87,7 @@ export const RoadmapDetailHeader = ({
             prefetch={true}
             className="rounded-none border-b-[3px] border-transparent px-0 py-3 sm:py-4 font-bold text-sm sm:text-[15px] transition-all flex items-center gap-1.5 sm:gap-2 text-muted-foreground hover:text-foreground cursor-pointer shrink-0 focus-visible:outline-none"
           >
-            <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5" />{" "}
-            <span>Back</span>
+            <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5" /> <span>Back</span>
           </Link>
 
           <TabsTrigger
@@ -98,7 +97,13 @@ export const RoadmapDetailHeader = ({
           >
             <GitFork className="h-4 w-4 sm:h-5 sm:w-5" /> Roadmap
           </TabsTrigger>
-
+          <TabsTrigger
+            id="resources-tab-trigger"
+            value="resources"
+            className="rounded-none border-b-[3px] border-transparent data-[state=active]:border-primary data-[state=active]:text-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none px-0 py-3 sm:py-4 font-bold text-sm sm:text-[15px] transition-all flex items-center gap-1.5 sm:gap-2 text-muted-foreground hover:text-foreground cursor-pointer shrink-0"
+          >
+            <Library className="h-4 w-4 sm:h-5 sm:w-5" /> Vedios and Other Resources
+          </TabsTrigger>
           <TabsTrigger
             id="project-tab-trigger"
             value="project"

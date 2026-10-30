@@ -5,6 +5,8 @@ import { type ResourceController } from "../../controllers/resources/resource.co
 import {
   createProjectSchema,
   updateProjectSchema,
+  createResourceSchema,
+  updateResourceSchema,
 } from "../../validators/resource.validator";
 import type { AuthMiddleware } from "../../middlewares/security/auth.middleware";
 
@@ -120,6 +122,73 @@ export const registerResourceRoutes = (
   resourceApp.delete(
     "/projects/:projectSlug",
     resourceController.action(resourceController.deleteProject, {
+      requireAuth: true,
+    })
+  );
+
+  // GET /api/v1/resources/roadmaps/:slug/resources (supports ?type=xxx & ?sort=xxx)
+  resourceApp.get(
+    "/roadmaps/:slug/resources",
+    resourceController.action(resourceController.getResourcesByRoadmap, {
+      requireAuth: false,
+    })
+  );
+
+  // GET /api/v1/resources/resources (supports ?roadmap=xxx & ?type=xxx & ?search=xxx & ?page=1 & ?limit=20)
+  resourceApp.get(
+    "/resources",
+    resourceController.action(resourceController.getAllResources, {
+      requireAuth: false,
+    })
+  );
+
+  // GET /api/v1/resources/resources/user/:username
+  resourceApp.get(
+    "/resources/user/:username",
+    resourceController.action(resourceController.getUserResources, {
+      requireAuth: false,
+    })
+  );
+
+  // GET /api/v1/resources/resources/:resourceId
+  resourceApp.get(
+    "/resources/:resourceId",
+    resourceController.action(resourceController.getResourceById, {
+      requireAuth: false,
+    })
+  );
+
+  // POST /api/v1/resources/resources
+  resourceApp.post(
+    "/resources",
+    zValidator("json", createResourceSchema),
+    resourceController.action(resourceController.createResource, {
+      requireAuth: true,
+      status: 201,
+    })
+  );
+
+  // PUT & PATCH /api/v1/resources/resources/:resourceId
+  resourceApp.put(
+    "/resources/:resourceId",
+    zValidator("json", updateResourceSchema),
+    resourceController.action(resourceController.updateResource, {
+      requireAuth: true,
+    })
+  );
+
+  resourceApp.patch(
+    "/resources/:resourceId",
+    zValidator("json", updateResourceSchema),
+    resourceController.action(resourceController.updateResource, {
+      requireAuth: true,
+    })
+  );
+
+  // DELETE /api/v1/resources/resources/:resourceId
+  resourceApp.delete(
+    "/resources/:resourceId",
+    resourceController.action(resourceController.deleteResource, {
       requireAuth: true,
     })
   );

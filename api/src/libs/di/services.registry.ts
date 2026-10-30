@@ -60,6 +60,7 @@ import { AcademyAdminService } from "../../services/academy/academy.admin.servic
 import { CacheAdminService } from "../../services/system/cache.admin.service";
 import { ResourceService } from "../../services/resources/resource.service";
 import { RoadmapProjectService } from "../../services/resources/roadmap-project.service";
+import { RoadmapResourceService } from "../../services/resources/roadmap-resource.service";
 import { VoteService } from "../../services/votes/vote.service";
 // --- Caches (Decorators) ---
 import { ProblemCache } from "../../cache/problems/problem.cache";
@@ -79,6 +80,7 @@ import { SystemDesignCache } from "../../cache/system-design/system-design.cache
 import { CompanyCache } from "../../cache/company/company.cache";
 import { ResourceCache } from "../../cache/resources/resource.cache";
 import { RoadmapProjectCache } from "../../cache/resources/roadmap-project.cache";
+import { RoadmapResourceCache } from "../../cache/resources/roadmap-resource.cache";
 
 /**
  * Service layer registrations.
@@ -117,6 +119,7 @@ export const servicesRegistry = {
   rawCompanyService: asClass(CompanyService).singleton(),
   rawResourceService: asClass(ResourceService).singleton(),
   rawRoadmapProjectService: asClass(RoadmapProjectService).singleton(),
+  rawRoadmapResourceService: asClass(RoadmapResourceService).singleton(),
   companyAdminService: asClass(CompanyAdminService).singleton(),
   chatService: asClass(ChatService).singleton(),
   diagramResolverService: asClass(DiagramResolverService).singleton(),
@@ -156,6 +159,7 @@ export const servicesRegistry = {
   companyCache: asClass(CompanyCache).singleton(),
   resourceCache: asClass(ResourceCache).singleton(),
   roadmapProjectCache: asClass(RoadmapProjectCache).singleton(),
+  roadmapResourceCache: asClass(RoadmapResourceCache).singleton(),
 
   // Primary service endpoints (pointing to caches)
   problemService: asFunction(
@@ -217,6 +221,9 @@ export const servicesRegistry = {
   ).singleton(),
   roadmapProjectService: asFunction(
     ({ roadmapProjectCache }: ICradle) => roadmapProjectCache,
+  ).singleton(),
+  roadmapResourceService: asFunction(
+    ({ roadmapResourceCache }: ICradle) => roadmapResourceCache,
   ).singleton(),
   voteService: asClass(VoteService).singleton(),
 };

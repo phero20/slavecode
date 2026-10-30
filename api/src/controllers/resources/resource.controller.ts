@@ -2,21 +2,29 @@ import { BaseController } from "../base.controller";
 import {
   type IResourceService,
   type IRoadmapProjectService,
+  type IRoadmapResourceService,
 } from "../../types/resources";
 import { type ICradle } from "../../libs/awilix-container";
 import { type ControllerRequest } from "../../types/infrastructure/hono.types";
 import { ApiResponse } from "../../utils/api-response";
 import { AppError } from "../../utils/app-error";
-import { type CreateProjectInput, type UpdateProjectInput } from "../../validators/resource.validator";
+import {
+  type CreateProjectInput,
+  type UpdateProjectInput,
+  type CreateResourceInput,
+  type UpdateResourceInput,
+} from "../../validators/resource.validator";
 
 export class ResourceController extends BaseController {
   private readonly resourceService: IResourceService;
   private readonly roadmapProjectService: IRoadmapProjectService;
+  private readonly roadmapResourceService: IRoadmapResourceService;
 
   constructor(cradle: ICradle) {
     super(cradle);
     this.resourceService = cradle.resourceService;
     this.roadmapProjectService = cradle.roadmapProjectService;
+    this.roadmapResourceService = cradle.roadmapResourceService;
   }
 
   async getRoadmaps(
@@ -194,6 +202,132 @@ export class ResourceController extends BaseController {
     await this.roadmapProjectService.deleteProject(slug, userId);
 
     return ApiResponse.success({ message: "Project deleted successfully" });
+  }
+
+  async getResourcesByRoadmap(
+    req: ControllerRequest<
+      never,
+      { slug: string },
+      { type?: string; sort?: "default" | "newest" }
+    >,
+  ) {
+    const data = await this.roadmapResourceService.getResourcesByRoadmap(
+      req.params.slug,
+      req.query?.type,
+      req.query?.sort as any,
+    );
+    return ApiResponse.success(data);
+  }
+
+  async getResourceById(
+    req: ControllerRequest<never, { resourceId: string }, never>,
+  ) {
+    const data = await this.roadmapResourceService.getResourceById(
+      req.params.resourceId,
+      req.user?.id,
+      req.user?.role,
+      req.clerkUserId,
+    );
+    return ApiResponse.success(data);
+  }
+
+  async getAllResources(
+    req: ControllerRequest<
+      never,
+      never,
+      {
+        roadmap?: string;
+        type?: string;
+        search?: string;
+        page?: string;
+        limit?: string;
+        sort?: "default" | "newest";
+      }
+    >,
+  ) {
+    const data = await this.roadmapResourceService.getAllResources({
+      roadmapSlug: req.query?.roadmap,
+      type: req.query?.type,
+      search: req.query?.search,
+      page: req.query?.page,
+      limit: req.query?.limit,
+      sort: req.query?.sort as any,
+    });
+    return ApiResponse.success(data);
+  }
+
+  async getUserResources(
+    req: ControllerRequest<
+      never,
+      { username: string },
+      { status?: string; page?: string; limit?: string }
+    >,
+  ) {
+    const data = await this.roadmapResourceService.getUserResources(
+      req.params.username,
+      req.user?.id,
+      req.clerkUserId,
+      {
+        status: req.query?.status,
+        page: req.query?.page,
+        limit: req.query?.limit,
+      },
+    );
+    return ApiResponse.success(data);
+  }
+
+  async createResource(req: ControllerRequest<CreateResourceInput>) {
+    const userId = req.user?.id;
+    if (!userId) {
+      throw AppError.unauthorized("Authentication required to create a resource");
+    }
+
+    const data = await this.roadmapResourceService.createResource({
+      ...req.body,
+      userId,
+    });
+
+    return ApiResponse.success(data);
+  }
+
+  async updateResource(
+    req: ControllerRequest<UpdateResourceInput, { resourceId: string }>,
+  ) {
+    const userId = req.user?.id;
+    if (!userId) {
+      throw AppError.unauthorized("Authentication required to update a resource");
+    }
+
+    const id = req.params?.resourceId;
+    if (!id) {
+      throw AppError.badRequest("Resource id is required");
+    }
+
+    const data = await this.roadmapResourceService.updateResource(
+      id,
+      req.body,
+      userId,
+    );
+
+    return ApiResponse.success(data);
+  }
+
+  async deleteResource(
+    req: ControllerRequest<never, { resourceId: string }>,
+  ) {
+    const userId = req.user?.id;
+    if (!userId) {
+      throw AppError.unauthorized("Authentication required to delete a resource");
+    }
+
+    const id = req.params?.resourceId;
+    if (!id) {
+      throw AppError.badRequest("Resource id is required");
+    }
+
+    await this.roadmapResourceService.deleteResource(id, userId);
+
+    return ApiResponse.success({ message: "Resource deleted successfully" });
   }
 }
 

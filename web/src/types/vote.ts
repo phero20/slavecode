@@ -1,4 +1,4 @@
-export type VoteTargetType = "project" | "solution" | "roadmap";
+export type VoteTargetType = "project" | "solution" | "roadmap" | "resource";
 
 export interface TargetVoteStats {
   targetType: VoteTargetType;

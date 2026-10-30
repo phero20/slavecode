@@ -205,7 +205,7 @@ export type NewSolutionVote = typeof solutionVotes.$inferInsert
 
 export const votes = pgTable('votes', {
   userId: uuid('user_id').references(() => users.id, { onDelete: 'cascade' }).notNull(),
-  targetType: text('target_type').notNull(), // 'project' | 'solution' | 'roadmap'
+  targetType: text('target_type').notNull(), // 'project' | 'solution' | 'roadmap' | 'resource'
   targetId: text('target_id').notNull(),     // UUID, MongoDB ObjectId, or Slug
   voteType: integer('vote_type').notNull(),   // 1 for upvote / like, -1 for downvote
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),

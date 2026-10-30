@@ -55,9 +55,9 @@ export function ResourcesHeader({
         <Heading className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-foreground">
           <span className="text-primary">{totalRoadmaps} roadmaps</span> for you to master
         </Heading>
-        <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-2xl">
+        <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
           Visual, step-by-step career and skill paths across Web Development, AI/ML,
-          System Design, DevOps, and more. 100% free and community-driven.
+          System Design, DevOps, and more.
         </p>
       </div>
     </section>

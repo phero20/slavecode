@@ -44,7 +44,7 @@ export function useRoadmapDetailTabs(
   const isMounted = useIsMounted();
 
   const allowedTabs = useMemo(
-    () => new Set(["roadmap", "project", "ai-tutor"]),
+    () => new Set(["roadmap", "project", "resources", "ai-tutor"]),
     []
   );
 

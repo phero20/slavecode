@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export const voteParamSchema = z.object({
-  targetType: z.enum(['project', 'solution', 'roadmap']),
+  targetType: z.enum(['project', 'solution', 'roadmap', 'resource']),
   targetId: z.string().min(1, "targetId is required"),
 });
 

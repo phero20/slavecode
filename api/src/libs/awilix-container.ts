@@ -136,13 +136,19 @@ import { type ReportBugAdminController } from "../controllers/report-bug/report-
 import { type IResourceRepository } from "../repositories/resources/resource.repository";
 import { type IRoadmapTopicRepository } from "../repositories/resources/roadmap-topic.repository";
 import { type IRoadmapProjectRepository } from "../repositories/resources/roadmap-project.repository";
+import { type IRoadmapResourceRepository } from "../types/resources/roadmap-resource.types";
 import { type IResourceService, type ResourceService } from "../services/resources/resource.service";
 import {
   type IRoadmapProjectService,
   type RoadmapProjectService,
 } from "../services/resources/roadmap-project.service";
+import {
+  type IRoadmapResourceService,
+  type RoadmapResourceService,
+} from "../services/resources/roadmap-resource.service";
 import { type ResourceCache } from "../cache/resources/resource.cache";
 import { type RoadmapProjectCache } from "../cache/resources/roadmap-project.cache";
+import { type RoadmapResourceCache } from "../cache/resources/roadmap-resource.cache";
 import { type ResourceController } from "../controllers/resources/resource.controller";
 import { type UploadController } from "../controllers/common/upload.controller";
 import { type ICloudinaryService } from "../services/common/cloudinary.service";
@@ -215,6 +221,7 @@ export interface ICradle {
   resourceRepository: IResourceRepository;
   roadmapTopicRepository: IRoadmapTopicRepository;
   roadmapProjectRepository: IRoadmapProjectRepository;
+  roadmapResourceRepository: IRoadmapResourceRepository;
   voteRepository: IVoteRepository;
 
   // Services (Primary/Cached)
@@ -275,6 +282,7 @@ export interface ICradle {
   cacheAdminService: CacheAdminService;
   resourceService: IResourceService;
   roadmapProjectService: IRoadmapProjectService;
+  roadmapResourceService: IRoadmapResourceService;
   voteService: IVoteService;
 
   // Raw Services
@@ -292,6 +300,7 @@ export interface ICradle {
   rawCompanyService: import("../services/company/company.service").CompanyService;
   rawResourceService: ResourceService;
   rawRoadmapProjectService: RoadmapProjectService;
+  rawRoadmapResourceService: RoadmapResourceService;
 
   // Middlewares
   authMiddleware: AuthMiddleware;
@@ -321,6 +330,7 @@ export interface ICradle {
   companyCache: CompanyCache;
   resourceCache: ResourceCache;
   roadmapProjectCache: RoadmapProjectCache;
+  roadmapResourceCache: RoadmapResourceCache;
 
   // Controllers
   authController: AuthController;

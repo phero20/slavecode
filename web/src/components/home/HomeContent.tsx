@@ -2,6 +2,8 @@ import { Hero } from "./Hero";
 import CompilerSection from "./compilers/compilerVisual";
 import AcademyHome from "./academy/AcademyHome";
 import { RoadmapHomeSection } from "./roadmap/RoadmapHomeSection";
+import ResourcesHome from "./resources/ResourcesHome";
+import ProjectsHomeSection from "./projects/ProjectsHomeSection";
 import { CompaniesHomeSection } from "./companies/CompaniesHomeSection";
 import SystemdesignHome from "./systemdesign/SystemdesignHome";
 import ArenaHome from "./Arena/ArenaHome";
@@ -21,20 +23,17 @@ export const HomeContent = () => {
         {/* 2.5 — Interactive Roadmap Mimic */}
         <RoadmapHomeSection />
 
+        {/* 2.55 — Resources & Developer Roadmaps */}
+        <ResourcesHome />
+
+        {/* 2.58 — Hands-on Projects */}
+        <ProjectsHomeSection />
+
         {/* 2.6 — Companies Section */}
         <CompaniesHomeSection />
 
         {/* 2.7 — System Design Section */}
         <SystemdesignHome />
-
-        {/* 2.0 — Features: Bento grid showcase of all platform pillars */}
-        {/* <Features /> */}
-
-        {/* 3.0 — How It Works: Numbered steps with connector lines */}
-        {/* <HowItWorks /> */}
-
-        {/* Statistics: By-the-numbers impact strip */}
-        {/* <Statistics /> */}
 
         {/* 4.0 — Arena Section */}
         <ArenaHome />

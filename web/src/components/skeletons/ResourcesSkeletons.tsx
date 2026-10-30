@@ -4,6 +4,7 @@ import React from "react";
 import Skeleton from "react-loading-skeleton";
 import { SkeletonProvider } from "./BaseSkeleton";
 import { CategorySkeletonList } from "./CategorySkeletons";
+import { Card } from "@/components/ui/card";
 
 // Re-export project skeletons for backward compatibility
 export {
@@ -215,6 +216,53 @@ export function RoadmapTopicSkeleton() {
             ))}
           </div>
         </div>
+      </div>
+    </SkeletonProvider>
+  );
+}
+
+/**
+ * Single Resource Card Skeleton
+ * Matches RoadmapResourceCard.tsx 1:1.
+ */
+export function ResourceCardSkeleton() {
+  return (
+    <Card className="flex flex-col justify-between overflow-hidden h-full bg-card border-2 border-border/40 shadow-sm">
+      <div className="p-2 sm:p-2.5 pb-0">
+        <div className="relative w-full aspect-video overflow-hidden rounded-lg border border-border/40 bg-muted/20 shrink-0 flex items-center justify-center">
+          <Skeleton width="100%" height="100%" className="rounded-lg opacity-25" />
+        </div>
+      </div>
+      <div className="p-4 sm:p-5 pt-3.5 sm:pt-4 space-y-3 flex-1 flex flex-col justify-between">
+        <div className="space-y-3">
+          <div className="flex items-center justify-between gap-2">
+            <Skeleton width={90} height={20} className="rounded-full opacity-35" />
+            <Skeleton width={14} height={14} className="rounded-sm opacity-25" />
+          </div>
+          <div className="space-y-1.5">
+            <Skeleton width="75%" height={20} className="rounded-sm opacity-40" />
+            <div className="space-y-1">
+              <Skeleton width="100%" height={13} className="rounded-sm opacity-25" />
+              <Skeleton width="60%" height={13} className="rounded-sm opacity-20" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </Card>
+  );
+}
+
+/**
+ * Resources Grid Skeleton
+ * Matches RoadmapResourcesView.tsx 1:1.
+ */
+export function RoadmapResourcesSkeleton({ count = 9 }: { count?: number }) {
+  return (
+    <SkeletonProvider noWrapper>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 pt-1 pb-16">
+        {Array.from({ length: count }).map((_, i) => (
+          <ResourceCardSkeleton key={i} />
+        ))}
       </div>
     </SkeletonProvider>
   );

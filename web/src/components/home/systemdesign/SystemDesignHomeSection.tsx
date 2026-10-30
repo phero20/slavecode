@@ -56,7 +56,7 @@ export const SystemDesignHomeSection = () => {
                 </div>
 
                 {/* Typography */}
-                <div className="space-y-6 flex flex-col items-center">
+                <div className="space-y-4 flex flex-col items-center">
                     <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground leading-[1.1]">
                         <span className="text-primary">56 topics</span> for you to master
                     </h2>

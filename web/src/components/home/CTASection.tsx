@@ -1,6 +1,3 @@
-
-
-
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Code2, GraduationCap } from "lucide-react";
 import Link from "next/link";
@@ -21,7 +18,7 @@ export const CTASection = () => {
 
           {/* Description */}
           <p className="text-[15px] text-muted-foreground leading-relaxed mb-10 max-w-3xl mx-auto">
-            Master your skills with a comprehensive platform. Access over <Link href="/problems" className="text-foreground font-semibold underline decoration-primary underline-offset-4 hover:text-primary transition-colors">11,000+ coding problems</Link>, explore our <Link href="/academy" className="text-foreground font-semibold underline decoration-primary underline-offset-4 hover:text-primary transition-colors">Academy</Link> supporting 80 languages for beginners, and follow structured <Link href="/roadmap" className="text-foreground font-semibold underline decoration-primary underline-offset-4 hover:text-primary transition-colors">DSA roadmaps</Link>. Prepare for interviews with <Link href="/companies" className="text-foreground font-semibold underline decoration-primary underline-offset-4 hover:text-primary transition-colors">470 company-specific questions</Link>, dive into <Link href="/systemdesign" className="text-foreground font-semibold underline decoration-primary underline-offset-4 hover:text-primary transition-colors">System Design</Link>, and more.
+            Master your skills with a comprehensive platform. Access over <Link href="/problems" className="text-foreground font-semibold underline decoration-primary underline-offset-4 hover:text-primary transition-colors">11,000+ coding problems</Link>, explore our <Link href="/academy" className="text-foreground font-semibold underline decoration-primary underline-offset-4 hover:text-primary transition-colors">Academy</Link> supporting 80 languages for beginners, follow structured <Link href="/roadmap" className="text-foreground font-semibold underline decoration-primary underline-offset-4 hover:text-primary transition-colors">DSA roadmaps</Link>, explore 90+ career <Link href="/resources" className="text-foreground font-semibold underline decoration-primary underline-offset-4 hover:text-primary transition-colors">Resources</Link>, and build real-world <Link href="/projects" className="text-foreground font-semibold underline decoration-primary underline-offset-4 hover:text-primary transition-colors">Projects</Link>. Prepare for interviews with <Link href="/companies" className="text-foreground font-semibold underline decoration-primary underline-offset-4 hover:text-primary transition-colors">470 company-specific questions</Link>, dive into <Link href="/systemdesign" className="text-foreground font-semibold underline decoration-primary underline-offset-4 hover:text-primary transition-colors">System Design</Link>, and more.
           </p>
 
           {/* Action Buttons */}

@@ -30,6 +30,7 @@ import { ReportBugAdminRepository } from "../../repositories/report-bug/report-b
 import { ResourceRepository } from "../../repositories/resources/resource.repository";
 import { RoadmapTopicRepository } from "../../repositories/resources/roadmap-topic.repository";
 import { RoadmapProjectRepository } from "../../repositories/resources/roadmap-project.repository";
+import { RoadmapResourceRepository } from "../../repositories/resources/roadmap-resource.repository";
 import { VoteRepository } from "../../repositories/votes/vote.repository";
 
 /**
@@ -68,6 +69,6 @@ export const repositoriesRegistry = {
   resourceRepository: asClass(ResourceRepository).singleton(),
   roadmapTopicRepository: asClass(RoadmapTopicRepository).singleton(),
   roadmapProjectRepository: asClass(RoadmapProjectRepository).singleton(),
+  roadmapResourceRepository: asClass(RoadmapResourceRepository).singleton(),
   voteRepository: asClass(VoteRepository).singleton(),
 };
-

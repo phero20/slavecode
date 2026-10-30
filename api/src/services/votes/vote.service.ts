@@ -6,9 +6,36 @@ import type {
 } from "../../types/votes/vote.types";
 import type { ICradle } from "../../libs/awilix-container";
 import { RoadmapProjectModel } from "../../mongo/models/roadmap-project.model";
+import { RoadmapResourceModel } from "../../mongo/models/roadmap-resource.model";
 import { db, schema } from "../../db";
 import { eq } from "drizzle-orm";
 import { redis } from "../../libs/core/redis";
+import { createLogger } from "../../libs/utils/logger";
+
+const logger = createLogger("vote.service");
+
+async function deleteKeysByPattern(pattern: string): Promise<void> {
+  await new Promise<void>((resolve) => {
+    const stream = redis.scanStream({ match: pattern, count: 100 });
+    stream.on("data", async (keys: string[]) => {
+      if (keys.length > 0) {
+        stream.pause();
+        try {
+          await redis.del(...keys);
+        } catch (err) {
+          logger.error({ err, pattern }, "Error deleting scanned Redis keys");
+        } finally {
+          stream.resume();
+        }
+      }
+    });
+    stream.on("end", () => resolve());
+    stream.on("error", (err) => {
+      logger.error({ err, pattern }, "Redis scanStream error");
+      resolve();
+    });
+  });
+}
 
 export interface IVoteService {
   toggleVote(
@@ -98,6 +125,25 @@ export class VoteService implements IVoteService {
       // Invalidate the detail cache for this project so fresh stats are retrieved
       try {
         redis.del(`projects:detail:${targetId.toLowerCase().trim()}`).catch(() => {});
+      } catch {
+        // non-blocking
+      }
+    }
+
+    // Sync count to MongoDB RoadmapResource and invalidate list/detail caches
+    if (targetType === "resource") {
+      const resourceId = targetId.trim();
+      RoadmapResourceModel.updateOne(
+        { _id: resourceId },
+        { $set: { "stats.upvotesCount": upvotes - downvotes } },
+      )
+        .exec()
+        .catch(() => {});
+
+      try {
+        redis.del(`resource:id:${resourceId}`).catch(() => {});
+        deleteKeysByPattern("resources:catalog:*").catch(() => {});
+        deleteKeysByPattern("resources:roadmap:*").catch(() => {});
       } catch {
         // non-blocking
       }

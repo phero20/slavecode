@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import type { ProjectDifficulty } from "@/types/project";
+import type { ResourceSortOption } from "@/types/roadmap-resource";
 
 export interface OpenTopicTab {
   id: string;
@@ -37,6 +38,15 @@ interface ResourceStoreState {
   setProjectDifficulty: (slug: string, difficulty: ProjectDifficulty | "all") => void;
   selectedProjectSlug: string | null;
   setSelectedProjectSlug: (slug: string | null) => void;
+
+  resourceTypeByRoadmap: Record<string, string | "all">;
+  setResourceType: (slug: string, type: string | "all") => void;
+  resourceSortByRoadmap: Record<string, ResourceSortOption>;
+  setResourceSort: (slug: string, sort: ResourceSortOption) => void;
+  isAddResourceFormOpen: boolean;
+  setIsAddResourceFormOpen: (isOpen: boolean) => void;
+  selectedResourceId: string | null;
+  setSelectedResourceId: (id: string | null) => void;
 
   openTopic: (slug: string, topic: OpenTopicTab) => void;
   closeTopic: (slug: string, topicId: string) => void;
@@ -87,6 +97,27 @@ export const useResourceStore = create<ResourceStoreState>()(
         })),
       selectedProjectSlug: null,
       setSelectedProjectSlug: (slug) => set({ selectedProjectSlug: slug }),
+
+      resourceTypeByRoadmap: {},
+      setResourceType: (slug, type) =>
+        set((state) => ({
+          resourceTypeByRoadmap: {
+            ...state.resourceTypeByRoadmap,
+            [slug]: type,
+          },
+        })),
+      resourceSortByRoadmap: {},
+      setResourceSort: (slug, sort) =>
+        set((state) => ({
+          resourceSortByRoadmap: {
+            ...state.resourceSortByRoadmap,
+            [slug]: sort,
+          },
+        })),
+      isAddResourceFormOpen: false,
+      setIsAddResourceFormOpen: (isOpen) => set({ isAddResourceFormOpen: isOpen }),
+      selectedResourceId: null,
+      setSelectedResourceId: (id) => set({ selectedResourceId: id }),
 
       openTopic: (slug, topic) =>
         set((state) => {
@@ -161,6 +192,8 @@ export const useResourceStore = create<ResourceStoreState>()(
         openTopicsByRoadmap: state.openTopicsByRoadmap,
         activeTabByRoadmap: state.activeTabByRoadmap,
         projectDifficultyByRoadmap: state.projectDifficultyByRoadmap,
+        resourceTypeByRoadmap: state.resourceTypeByRoadmap,
+        resourceSortByRoadmap: state.resourceSortByRoadmap,
       }),
       onRehydrateStorage: () => (state) => {
         state?.setHasHydrated(true);

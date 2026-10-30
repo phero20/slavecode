@@ -1,0 +1,3300 @@
+{
+  "success": true,
+  "data": {
+    "_id": "6ad4c759d5d8636a57e78ffd",
+    "title": {
+      "card": "Full Stack",
+      "page": "Full Stack Developer"
+    },
+    "description": "Step by step guide to becoming a modern full stack developer in @currentYear@",
+    "slug": "full-stack",
+    "category": "other",
+    "categories": [],
+    "type": "role",
+    "status": "published",
+    "nodes": [
+      {
+        "id": "yrZUjoNj7mjOHaZVRiFJV",
+        "type": "horizontal",
+        "position": {
+          "x": -502.082308231475,
+          "y": 497.904587772902
+        },
+        "selected": false,
+        "data": {
+          "label": "horizontal node",
+          "style": {
+            "strokeDasharray": "0.8 8",
+            "strokeLinecap": "round",
+            "strokeWidth": 3.5,
+            "stroke": "#2B78E4"
+          }
+        },
+        "zIndex": 999,
+        "width": 63,
+        "height": 20,
+        "positionAbsolute": {
+          "x": -502.082308231475,
+          "y": 497.904587772902
+        },
+        "dragging": false,
+        "style": {
+          "width": 63,
+          "height": 20
+        },
+        "resizing": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 63,
+          "height": 20
+        }
+      },
+      {
+        "id": "kPPgIGhyoDoJoUJnP-vOY",
+        "type": "section",
+        "position": {
+          "x": 44.6592120530787,
+          "y": -125.502289843954
+        },
+        "selected": false,
+        "data": {
+          "label": "",
+          "style": {
+            "width": 150,
+            "height": 100,
+            "fontSize": 17,
+            "backgroundColor": "#ffffff",
+            "borderColor": "#ffffff"
+          }
+        },
+        "zIndex": -999,
+        "width": 356,
+        "height": 103,
+        "style": {
+          "width": 356,
+          "height": 103
+        },
+        "resizing": false,
+        "positionAbsolute": {
+          "x": 44.6592120530787,
+          "y": -125.502289843954
+        },
+        "dragging": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 356,
+          "height": 103
+        }
+      },
+      {
+        "id": "tmRyxL2cIei7PVHdOvmuJ",
+        "type": "horizontal",
+        "position": {
+          "x": 253.009489648058,
+          "y": 1215.22101536403
+        },
+        "selected": false,
+        "data": {
+          "label": "horizontal node",
+          "style": {
+            "strokeDasharray": "0.8 8",
+            "strokeLinecap": "round",
+            "strokeWidth": 3.5,
+            "stroke": "#2B78E4"
+          },
+          "oldId": "zh4DYU0QpAolXJ6wE0CEe"
+        },
+        "zIndex": 999,
+        "width": 85,
+        "height": 20,
+        "positionAbsolute": {
+          "x": 253.009489648058,
+          "y": 1215.22101536403
+        },
+        "dragging": false,
+        "style": {
+          "width": 85,
+          "height": 20
+        },
+        "resizing": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 85,
+          "height": 20
+        }
+      },
+      {
+        "id": "Ju00mr0KLGN2BV6yEQGPt",
+        "type": "vertical",
+        "position": {
+          "x": -45.8697232634204,
+          "y": 1834.05238972695
+        },
+        "selected": false,
+        "data": {
+          "label": "vertical node",
+          "style": {
+            "strokeDasharray": "0.8 8",
+            "strokeLinecap": "round",
+            "strokeWidth": 3.5,
+            "stroke": "#4136D4"
+          }
+        },
+        "zIndex": 999,
+        "width": 21,
+        "height": 104,
+        "positionAbsolute": {
+          "x": -45.8697232634204,
+          "y": 1834.05238972695
+        },
+        "dragging": false,
+        "style": {
+          "width": 21,
+          "height": 104
+        },
+        "resizing": false,
+        "focusable": true,
+        "selectable": true,
+        "measured": {
+          "width": 21,
+          "height": 104
+        }
+      },
+      {
+        "width": 454,
+        "height": 124,
+        "id": "sVXZrBCsiSzWBBYWTm-nQ",
+        "type": "paragraph",
+        "position": {
+          "x": -253.283329132996,
+          "y": 1746.014785961
+        },
+        "selected": false,
+        "data": {
+          "label": "Continue Learning with following relevant tracks",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center",
+            "borderColor": "#000000",
+            "backgroundColor": "#ffffff"
+          },
+          "oldId": "0vLaVNJaJSHZ_bHli6Qzs"
+        },
+        "zIndex": 999,
+        "positionAbsolute": {
+          "x": -253.283329132996,
+          "y": 1746.014785961
+        },
+        "dragging": false,
+        "style": {
+          "width": 454,
+          "height": 124
+        },
+        "resizing": false,
+        "focusable": true,
+        "selectable": true,
+        "measured": {
+          "width": 454,
+          "height": 124
+        }
+      },
+      {
+        "width": 162,
+        "height": 68,
+        "id": "iogwMmOvub2ZF4zgg6WyF",
+        "type": "title",
+        "position": {
+          "x": -584.582308231475,
+          "y": -192.890915443607
+        },
+        "selected": false,
+        "data": {
+          "label": "Full Stack",
+          "style": {
+            "fontSize": 28,
+            "justifyContent": "flex-start",
+            "textAlign": "center"
+          },
+          "oldId": "9nxw2PEl-_eQPW0FHNPq2"
+        },
+        "zIndex": 999,
+        "dragging": false,
+        "positionAbsolute": {
+          "x": -584.582308231475,
+          "y": -192.890915443607
+        },
+        "focusable": true,
+        "selectable": true,
+        "measured": {
+          "width": 162,
+          "height": 68
+        }
+      },
+      {
+        "width": 104,
+        "height": 49,
+        "id": "sQsxo9QyLKZyhMnFUcxhS",
+        "type": "button",
+        "position": {
+          "x": -235.86972326342,
+          "y": 1802.48454333346
+        },
+        "selected": false,
+        "data": {
+          "label": "Frontend",
+          "href": "/resources/frontend",
+          "color": "#FFFFFf",
+          "backgroundColor": "#4136D4",
+          "style": {
+            "fontSize": 17
+          },
+          "borderColor": "#4136D4",
+          "oldId": "uSLzfLPXxS5-P7ozscvjZ"
+        },
+        "zIndex": 999,
+        "dragging": false,
+        "positionAbsolute": {
+          "x": -235.86972326342,
+          "y": 1802.48454333346
+        },
+        "style": {
+          "width": 104,
+          "height": 49
+        },
+        "focusable": true,
+        "resizing": false,
+        "selectable": true,
+        "measured": {
+          "width": 104,
+          "height": 49
+        }
+      },
+      {
+        "width": 21,
+        "height": 81,
+        "id": "LEijbLyxg4RyutKEM2Y5g",
+        "type": "vertical",
+        "position": {
+          "x": -514.082308231475,
+          "y": -273.890915443607
+        },
+        "selected": false,
+        "data": {
+          "label": "vertical node",
+          "style": {
+            "strokeDasharray": "0.8 8",
+            "strokeLinecap": "round",
+            "strokeWidth": 3.5,
+            "stroke": "#0A33FF"
+          },
+          "oldId": "xD07fJ1NmNeAarVCEfubU"
+        },
+        "zIndex": 999,
+        "positionAbsolute": {
+          "x": -514.082308231475,
+          "y": -273.890915443607
+        },
+        "dragging": false,
+        "focusable": true,
+        "style": {
+          "width": 21,
+          "height": 81
+        },
+        "resizing": false,
+        "selectable": true,
+        "measured": {
+          "width": 21,
+          "height": 81
+        }
+      },
+      {
+        "id": "B0kARTODvCBi0iOF8iiqI",
+        "type": "topic",
+        "position": {
+          "x": -395.5644637618,
+          "y": 43.4045877729017
+        },
+        "selected": false,
+        "data": {
+          "label": "HTML",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center"
+          },
+          "oldId": "mGgx_QTEPmVKf6AijX9fi"
+        },
+        "zIndex": 999,
+        "width": 105,
+        "height": 49,
+        "positionAbsolute": {
+          "x": -395.5644637618,
+          "y": 43.4045877729017
+        },
+        "dragging": false,
+        "style": {
+          "width": 105,
+          "height": 49
+        },
+        "resizing": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 105,
+          "height": 49
+        }
+      },
+      {
+        "id": "dAJHWmGeiYdzZ1ZjrWz1S",
+        "type": "topic",
+        "position": {
+          "x": -251.5644637618,
+          "y": 43.4045877729017
+        },
+        "selected": false,
+        "data": {
+          "label": "CSS",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center"
+          },
+          "oldId": "mGgx_QTEPmVKf6AijX9fi"
+        },
+        "zIndex": 999,
+        "width": 101,
+        "height": 49,
+        "positionAbsolute": {
+          "x": -251.5644637618,
+          "y": 43.4045877729017
+        },
+        "dragging": false,
+        "style": {
+          "width": 101,
+          "height": 49
+        },
+        "resizing": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 101,
+          "height": 49
+        }
+      },
+      {
+        "id": "T9PB6WQf-Fa9NXKKvVOy_",
+        "type": "topic",
+        "position": {
+          "x": 28.0094896480582,
+          "y": 43.4045877729017
+        },
+        "selected": false,
+        "data": {
+          "label": "JavaScript",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center"
+          },
+          "oldId": "khoUtTUxdf8udAzN9_CAb"
+        },
+        "zIndex": 999,
+        "width": 125,
+        "height": 49,
+        "positionAbsolute": {
+          "x": 28.0094896480582,
+          "y": 43.4045877729017
+        },
+        "dragging": false,
+        "style": {
+          "width": 125,
+          "height": 49
+        },
+        "resizing": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 125,
+          "height": 49
+        }
+      },
+      {
+        "id": "mGgx_QTEPmVKf6AijX9fi",
+        "type": "topic",
+        "position": {
+          "x": 298.182104331322,
+          "y": 133.404587772902
+        },
+        "selected": false,
+        "data": {
+          "label": "npm",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center"
+          }
+        },
+        "zIndex": 999,
+        "width": 101,
+        "height": 49,
+        "positionAbsolute": {
+          "x": 298.182104331322,
+          "y": 133.404587772902
+        },
+        "dragging": false,
+        "style": {
+          "width": 101,
+          "height": 49
+        },
+        "resizing": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 101,
+          "height": 49
+        }
+      },
+      {
+        "id": "WsdUAEaI7FX6DKKhPXUHp",
+        "type": "subtopic",
+        "position": {
+          "x": -351.978069631376,
+          "y": 133.404587772902
+        },
+        "selected": false,
+        "data": {
+          "label": "Checkpoint - Static Webpages",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center",
+            "colorType": "a"
+          },
+          "oldId": "7JU1cVggMDoZUV-adGsf-"
+        },
+        "zIndex": 999,
+        "width": 291,
+        "height": 49,
+        "positionAbsolute": {
+          "x": -351.978069631376,
+          "y": 133.404587772902
+        },
+        "dragging": false,
+        "selectable": true,
+        "focusable": true,
+        "style": {
+          "width": 291,
+          "height": 49
+        },
+        "resizing": true,
+        "measured": {
+          "width": 291,
+          "height": 49
+        }
+      },
+      {
+        "id": "arAWBttFmMY6g99PcEaeA",
+        "type": "vertical",
+        "position": {
+          "x": -117.381421861762,
+          "y": 69.4045877729017
+        },
+        "selected": false,
+        "data": {
+          "label": "vertical node",
+          "style": {
+            "strokeDasharray": "0.8 8",
+            "strokeLinecap": "round",
+            "strokeWidth": 3.5,
+            "stroke": "#2B78E4"
+          },
+          "oldId": "8MhESAMICF6j7X3RL9bFE"
+        },
+        "zIndex": 999,
+        "width": 21,
+        "height": 64,
+        "positionAbsolute": {
+          "x": -117.381421861762,
+          "y": 69.4045877729017
+        },
+        "dragging": false,
+        "style": {
+          "width": 21,
+          "height": 64
+        },
+        "resizing": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 21,
+          "height": 64
+        }
+      },
+      {
+        "id": "2DFzoIUjKdAKGjfu_SCfa",
+        "type": "subtopic",
+        "position": {
+          "x": -23.9905103519419,
+          "y": 133.404587772902
+        },
+        "selected": false,
+        "data": {
+          "label": "Checkpoint - Interactivity",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center",
+            "colorType": "a"
+          },
+          "oldId": "YVMyHFSCVF-GgXydq-SFJ"
+        },
+        "zIndex": 999,
+        "width": 287,
+        "height": 49,
+        "positionAbsolute": {
+          "x": -23.9905103519419,
+          "y": 133.404587772902
+        },
+        "dragging": false,
+        "selectable": true,
+        "focusable": true,
+        "style": {
+          "width": 287,
+          "height": 49
+        },
+        "resizing": false,
+        "measured": {
+          "width": 287,
+          "height": 49
+        }
+      },
+      {
+        "id": "CVVeXklBu8uEr7oyiSEhQ",
+        "type": "vertical",
+        "position": {
+          "x": 191.618578138238,
+          "y": 71.4045877729017
+        },
+        "selected": false,
+        "data": {
+          "label": "vertical node",
+          "style": {
+            "strokeDasharray": "0.8 8",
+            "strokeLinecap": "round",
+            "strokeWidth": 3.5,
+            "stroke": "#2B78E4"
+          },
+          "oldId": "8MhESAMICF6j7X3RL9bFE"
+        },
+        "zIndex": 999,
+        "width": 21,
+        "height": 62,
+        "positionAbsolute": {
+          "x": 191.618578138238,
+          "y": 71.4045877729017
+        },
+        "dragging": false,
+        "style": {
+          "width": 21,
+          "height": 62
+        },
+        "resizing": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 21,
+          "height": 62
+        }
+      },
+      {
+        "id": "We2APJpOPTr-VNfowG0kI",
+        "type": "topic",
+        "position": {
+          "x": 162.009489648058,
+          "y": 316.404587772902
+        },
+        "selected": false,
+        "data": {
+          "label": "Git",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center"
+          },
+          "oldId": "khoUtTUxdf8udAzN9_CAb"
+        },
+        "zIndex": 999,
+        "width": 101,
+        "height": 49,
+        "positionAbsolute": {
+          "x": 162.009489648058,
+          "y": 316.404587772902
+        },
+        "dragging": false,
+        "style": {
+          "width": 101,
+          "height": 49
+        },
+        "resizing": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 101,
+          "height": 49
+        }
+      },
+      {
+        "id": "8sPXL8iClpPqje03ksses",
+        "type": "topic",
+        "position": {
+          "x": -19.5644637618,
+          "y": 316.404587772902
+        },
+        "selected": false,
+        "data": {
+          "label": "GitHub",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center"
+          },
+          "oldId": "khoUtTUxdf8udAzN9_CAb"
+        },
+        "zIndex": 999,
+        "width": 101,
+        "height": 49,
+        "positionAbsolute": {
+          "x": -19.5644637618,
+          "y": 316.404587772902
+        },
+        "dragging": false,
+        "style": {
+          "width": 101,
+          "height": 49
+        },
+        "resizing": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 101,
+          "height": 49
+        }
+      },
+      {
+        "id": "R4aeJNOrfWyVp3ea-qF4H",
+        "type": "subtopic",
+        "position": {
+          "x": -26.9780696313755,
+          "y": 215.404587772902
+        },
+        "selected": false,
+        "data": {
+          "label": "Checkpoint - External Packages",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center",
+            "colorType": "a"
+          },
+          "oldId": "YVMyHFSCVF-GgXydq-SFJ"
+        },
+        "zIndex": 999,
+        "width": 290,
+        "height": 49,
+        "positionAbsolute": {
+          "x": -26.9780696313755,
+          "y": 215.404587772902
+        },
+        "dragging": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 290,
+          "height": 49
+        }
+      },
+      {
+        "id": "PW10DTLV-5U2ue770SXtM",
+        "type": "horizontal",
+        "position": {
+          "x": 262.021930368624,
+          "y": 229.904587772902
+        },
+        "selected": false,
+        "data": {
+          "label": "horizontal node",
+          "style": {
+            "strokeDasharray": "0.8 8",
+            "strokeLinecap": "round",
+            "strokeWidth": 3.5,
+            "stroke": "#2B78E4"
+          },
+          "oldId": "BfadoWcewEUb5PQ_itqK-"
+        },
+        "zIndex": 999,
+        "width": 85,
+        "height": 20,
+        "positionAbsolute": {
+          "x": 262.021930368624,
+          "y": 229.904587772902
+        },
+        "dragging": false,
+        "style": {
+          "width": 85,
+          "height": 20
+        },
+        "resizing": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 85,
+          "height": 20
+        }
+      },
+      {
+        "id": "CVCqdPkq_hGQfI8EEi5RC",
+        "type": "topic",
+        "position": {
+          "x": -329.478069631376,
+          "y": 315.404587772902
+        },
+        "selected": false,
+        "data": {
+          "label": "Tailwind CSS",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center"
+          },
+          "oldId": "2kKHuQZScu7hCDgQWxl5u"
+        },
+        "zIndex": 999,
+        "width": 146,
+        "height": 49,
+        "positionAbsolute": {
+          "x": -329.478069631376,
+          "y": 315.404587772902
+        },
+        "dragging": false,
+        "style": {
+          "width": 146,
+          "height": 49
+        },
+        "resizing": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 146,
+          "height": 49
+        }
+      },
+      {
+        "id": "khoUtTUxdf8udAzN9_CAb",
+        "type": "topic",
+        "position": {
+          "x": -444.817895668678,
+          "y": 315.404587772902
+        },
+        "selected": false,
+        "data": {
+          "label": "React",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center"
+          },
+          "oldId": "mGgx_QTEPmVKf6AijX9fi"
+        },
+        "zIndex": 999,
+        "width": 101,
+        "height": 49,
+        "positionAbsolute": {
+          "x": -444.817895668678,
+          "y": 315.404587772902
+        },
+        "dragging": false,
+        "style": {
+          "width": 101,
+          "height": 49
+        },
+        "resizing": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 101,
+          "height": 49
+        }
+      },
+      {
+        "id": "zFGWxgLPcZoW7KIzlnSV9",
+        "type": "subtopic",
+        "position": {
+          "x": -350.978069631376,
+          "y": 215.404587772902
+        },
+        "selected": false,
+        "data": {
+          "label": "Checkpoint - Collaborative Work",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center",
+            "colorType": "a"
+          },
+          "oldId": "7JU1cVggMDoZUV-adGsf-"
+        },
+        "zIndex": 999,
+        "width": 290,
+        "height": 49,
+        "positionAbsolute": {
+          "x": -350.978069631376,
+          "y": 215.404587772902
+        },
+        "dragging": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 290,
+          "height": 49
+        }
+      },
+      {
+        "id": "8MhESAMICF6j7X3RL9bFE",
+        "type": "vertical",
+        "position": {
+          "x": -117.381421861762,
+          "y": 265.404587772902
+        },
+        "selected": false,
+        "data": {
+          "label": "vertical node",
+          "style": {
+            "strokeDasharray": "0.8 8",
+            "strokeLinecap": "round",
+            "strokeWidth": 3.5,
+            "stroke": "#2B78E4"
+          }
+        },
+        "zIndex": 999,
+        "width": 21,
+        "height": 73,
+        "positionAbsolute": {
+          "x": -117.381421861762,
+          "y": 265.404587772902
+        },
+        "dragging": false,
+        "style": {
+          "width": 21,
+          "height": 73
+        },
+        "resizing": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 21,
+          "height": 73
+        }
+      },
+      {
+        "id": "H63WyNiiJ2Yr9HWs98EjR",
+        "type": "paragraph",
+        "position": {
+          "x": -459.478069631376,
+          "y": 396.904587772902
+        },
+        "selected": false,
+        "data": {
+          "label": "Feel free to skip these and revisit after learning Backend",
+          "style": {
+            "fontSize": 17,
+            "borderColor": "transparent",
+            "backgroundColor": "TRANSPARENT",
+            "color": "#000000",
+            "textAlign": "center",
+            "justifyContent": "center",
+            "padding": 16
+          },
+          "oldId": "fKzuMTsf6XL_0Ik6t8SAX"
+        },
+        "zIndex": 999,
+        "width": 276,
+        "height": 63,
+        "dragging": false,
+        "style": {
+          "width": 276,
+          "height": 63
+        },
+        "resizing": false,
+        "positionAbsolute": {
+          "x": -459.478069631376,
+          "y": 396.904587772902
+        },
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 276,
+          "height": 63
+        }
+      },
+      {
+        "id": "QfW-odmDYknm_qXNcDu5o",
+        "type": "paragraph",
+        "position": {
+          "x": -482.082308231475,
+          "y": 575.904587772902
+        },
+        "selected": false,
+        "data": {
+          "label": "Start Backend Development",
+          "style": {
+            "fontSize": 17,
+            "borderColor": "transparent",
+            "backgroundColor": "#ffffff",
+            "color": "#000000",
+            "textAlign": "center",
+            "justifyContent": "center",
+            "padding": 16
+          }
+        },
+        "zIndex": 999,
+        "width": 265,
+        "height": 48,
+        "dragging": false,
+        "style": {
+          "width": 265,
+          "height": 48
+        },
+        "resizing": false,
+        "positionAbsolute": {
+          "x": -482.082308231475,
+          "y": 575.904587772902
+        },
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 265,
+          "height": 48
+        }
+      },
+      {
+        "id": "7JU1cVggMDoZUV-adGsf-",
+        "type": "subtopic",
+        "position": {
+          "x": -443.478069631376,
+          "y": 483.404587772902
+        },
+        "selected": false,
+        "data": {
+          "label": "Checkpoint - Frontend Apps",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center",
+            "colorType": "a"
+          }
+        },
+        "zIndex": 999,
+        "width": 260,
+        "height": 49,
+        "positionAbsolute": {
+          "x": -443.478069631376,
+          "y": 483.404587772902
+        },
+        "dragging": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 260,
+          "height": 49
+        }
+      },
+      {
+        "id": "_aA6Hp4KkgJeptqo8oKTg",
+        "type": "topic",
+        "position": {
+          "x": 7.00948964805815,
+          "y": 574.904587772902
+        },
+        "selected": false,
+        "data": {
+          "label": "Node.js",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center"
+          },
+          "oldId": "cUOfvOlQ_0Uu1VX3i67kJ"
+        },
+        "zIndex": 999,
+        "width": 146,
+        "height": 49,
+        "positionAbsolute": {
+          "x": 7.00948964805815,
+          "y": 574.904587772902
+        },
+        "dragging": false,
+        "style": {
+          "width": 146,
+          "height": 49
+        },
+        "resizing": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 146,
+          "height": 49
+        }
+      },
+      {
+        "id": "qCV1wiNSXj4OSHyMqxRIK",
+        "type": "paragraph",
+        "position": {
+          "x": -26.9780696313755,
+          "y": 431.404587772902
+        },
+        "selected": false,
+        "data": {
+          "label": "You can pick any backend programming language. My recommendation is Node.js because you are already familiar with JavaScript and it's easier to pick.",
+          "style": {
+            "fontSize": 17,
+            "borderColor": "transparent",
+            "backgroundColor": "TRANSPARENT",
+            "color": "#000000",
+            "textAlign": "left",
+            "justifyContent": "center",
+            "padding": 16
+          },
+          "oldId": "fKzuMTsf6XL_0Ik6t8SAX"
+        },
+        "zIndex": 999,
+        "width": 445,
+        "height": 101,
+        "dragging": false,
+        "style": {
+          "width": 445,
+          "height": 101
+        },
+        "resizing": false,
+        "positionAbsolute": {
+          "x": -26.9780696313755,
+          "y": 431.404587772902
+        },
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 445,
+          "height": 101
+        }
+      },
+      {
+        "id": "0QKpvDD33C3WCmNGtRanp",
+        "type": "vertical",
+        "position": {
+          "x": -104.204339576854,
+          "y": 531.904587772902
+        },
+        "selected": false,
+        "data": {
+          "label": "vertical node",
+          "style": {
+            "stroke": "#000000"
+          }
+        },
+        "zIndex": 999,
+        "width": 21,
+        "height": 130,
+        "positionAbsolute": {
+          "x": -104.204339576854,
+          "y": 531.904587772902
+        },
+        "dragging": false,
+        "selectable": true,
+        "focusable": true,
+        "style": {
+          "width": 21,
+          "height": 130
+        },
+        "resizing": false,
+        "measured": {
+          "width": 21,
+          "height": 130
+        }
+      },
+      {
+        "id": "WqNcVZ8IkyqEubdd9JCa1",
+        "type": "label",
+        "position": {
+          "x": -283.0644637618,
+          "y": 630.904587772902
+        },
+        "selected": false,
+        "data": {
+          "label": "Backend Starts here",
+          "href": "",
+          "color": "#000000",
+          "style": {
+            "fontSize": 17
+          },
+          "oldId": "Dj2QhtEuuIgKc2CvgFGyK"
+        },
+        "zIndex": 999,
+        "width": 174,
+        "height": 36,
+        "positionAbsolute": {
+          "x": -283.0644637618,
+          "y": 630.904587772902
+        },
+        "dragging": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 174,
+          "height": 36
+        }
+      },
+      {
+        "id": "JGu0TKwAw-ieiG92BytYI",
+        "type": "subtopic",
+        "position": {
+          "x": -47.9905103519419,
+          "y": 651.904587772902
+        },
+        "selected": false,
+        "data": {
+          "label": "Checkpoint — CLI Apps",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center",
+            "colorType": "a"
+          },
+          "oldId": "YVMyHFSCVF-GgXydq-SFJ"
+        },
+        "zIndex": 999,
+        "width": 302,
+        "height": 49,
+        "positionAbsolute": {
+          "x": -47.9905103519419,
+          "y": 651.904587772902
+        },
+        "dragging": false,
+        "selectable": true,
+        "focusable": true,
+        "style": {
+          "width": 302,
+          "height": 49
+        },
+        "resizing": false,
+        "measured": {
+          "width": 302,
+          "height": 49
+        }
+      },
+      {
+        "id": "o72NM00uoHXswkadhqVVW",
+        "type": "horizontal",
+        "position": {
+          "x": 253.009489648058,
+          "y": 666.404587772902
+        },
+        "selected": false,
+        "data": {
+          "label": "horizontal node",
+          "style": {
+            "strokeDasharray": "0.8 8",
+            "strokeLinecap": "round",
+            "strokeWidth": 3.5,
+            "stroke": "#2B78E4"
+          },
+          "oldId": "BfadoWcewEUb5PQ_itqK-"
+        },
+        "zIndex": 999,
+        "width": 85,
+        "height": 20,
+        "positionAbsolute": {
+          "x": 253.009489648058,
+          "y": 666.404587772902
+        },
+        "dragging": false,
+        "style": {
+          "width": 85,
+          "height": 20
+        },
+        "resizing": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 85,
+          "height": 20
+        }
+      },
+      {
+        "id": "vmHbWdmMHF53otXIrqzRV",
+        "type": "topic",
+        "position": {
+          "x": -117.381421861762,
+          "y": 847.904587772902
+        },
+        "selected": false,
+        "data": {
+          "label": "RESTful APIs",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center"
+          },
+          "oldId": "cUOfvOlQ_0Uu1VX3i67kJ"
+        },
+        "zIndex": 999,
+        "width": 151,
+        "height": 49,
+        "positionAbsolute": {
+          "x": -117.381421861762,
+          "y": 847.904587772902
+        },
+        "dragging": false,
+        "style": {
+          "width": 151,
+          "height": 49
+        },
+        "resizing": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 151,
+          "height": 49
+        }
+      },
+      {
+        "id": "3EtGLO6cwkLc1-o9gwFNk",
+        "type": "subtopic",
+        "position": {
+          "x": -49.9905103519419,
+          "y": 779.721015364028
+        },
+        "selected": false,
+        "data": {
+          "label": "Checkpoint — Simple CRUD Apps",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center",
+            "colorType": "a"
+          },
+          "oldId": "sO_9-l4FECbaqiaFnyeXO"
+        },
+        "zIndex": 999,
+        "width": 304,
+        "height": 49,
+        "positionAbsolute": {
+          "x": -49.9905103519419,
+          "y": 779.721015364028
+        },
+        "dragging": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 304,
+          "height": 49
+        }
+      },
+      {
+        "id": "BQV2ycD-EnmssO1idTgx9",
+        "type": "horizontal",
+        "position": {
+          "x": 253.009489648058,
+          "y": 794.221015364028
+        },
+        "selected": false,
+        "data": {
+          "label": "horizontal node",
+          "style": {
+            "strokeDasharray": "0.8 8",
+            "strokeLinecap": "round",
+            "strokeWidth": 3.5,
+            "stroke": "#2B78E4"
+          },
+          "oldId": "zh4DYU0QpAolXJ6wE0CEe"
+        },
+        "zIndex": 999,
+        "width": 85,
+        "height": 20,
+        "positionAbsolute": {
+          "x": 253.009489648058,
+          "y": 794.221015364028
+        },
+        "dragging": false,
+        "style": {
+          "width": 85,
+          "height": 20
+        },
+        "resizing": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 85,
+          "height": 20
+        }
+      },
+      {
+        "id": "vHojhJYjiN0IwruEqi1Dv",
+        "type": "topic",
+        "position": {
+          "x": -257.0644637618,
+          "y": 847.904587772902
+        },
+        "selected": false,
+        "data": {
+          "label": "JWT Auth",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center"
+          },
+          "oldId": "cUOfvOlQ_0Uu1VX3i67kJ"
+        },
+        "zIndex": 999,
+        "width": 123,
+        "height": 49,
+        "positionAbsolute": {
+          "x": -257.0644637618,
+          "y": 847.904587772902
+        },
+        "dragging": false,
+        "style": {
+          "width": 123,
+          "height": 49
+        },
+        "resizing": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 123,
+          "height": 49
+        }
+      },
+      {
+        "id": "Onfd7Sl8LG2sjh2aQY7gb",
+        "type": "topic",
+        "position": {
+          "x": -460.082308231475,
+          "y": 847.904587772902
+        },
+        "selected": false,
+        "data": {
+          "label": "Redis",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center"
+          },
+          "oldId": "cUOfvOlQ_0Uu1VX3i67kJ"
+        },
+        "zIndex": 999,
+        "width": 101,
+        "height": 49,
+        "positionAbsolute": {
+          "x": -460.082308231475,
+          "y": 847.904587772902
+        },
+        "dragging": false,
+        "style": {
+          "width": 101,
+          "height": 49
+        },
+        "resizing": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 101,
+          "height": 49
+        }
+      },
+      {
+        "id": "SHTSvMDqI7X1_ZT7-m--n",
+        "type": "topic",
+        "position": {
+          "x": -576.582308231475,
+          "y": 1145.31437751542
+        },
+        "selected": false,
+        "data": {
+          "label": "Linux Basics",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center"
+          },
+          "oldId": "cUOfvOlQ_0Uu1VX3i67kJ"
+        },
+        "zIndex": 999,
+        "width": 146,
+        "height": 49,
+        "positionAbsolute": {
+          "x": -576.582308231475,
+          "y": 1145.31437751542
+        },
+        "dragging": false,
+        "style": {
+          "width": 146,
+          "height": 49
+        },
+        "resizing": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 146,
+          "height": 49
+        }
+      },
+      {
+        "id": "gSUWhfd0DQoJjDpHEkk0i",
+        "type": "horizontal",
+        "position": {
+          "x": -504.478069631376,
+          "y": 970.085039845095
+        },
+        "selected": false,
+        "data": {
+          "label": "horizontal node",
+          "style": {
+            "strokeDasharray": "0.8 8",
+            "strokeLinecap": "round",
+            "strokeWidth": 3.5,
+            "stroke": "#2B78E4"
+          },
+          "oldId": "b7EdI-25v_eVMkqTBa0se"
+        },
+        "zIndex": 999,
+        "width": 100,
+        "height": 20,
+        "positionAbsolute": {
+          "x": -504.478069631376,
+          "y": 970.085039845095
+        },
+        "selectable": true,
+        "focusable": true,
+        "dragging": false,
+        "style": {
+          "width": 100,
+          "height": 20
+        },
+        "resizing": false,
+        "measured": {
+          "width": 100,
+          "height": 20
+        }
+      },
+      {
+        "id": "v4NF25lJElAtkU0Rm6Fob",
+        "type": "subtopic",
+        "position": {
+          "x": -459.478069631376,
+          "y": 955.585039845095
+        },
+        "selected": false,
+        "data": {
+          "label": "Checkpoint — Complete App",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center",
+            "colorType": "a"
+          },
+          "oldId": "YVMyHFSCVF-GgXydq-SFJ"
+        },
+        "zIndex": 999,
+        "width": 265,
+        "height": 49,
+        "positionAbsolute": {
+          "x": -459.478069631376,
+          "y": 955.585039845095
+        },
+        "dragging": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 265,
+          "height": 49
+        }
+      },
+      {
+        "id": "Oav7YPRBmsE1gVhEURckg",
+        "type": "horizontal",
+        "position": {
+          "x": -560.082308231475,
+          "y": 1037.81437751542
+        },
+        "selected": false,
+        "data": {
+          "label": "horizontal node",
+          "style": {
+            "stroke": "#000000"
+          },
+          "oldId": "rQozP_4g0XSRR4l5-OGsI"
+        },
+        "zIndex": 999,
+        "width": 243,
+        "height": 20,
+        "positionAbsolute": {
+          "x": -560.082308231475,
+          "y": 1037.81437751542
+        },
+        "dragging": false,
+        "resizing": false,
+        "style": {
+          "width": 243,
+          "height": 20
+        },
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 243,
+          "height": 20
+        }
+      },
+      {
+        "id": "Dj2QhtEuuIgKc2CvgFGyK",
+        "type": "label",
+        "position": {
+          "x": -473.257810215704,
+          "y": 1051.31437751542
+        },
+        "selected": false,
+        "data": {
+          "label": "DevOps starts here",
+          "href": "",
+          "color": "#000000",
+          "style": {
+            "fontSize": 17
+          }
+        },
+        "zIndex": 999,
+        "width": 166,
+        "height": 36,
+        "positionAbsolute": {
+          "x": -473.257810215704,
+          "y": 1051.31437751542
+        },
+        "dragging": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 166,
+          "height": 36
+        }
+      },
+      {
+        "id": "cUOfvOlQ_0Uu1VX3i67kJ",
+        "type": "topic",
+        "position": {
+          "x": -241.704339576854,
+          "y": 1145.31437751542
+        },
+        "selected": false,
+        "data": {
+          "label": "Basic AWS Services",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center"
+          },
+          "oldId": "2kKHuQZScu7hCDgQWxl5u"
+        },
+        "zIndex": 999,
+        "width": 210,
+        "height": 49,
+        "positionAbsolute": {
+          "x": -241.704339576854,
+          "y": 1145.31437751542
+        },
+        "dragging": false,
+        "style": {
+          "width": 210,
+          "height": 49
+        },
+        "resizing": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 210,
+          "height": 49
+        }
+      },
+      {
+        "id": "6oBIxYj8WPcUHidQ99tus",
+        "type": "subtopic",
+        "position": {
+          "x": -239.5644637618,
+          "y": 1087.31437751542
+        },
+        "selected": false,
+        "data": {
+          "label": "EC2",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center"
+          },
+          "oldId": "B-cphY7Imnv6JBMujVIF7"
+        },
+        "zIndex": 999,
+        "width": 71,
+        "height": 51,
+        "style": {
+          "width": 71,
+          "height": 51
+        },
+        "resizing": false,
+        "positionAbsolute": {
+          "x": -239.5644637618,
+          "y": 1087.31437751542
+        },
+        "dragging": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 71,
+          "height": 51
+        }
+      },
+      {
+        "id": "QtL-bLKtWIdH00K6k_PdC",
+        "type": "subtopic",
+        "position": {
+          "x": -165.5644637618,
+          "y": 1087.31437751542
+        },
+        "selected": false,
+        "data": {
+          "label": "VPC",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center",
+            "colorType": "c"
+          },
+          "oldId": "n2Xp_ijJ2OS8xhE7xMWxk"
+        },
+        "zIndex": 999,
+        "width": 71,
+        "height": 51,
+        "style": {
+          "width": 71,
+          "height": 51
+        },
+        "resizing": false,
+        "positionAbsolute": {
+          "x": -165.5644637618,
+          "y": 1087.31437751542
+        },
+        "dragging": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 71,
+          "height": 51
+        }
+      },
+      {
+        "id": "5zyYpu9cyuTFwQCjTbHpS",
+        "type": "subtopic",
+        "position": {
+          "x": -239.5644637618,
+          "y": 1032.31437751542
+        },
+        "selected": false,
+        "data": {
+          "label": "Route53",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center"
+          },
+          "oldId": "B-cphY7Imnv6JBMujVIF7"
+        },
+        "zIndex": 999,
+        "width": 104,
+        "height": 51,
+        "style": {
+          "width": 104,
+          "height": 51
+        },
+        "resizing": false,
+        "positionAbsolute": {
+          "x": -239.5644637618,
+          "y": 1032.31437751542
+        },
+        "dragging": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 104,
+          "height": 51
+        }
+      },
+      {
+        "id": "B-cphY7Imnv6JBMujVIF7",
+        "type": "subtopic",
+        "position": {
+          "x": -133.704339576854,
+          "y": 1032.31437751542
+        },
+        "selected": false,
+        "data": {
+          "label": "SES",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center"
+          }
+        },
+        "zIndex": 999,
+        "width": 101,
+        "height": 51,
+        "style": {
+          "width": 101,
+          "height": 51
+        },
+        "resizing": false,
+        "positionAbsolute": {
+          "x": -133.704339576854,
+          "y": 1032.31437751542
+        },
+        "dragging": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 101,
+          "height": 51
+        }
+      },
+      {
+        "id": "n2Xp_ijJ2OS8xhE7xMWxk",
+        "type": "subtopic",
+        "position": {
+          "x": -91.5644637618,
+          "y": 1087.31437751542
+        },
+        "selected": false,
+        "data": {
+          "label": "S3",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center"
+          },
+          "oldId": "B-cphY7Imnv6JBMujVIF7"
+        },
+        "zIndex": 999,
+        "width": 60,
+        "height": 51,
+        "style": {
+          "width": 60,
+          "height": 51
+        },
+        "resizing": false,
+        "positionAbsolute": {
+          "x": -91.5644637618,
+          "y": 1087.31437751542
+        },
+        "dragging": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 60,
+          "height": 51
+        }
+      },
+      {
+        "id": "fKzuMTsf6XL_0Ik6t8SAX",
+        "type": "paragraph",
+        "position": {
+          "x": 58.4971847919508,
+          "y": 923.814377515422
+        },
+        "selected": false,
+        "data": {
+          "label": "Use the checkpoints and do not forget to practice what you learn. There are project ideas at each checkpoint that you can build to solidify your knowledge.",
+          "style": {
+            "fontSize": 17,
+            "borderColor": "#000000",
+            "backgroundColor": "#ffffff",
+            "color": "#000000",
+            "textAlign": "left",
+            "justifyContent": "center",
+            "padding": 16
+          },
+          "oldId": "QfW-odmDYknm_qXNcDu5o"
+        },
+        "zIndex": 999,
+        "width": 342,
+        "height": 139,
+        "dragging": false,
+        "style": {
+          "width": 342
+        },
+        "resizing": false,
+        "positionAbsolute": {
+          "x": 58.4971847919508,
+          "y": 923.814377515422
+        },
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 342,
+          "height": 139
+        }
+      },
+      {
+        "id": "y1SFX7uvWaCy4OYBnECLu",
+        "type": "topic",
+        "position": {
+          "x": 290.521930368624,
+          "y": 1266.52383318443
+        },
+        "selected": false,
+        "data": {
+          "label": "Monit",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center"
+          },
+          "oldId": "2kKHuQZScu7hCDgQWxl5u"
+        },
+        "zIndex": 999,
+        "width": 89,
+        "height": 49,
+        "positionAbsolute": {
+          "x": 290.521930368624,
+          "y": 1266.52383318443
+        },
+        "dragging": false,
+        "resizing": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 89,
+          "height": 49
+        }
+      },
+      {
+        "id": "HGhnbMg6jh6cAmUH4DtOx",
+        "type": "topic",
+        "position": {
+          "x": 262.021930368624,
+          "y": 716.904587772902
+        },
+        "selected": false,
+        "data": {
+          "label": "PostgreSQL",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center"
+          },
+          "oldId": "2kKHuQZScu7hCDgQWxl5u"
+        },
+        "zIndex": 999,
+        "width": 146,
+        "height": 49,
+        "positionAbsolute": {
+          "x": 262.021930368624,
+          "y": 716.904587772902
+        },
+        "dragging": false,
+        "style": {
+          "width": 146,
+          "height": 49
+        },
+        "resizing": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 146,
+          "height": 49
+        }
+      },
+      {
+        "id": "J2_IWAb1s9zZcxOY3NXm2",
+        "type": "subtopic",
+        "position": {
+          "x": 16.0094896480582,
+          "y": 1200.72101536403
+        },
+        "selected": false,
+        "data": {
+          "label": "Checkpoint — Deployment",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center",
+            "colorType": "a"
+          },
+          "oldId": "sO_9-l4FECbaqiaFnyeXO"
+        },
+        "zIndex": 999,
+        "width": 248,
+        "height": 49,
+        "positionAbsolute": {
+          "x": 16.0094896480582,
+          "y": 1200.72101536403
+        },
+        "dragging": false,
+        "selectable": true,
+        "focusable": true,
+        "style": {
+          "width": 248,
+          "height": 49
+        },
+        "measured": {
+          "width": 248,
+          "height": 49
+        }
+      },
+      {
+        "id": "863KMXcFJzInvTp_-Ldmz",
+        "type": "topic",
+        "position": {
+          "x": 103.009489648058,
+          "y": 1392.52383318443
+        },
+        "selected": false,
+        "data": {
+          "label": "GitHub Actions",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center"
+          },
+          "oldId": "2kKHuQZScu7hCDgQWxl5u"
+        },
+        "zIndex": 999,
+        "width": 160,
+        "height": 49,
+        "positionAbsolute": {
+          "x": 103.009489648058,
+          "y": 1392.52383318443
+        },
+        "dragging": false,
+        "resizing": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 160,
+          "height": 49
+        }
+      },
+      {
+        "id": "zh4DYU0QpAolXJ6wE0CEe",
+        "type": "horizontal",
+        "position": {
+          "x": 253.009489648058,
+          "y": 1340.22101536403
+        },
+        "selected": false,
+        "data": {
+          "label": "horizontal node",
+          "style": {
+            "strokeDasharray": "0.8 8",
+            "strokeLinecap": "round",
+            "strokeWidth": 3.5,
+            "stroke": "#2B78E4"
+          },
+          "oldId": "BfadoWcewEUb5PQ_itqK-"
+        },
+        "zIndex": 999,
+        "width": 85,
+        "height": 20,
+        "positionAbsolute": {
+          "x": 253.009489648058,
+          "y": 1340.22101536403
+        },
+        "dragging": false,
+        "style": {
+          "width": 85,
+          "height": 20
+        },
+        "resizing": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 85,
+          "height": 20
+        }
+      },
+      {
+        "id": "NQmEl27eBPYhivcXdOEz3",
+        "type": "subtopic",
+        "position": {
+          "x": 16.0094896480582,
+          "y": 1325.72101536403
+        },
+        "selected": false,
+        "data": {
+          "label": "Checkpoint — Monitoring",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center",
+            "colorType": "a"
+          },
+          "oldId": "sO_9-l4FECbaqiaFnyeXO"
+        },
+        "zIndex": 999,
+        "width": 248,
+        "height": 49,
+        "positionAbsolute": {
+          "x": 16.0094896480582,
+          "y": 1325.72101536403
+        },
+        "dragging": false,
+        "selectable": true,
+        "focusable": true,
+        "style": {
+          "width": 248,
+          "height": 49
+        },
+        "measured": {
+          "width": 248,
+          "height": 49
+        }
+      },
+      {
+        "id": "rFXupYpUFfp7vZO8zh614",
+        "type": "topic",
+        "position": {
+          "x": -327.5644637618,
+          "y": 1392.52383318443
+        },
+        "selected": false,
+        "data": {
+          "label": "Ansible",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center"
+          },
+          "oldId": "2kKHuQZScu7hCDgQWxl5u"
+        },
+        "zIndex": 999,
+        "width": 102,
+        "height": 49,
+        "positionAbsolute": {
+          "x": -327.5644637618,
+          "y": 1392.52383318443
+        },
+        "dragging": false,
+        "resizing": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 102,
+          "height": 49
+        }
+      },
+      {
+        "id": "WJIx6JGqxoNT-vKk4LMQp",
+        "type": "vertical",
+        "position": {
+          "x": -128.0644637618,
+          "y": 1366
+        },
+        "selected": false,
+        "data": {
+          "label": "vertical node",
+          "style": {
+            "strokeDasharray": "0.8 8",
+            "strokeLinecap": "round",
+            "strokeWidth": 3.5,
+            "stroke": "#2B78E4"
+          },
+          "oldId": "gJhoy4tQwP4Gtwh0wL343"
+        },
+        "zIndex": 999,
+        "width": 21,
+        "height": 50,
+        "style": {
+          "width": 21,
+          "height": 50
+        },
+        "resizing": false,
+        "positionAbsolute": {
+          "x": -128.0644637618,
+          "y": 1366
+        },
+        "dragging": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 21,
+          "height": 50
+        }
+      },
+      {
+        "id": "liaY1GnlOateB_ZKBjNpY",
+        "type": "subtopic",
+        "position": {
+          "x": -226.5644637618,
+          "y": 1325.72101536403
+        },
+        "selected": false,
+        "data": {
+          "label": "Checkpoint — CI / CD",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center",
+            "colorType": "a"
+          },
+          "oldId": "sO_9-l4FECbaqiaFnyeXO"
+        },
+        "zIndex": 999,
+        "width": 218,
+        "height": 49,
+        "positionAbsolute": {
+          "x": -226.5644637618,
+          "y": 1325.72101536403
+        },
+        "dragging": false,
+        "selectable": true,
+        "focusable": true,
+        "style": {
+          "width": 218,
+          "height": 49
+        },
+        "resizing": false,
+        "measured": {
+          "width": 218,
+          "height": 49
+        }
+      },
+      {
+        "id": "2kKHuQZScu7hCDgQWxl5u",
+        "type": "topic",
+        "position": {
+          "x": -560.082308231475,
+          "y": 1468.72863037183
+        },
+        "selected": false,
+        "data": {
+          "label": "Terraform",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center"
+          },
+          "oldId": "khoUtTUxdf8udAzN9_CAb"
+        },
+        "zIndex": 999,
+        "width": 121,
+        "height": 49,
+        "positionAbsolute": {
+          "x": -560.082308231475,
+          "y": 1468.72863037183
+        },
+        "dragging": false,
+        "resizing": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 121,
+          "height": 49
+        }
+      },
+      {
+        "id": "gJhoy4tQwP4Gtwh0wL343",
+        "type": "vertical",
+        "position": {
+          "x": -473.257810215704,
+          "y": 1365.18200628802
+        },
+        "selected": false,
+        "data": {
+          "label": "vertical node",
+          "style": {
+            "strokeDasharray": "0.8 8",
+            "strokeLinecap": "round",
+            "strokeWidth": 3.5,
+            "stroke": "#2B78E4"
+          }
+        },
+        "zIndex": 999,
+        "width": 21,
+        "height": 50,
+        "style": {
+          "width": 21,
+          "height": 50
+        },
+        "resizing": false,
+        "positionAbsolute": {
+          "x": -473.257810215704,
+          "y": 1365.18200628802
+        },
+        "dragging": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 21,
+          "height": 50
+        }
+      },
+      {
+        "id": "sO_9-l4FECbaqiaFnyeXO",
+        "type": "subtopic",
+        "position": {
+          "x": -571.757810215704,
+          "y": 1324.90302165205
+        },
+        "selected": false,
+        "data": {
+          "label": "Checkpoint — Automation",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center",
+            "colorType": "a"
+          },
+          "oldId": "YVMyHFSCVF-GgXydq-SFJ"
+        },
+        "zIndex": 999,
+        "width": 252,
+        "height": 49,
+        "positionAbsolute": {
+          "x": -571.757810215704,
+          "y": 1324.90302165205
+        },
+        "dragging": false,
+        "selectable": true,
+        "focusable": true,
+        "style": {
+          "width": 252,
+          "height": 49
+        },
+        "resizing": false,
+        "measured": {
+          "width": 252,
+          "height": 49
+        }
+      },
+      {
+        "id": "b7EdI-25v_eVMkqTBa0se",
+        "type": "horizontal",
+        "position": {
+          "x": -498,
+          "y": 1552.53844329961
+        },
+        "selected": false,
+        "data": {
+          "label": "horizontal node",
+          "style": {
+            "strokeDasharray": "0.8 8",
+            "strokeLinecap": "round",
+            "strokeWidth": 3.5,
+            "stroke": "#2B78E4"
+          }
+        },
+        "zIndex": 999,
+        "width": 100,
+        "height": 20,
+        "positionAbsolute": {
+          "x": -498,
+          "y": 1552.53844329961
+        },
+        "selectable": true,
+        "focusable": true,
+        "dragging": false,
+        "style": {
+          "width": 100,
+          "height": 20
+        },
+        "resizing": false,
+        "measured": {
+          "width": 100,
+          "height": 20
+        }
+      },
+      {
+        "id": "YVMyHFSCVF-GgXydq-SFJ",
+        "type": "subtopic",
+        "position": {
+          "x": -415.5644637618,
+          "y": 1538.03844329961
+        },
+        "selected": false,
+        "data": {
+          "label": "Checkpoint — Infrastructure",
+          "style": {
+            "fontSize": 17,
+            "justifyContent": "flex-start",
+            "textAlign": "center",
+            "colorType": "a"
+          },
+          "oldId": "7JU1cVggMDoZUV-adGsf-"
+        },
+        "zIndex": 999,
+        "width": 260,
+        "height": 49,
+        "positionAbsolute": {
+          "x": -415.5644637618,
+          "y": 1538.03844329961
+        },
+        "dragging": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 260,
+          "height": 49
+        }
+      },
+      {
+        "width": 104,
+        "height": 49,
+        "id": "DezWXw5LWeP1S5Sosj90S",
+        "type": "button",
+        "position": {
+          "x": -128.86972326342,
+          "y": 1802.48454333346
+        },
+        "selected": false,
+        "data": {
+          "label": "Backend",
+          "href": "/resources/backend",
+          "color": "#FFFFFf",
+          "backgroundColor": "#4136D4",
+          "style": {
+            "fontSize": 17
+          },
+          "borderColor": "#4136D4",
+          "oldId": "uSLzfLPXxS5-P7ozscvjZ"
+        },
+        "zIndex": 999,
+        "dragging": false,
+        "positionAbsolute": {
+          "x": -128.86972326342,
+          "y": 1802.48454333346
+        },
+        "style": {
+          "width": 104,
+          "height": 49
+        },
+        "focusable": true,
+        "resizing": false,
+        "selectable": true,
+        "measured": {
+          "width": 104,
+          "height": 49
+        }
+      },
+      {
+        "width": 104,
+        "height": 49,
+        "id": "DsvdvpHWD0FgTjdkSJ9Uu",
+        "type": "button",
+        "position": {
+          "x": -21.8697232634204,
+          "y": 1802.48454333346
+        },
+        "selected": false,
+        "data": {
+          "label": "DevOps",
+          "href": "/resources/devops",
+          "color": "#FFFFFf",
+          "backgroundColor": "#4136D4",
+          "style": {
+            "fontSize": 17
+          },
+          "borderColor": "#4136D4",
+          "oldId": "uSLzfLPXxS5-P7ozscvjZ"
+        },
+        "zIndex": 999,
+        "dragging": false,
+        "positionAbsolute": {
+          "x": -21.8697232634204,
+          "y": 1802.48454333346
+        },
+        "style": {
+          "width": 104,
+          "height": 49
+        },
+        "focusable": true,
+        "resizing": false,
+        "selectable": true,
+        "measured": {
+          "width": 104,
+          "height": 49
+        }
+      },
+      {
+        "width": 101,
+        "height": 49,
+        "id": "uSLzfLPXxS5-P7ozscvjZ",
+        "type": "button",
+        "position": {
+          "x": 85.1302767365796,
+          "y": 1802.48454333346
+        },
+        "selected": false,
+        "data": {
+          "label": "AWS",
+          "href": "/resources/aws",
+          "color": "#FFFFFf",
+          "backgroundColor": "#4136D4",
+          "style": {
+            "fontSize": 17
+          },
+          "borderColor": "#4136D4",
+          "oldId": "PkhQdVms2TGgnPrytCBPZ"
+        },
+        "zIndex": 999,
+        "dragging": false,
+        "positionAbsolute": {
+          "x": 85.1302767365796,
+          "y": 1802.48454333346
+        },
+        "style": {
+          "width": 101,
+          "height": 49
+        },
+        "focusable": true,
+        "resizing": true,
+        "selectable": true,
+        "measured": {
+          "width": 101,
+          "height": 49
+        }
+      },
+      {
+        "id": "2bi7EWaC5QIWX6_Vl6988",
+        "type": "paragraph",
+        "position": {
+          "x": 72.1182771963982,
+          "y": -101.660692414483
+        },
+        "selected": false,
+        "data": {
+          "label": "",
+          "style": {
+            "fontSize": 17,
+            "borderColor": "#000000",
+            "backgroundColor": "#fcff00",
+            "color": "#ffffff",
+            "textAlign": "left",
+            "justifyContent": "flex-start",
+            "padding": 3
+          },
+          "oldId": "kvS4x6z7YWJjMpkpU01yh"
+        },
+        "zIndex": 999,
+        "width": 26,
+        "height": 25,
+        "resizing": false,
+        "style": {
+          "width": 26,
+          "height": 25
+        },
+        "positionAbsolute": {
+          "x": 72.1182771963982,
+          "y": -101.660692414483
+        },
+        "dragging": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 26,
+          "height": 25
+        }
+      },
+      {
+        "id": "aaWX__NQvUofoN1VzwgD0",
+        "type": "label",
+        "position": {
+          "x": 102.997490107877,
+          "y": -107.160692414483
+        },
+        "selected": false,
+        "data": {
+          "label": "Key topics to learn",
+          "href": "",
+          "color": "#000000",
+          "style": {
+            "fontSize": 17
+          },
+          "oldId": "7HLG5FTMmOWGS-mOpqnQh"
+        },
+        "zIndex": 999,
+        "width": 158,
+        "height": 36,
+        "dragging": false,
+        "positionAbsolute": {
+          "x": 102.997490107877,
+          "y": -107.160692414483
+        },
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 158,
+          "height": 36
+        }
+      },
+      {
+        "id": "kvS4x6z7YWJjMpkpU01yh",
+        "type": "paragraph",
+        "position": {
+          "x": 72.1182771963982,
+          "y": -68.2892501928786
+        },
+        "selected": false,
+        "data": {
+          "label": "",
+          "style": {
+            "fontSize": 17,
+            "borderColor": "#000000",
+            "backgroundColor": "#000000",
+            "color": "#000000",
+            "textAlign": "left",
+            "justifyContent": "flex-start",
+            "padding": 3
+          }
+        },
+        "zIndex": 999,
+        "width": 26,
+        "height": 25,
+        "resizing": false,
+        "style": {
+          "width": 26,
+          "height": 25
+        },
+        "positionAbsolute": {
+          "x": 72.1182771963982,
+          "y": -68.2892501928786
+        },
+        "dragging": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 26,
+          "height": 25
+        }
+      },
+      {
+        "id": "7HLG5FTMmOWGS-mOpqnQh",
+        "type": "label",
+        "position": {
+          "x": 102.997490107877,
+          "y": -71.1606924144831
+        },
+        "selected": false,
+        "data": {
+          "label": "Project ideas and suggestions",
+          "href": "",
+          "color": "#000000",
+          "style": {
+            "fontSize": 17
+          }
+        },
+        "zIndex": 999,
+        "width": 249,
+        "height": 36,
+        "dragging": false,
+        "positionAbsolute": {
+          "x": 102.997490107877,
+          "y": -71.1606924144831
+        },
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 249,
+          "height": 36
+        }
+      },
+      {
+        "id": "9mrs26igEG0D9GpMv2NZc",
+        "type": "section",
+        "position": {
+          "x": -317.516084034493,
+          "y": -278.107670169254
+        },
+        "selected": false,
+        "data": {
+          "label": "",
+          "style": {
+            "width": 150,
+            "height": 100,
+            "fontSize": 17,
+            "backgroundColor": "#ffffff",
+            "borderColor": "#ffffff"
+          }
+        },
+        "zIndex": -999,
+        "width": 346,
+        "height": 259,
+        "style": {
+          "width": 346,
+          "height": 259
+        },
+        "positionAbsolute": {
+          "x": -317.516084034493,
+          "y": -278.107670169254
+        },
+        "dragging": false,
+        "resizing": false,
+        "selectable": true,
+        "focusable": true,
+        "measured": {
+          "width": 346,
+          "height": 259
+        }
+      },
+      {
+        "id": "X8Gvqj2h4wkfA1Cx2d1iW",
+        "type": "paragraph",
+        "position": {
+          "x": -297.0644637618,
+          "y": -251.151066995471
+        },
+        "selected": false,
+        "data": {
+          "label": "If you are already a full-stack developer you should visit the following tracks.",
+          "style": {
+            "fontSize": 17,
+            "borderColor": "transparent",
+            "backgroundColor": "transparent",
+            "color": "#000000",
+            "textAlign": "left",
+            "justifyContent": "flex-start",
+            "padding": 0
+          },
+          "oldId": "7cbUuhyNE2SoZbm2Zh_t7"
+        },
+        "zIndex": 999,
+        "width": 311,
+        "height": 55,
+        "positionAbsolute": {
+          "x": -297.0644637618,
+          "y": -251.151066995471
+        },
+        "dragging": false,
+        "selectable": true,
+        "focusable": true,
+        "style": {
+          "width": 311
+        },
+        "resizing": false,
+        "measured": {
+          "width": 311,
+          "height": 55
+        }
+      },
+      {
+        "id": "7cbUuhyNE2SoZbm2Zh_t7",
+        "type": "paragraph",
+        "position": {
+          "x": -297.0644637618,
+          "y": -122.151066995471
+        },
+        "selected": false,
+        "data": {
+          "label": "Target audience for this roadmap is absolute beginners wanting to get into full-stack development.",
+          "style": {
+            "fontSize": 17,
+            "borderColor": "transparent",
+            "backgroundColor": "transparent",
+            "color": "#000000",
+            "textAlign": "left",
+            "justifyContent": "flex-start",
+            "padding": 0
+          }
+        },
+        "zIndex": 999,
+        "width": 311,
+        "height": 80,
+        "positionAbsolute": {
+          "x": -297.0644637618,
+          "y": -122.151066995471
+        },
+        "dragging": false,
+        "selectable": true,
+        "focusable": true,
+        "style": {
+          "width": 311
+        },
+        "resizing": false,
+        "measured": {
+          "width": 311,
+          "height": 80
+        }
+      },
+      {
+        "id": "p1nlhjqz_BiKFFop2yHpJ",
+        "type": "button",
+        "position": {
+          "x": -293.300717482819,
+          "y": -187.421267607494
+        },
+        "selected": false,
+        "data": {
+          "label": "Frontend",
+          "href": "/resources/frontend",
+          "color": "#000000",
+          "backgroundColor": "#E3E3E3",
+          "style": {
+            "fontSize": 17
+          },
+          "oldId": "x1j-a82XiCX3bNIgLFryZ"
+        },
+        "zIndex": 999,
+        "width": 99,
+        "height": 49,
+        "positionAbsolute": {
+          "x": -293.300717482819,
+          "y": -187.421267607494
+        },
+        "dragging": false,
+        "style": {
+          "width": 99,
+          "height": 49
+        },
+        "focusable": true,
+        "selectable": true,
+        "measured": {
+          "width": 99,
+          "height": 49
+        }
+      },
+      {
+        "id": "bt_V8XXqg8XDAJCzHrbWt",
+        "type": "button",
+        "position": {
+          "x": -192.091956319763,
+          "y": -187.421267607494
+        },
+        "selected": false,
+        "data": {
+          "label": "Backend",
+          "href": "/resources/backend",
+          "color": "#000000",
+          "backgroundColor": "#E3E3E3",
+          "style": {
+            "fontSize": 17
+          },
+          "oldId": "x1j-a82XiCX3bNIgLFryZ"
+        },
+        "zIndex": 999,
+        "width": 99,
+        "height": 49,
+        "positionAbsolute": {
+          "x": -192.091956319763,
+          "y": -187.421267607494
+        },
+        "dragging": false,
+        "style": {
+          "width": 99,
+          "height": 49
+        },
+        "focusable": true,
+        "selectable": true,
+        "measured": {
+          "width": 99,
+          "height": 49
+        }
+      },
+      {
+        "id": "x1j-a82XiCX3bNIgLFryZ",
+        "type": "button",
+        "position": {
+          "x": -89.5180029099048,
+          "y": -187.421267607494
+        },
+        "selected": false,
+        "data": {
+          "label": "DevOps",
+          "href": "/resources/devops",
+          "color": "#000000",
+          "backgroundColor": "#E3E3E3",
+          "style": {
+            "fontSize": 17
+          }
+        },
+        "zIndex": 999,
+        "width": 89,
+        "height": 49,
+        "positionAbsolute": {
+          "x": -89.5180029099048,
+          "y": -187.421267607494
+        },
+        "dragging": false,
+        "style": {
+          "width": 89,
+          "height": 49
+        },
+        "focusable": true,
+        "selectable": true,
+        "measured": {
+          "width": 89,
+          "height": 49
+        }
+      }
+    ],
+    "edges": [
+      {
+        "style": {
+          "strokeDasharray": "0",
+          "strokeLinecap": "round",
+          "strokeWidth": 3.5,
+          "stroke": "#2b78e4"
+        },
+        "source": "iogwMmOvub2ZF4zgg6WyF",
+        "sourceHandle": "x2",
+        "target": "B0kARTODvCBi0iOF8iiqI",
+        "targetHandle": "y2",
+        "data": {
+          "edgeStyle": "solid"
+        },
+        "id": "reactflow__edge-iogwMmOvub2ZF4zgg6WyFx2-mGgx_QTEPmVKf6AijX9fiy2",
+        "selected": false,
+        "type": "smoothstep",
+        "selectable": true,
+        "focusable": true
+      },
+      {
+        "style": {
+          "strokeDasharray": "0",
+          "strokeLinecap": "round",
+          "strokeWidth": 3.5,
+          "stroke": "#2b78e4"
+        },
+        "source": "B0kARTODvCBi0iOF8iiqI",
+        "sourceHandle": "z2",
+        "target": "dAJHWmGeiYdzZ1ZjrWz1S",
+        "targetHandle": "y2",
+        "data": {
+          "edgeStyle": "solid"
+        },
+        "id": "reactflow__edge-B0kARTODvCBi0iOF8iiqIz2-mGgx_QTEPmVKf6AijX9fiy2",
+        "selected": false,
+        "selectable": true,
+        "focusable": true
+      },
+      {
+        "style": {
+          "strokeDasharray": "0",
+          "strokeLinecap": "round",
+          "strokeWidth": 3.5,
+          "stroke": "#2b78e4"
+        },
+        "source": "T9PB6WQf-Fa9NXKKvVOy_",
+        "sourceHandle": "z2",
+        "target": "mGgx_QTEPmVKf6AijX9fi",
+        "targetHandle": "w1",
+        "data": {
+          "edgeStyle": "solid"
+        },
+        "id": "reactflow__edge-khoUtTUxdf8udAzN9_CAbz2-mGgx_QTEPmVKf6AijX9fiw1",
+        "selected": false,
+        "type": "smoothstep",
+        "selectable": true,
+        "focusable": true
+      },
+      {
+        "style": {
+          "strokeDasharray": "0",
+          "strokeLinecap": "round",
+          "strokeWidth": 3.5,
+          "stroke": "#2b78e4"
+        },
+        "source": "dAJHWmGeiYdzZ1ZjrWz1S",
+        "sourceHandle": "z2",
+        "target": "T9PB6WQf-Fa9NXKKvVOy_",
+        "targetHandle": "y2",
+        "data": {
+          "edgeStyle": "solid"
+        },
+        "id": "reactflow__edge-dAJHWmGeiYdzZ1ZjrWz1Sz2-khoUtTUxdf8udAzN9_CAby2",
+        "selected": false,
+        "selectable": true,
+        "focusable": true
+      },
+      {
+        "style": {
+          "strokeDasharray": "0",
+          "strokeLinecap": "round",
+          "strokeWidth": 3.5,
+          "stroke": "#2b78e4"
+        },
+        "source": "mGgx_QTEPmVKf6AijX9fi",
+        "sourceHandle": "x2",
+        "target": "We2APJpOPTr-VNfowG0kI",
+        "targetHandle": "z2",
+        "data": {
+          "edgeStyle": "solid"
+        },
+        "id": "reactflow__edge-mGgx_QTEPmVKf6AijX9fix2-We2APJpOPTr-VNfowG0kIz2",
+        "selected": false,
+        "type": "smoothstep",
+        "selectable": true,
+        "focusable": true
+      },
+      {
+        "style": {
+          "strokeDasharray": "0",
+          "strokeLinecap": "round",
+          "strokeWidth": 3.5,
+          "stroke": "#2b78e4"
+        },
+        "source": "We2APJpOPTr-VNfowG0kI",
+        "sourceHandle": "y2",
+        "target": "8sPXL8iClpPqje03ksses",
+        "targetHandle": "z1",
+        "data": {
+          "edgeStyle": "solid"
+        },
+        "id": "reactflow__edge-We2APJpOPTr-VNfowG0kIy2-khoUtTUxdf8udAzN9_CAbz1",
+        "selected": false,
+        "selectable": true,
+        "focusable": true
+      },
+      {
+        "style": {
+          "strokeDasharray": "0",
+          "strokeLinecap": "round",
+          "strokeWidth": 3.5,
+          "stroke": "#2b78e4"
+        },
+        "source": "8sPXL8iClpPqje03ksses",
+        "sourceHandle": "y2",
+        "target": "CVCqdPkq_hGQfI8EEi5RC",
+        "targetHandle": "z1",
+        "data": {
+          "edgeStyle": "solid"
+        },
+        "id": "reactflow__edge-8sPXL8iClpPqje03kssesy2-khoUtTUxdf8udAzN9_CAbz1",
+        "selected": false,
+        "selectable": true,
+        "focusable": true
+      },
+      {
+        "style": {
+          "strokeDasharray": "0",
+          "strokeLinecap": "round",
+          "strokeWidth": 3.5,
+          "stroke": "#2b78e4"
+        },
+        "source": "CVCqdPkq_hGQfI8EEi5RC",
+        "sourceHandle": "y2",
+        "target": "khoUtTUxdf8udAzN9_CAb",
+        "targetHandle": "z2",
+        "data": {
+          "edgeStyle": "solid"
+        },
+        "id": "reactflow__edge-2kKHuQZScu7hCDgQWxl5uy2-khoUtTUxdf8udAzN9_CAbz2",
+        "selected": false,
+        "selectable": true,
+        "focusable": true
+      },
+      {
+        "style": {
+          "strokeDasharray": "0",
+          "strokeLinecap": "round",
+          "strokeWidth": 3.5,
+          "stroke": "#2b78e4"
+        },
+        "source": "khoUtTUxdf8udAzN9_CAb",
+        "sourceHandle": "y2",
+        "target": "QfW-odmDYknm_qXNcDu5o",
+        "targetHandle": "y1",
+        "data": {
+          "edgeStyle": "solid"
+        },
+        "id": "reactflow__edge-khoUtTUxdf8udAzN9_CAby2-QfW-odmDYknm_qXNcDu5oy1",
+        "selected": false,
+        "selectable": true,
+        "focusable": true,
+        "type": "smoothstep"
+      },
+      {
+        "style": {
+          "strokeDasharray": "0",
+          "strokeLinecap": "round",
+          "strokeWidth": 3.5,
+          "stroke": "#2b78e4"
+        },
+        "source": "QfW-odmDYknm_qXNcDu5o",
+        "sourceHandle": "z2",
+        "target": "_aA6Hp4KkgJeptqo8oKTg",
+        "targetHandle": "y1",
+        "data": {
+          "edgeStyle": "solid"
+        },
+        "id": "reactflow__edge-QfW-odmDYknm_qXNcDu5oz2-2kKHuQZScu7hCDgQWxl5uy1",
+        "selected": false,
+        "selectable": true,
+        "focusable": true
+      },
+      {
+        "style": {
+          "strokeDasharray": "0",
+          "strokeLinecap": "round",
+          "strokeWidth": 3.5,
+          "stroke": "#2b78e4"
+        },
+        "source": "HGhnbMg6jh6cAmUH4DtOx",
+        "sourceHandle": "x2",
+        "target": "vmHbWdmMHF53otXIrqzRV",
+        "targetHandle": "z1",
+        "data": {
+          "edgeStyle": "solid"
+        },
+        "id": "reactflow__edge-2kKHuQZScu7hCDgQWxl5ux2-cUOfvOlQ_0Uu1VX3i67kJz1",
+        "selected": false,
+        "type": "smoothstep",
+        "selectable": true,
+        "focusable": true
+      },
+      {
+        "style": {
+          "strokeDasharray": "0",
+          "strokeLinecap": "round",
+          "strokeWidth": 3.5,
+          "stroke": "#2b78e4"
+        },
+        "source": "vmHbWdmMHF53otXIrqzRV",
+        "sourceHandle": "y2",
+        "target": "vHojhJYjiN0IwruEqi1Dv",
+        "targetHandle": "z2",
+        "data": {
+          "edgeStyle": "solid"
+        },
+        "id": "reactflow__edge-vmHbWdmMHF53otXIrqzRVy2-cUOfvOlQ_0Uu1VX3i67kJz2",
+        "selected": false,
+        "selectable": true,
+        "focusable": true
+      },
+      {
+        "style": {
+          "strokeDasharray": "0",
+          "strokeLinecap": "round",
+          "strokeWidth": 3.5,
+          "stroke": "#2b78e4"
+        },
+        "source": "vHojhJYjiN0IwruEqi1Dv",
+        "sourceHandle": "y2",
+        "target": "Onfd7Sl8LG2sjh2aQY7gb",
+        "targetHandle": "z1",
+        "data": {
+          "edgeStyle": "solid"
+        },
+        "id": "reactflow__edge-vHojhJYjiN0IwruEqi1Dvy2-cUOfvOlQ_0Uu1VX3i67kJz1",
+        "selected": false,
+        "selectable": true,
+        "focusable": true
+      },
+      {
+        "style": {
+          "strokeDasharray": "0",
+          "strokeLinecap": "round",
+          "strokeWidth": 3.5,
+          "stroke": "#2b78e4"
+        },
+        "source": "Onfd7Sl8LG2sjh2aQY7gb",
+        "sourceHandle": "y2",
+        "target": "SHTSvMDqI7X1_ZT7-m--n",
+        "targetHandle": "w1",
+        "data": {
+          "edgeStyle": "solid"
+        },
+        "id": "reactflow__edge-Onfd7Sl8LG2sjh2aQY7gby2-cUOfvOlQ_0Uu1VX3i67kJw1",
+        "selected": false,
+        "type": "smoothstep",
+        "selectable": true,
+        "focusable": true
+      },
+      {
+        "style": {
+          "strokeDasharray": "0",
+          "strokeLinecap": "round",
+          "strokeWidth": 3.5,
+          "stroke": "#2b78e4"
+        },
+        "source": "SHTSvMDqI7X1_ZT7-m--n",
+        "sourceHandle": "z2",
+        "target": "cUOfvOlQ_0Uu1VX3i67kJ",
+        "targetHandle": "y2",
+        "data": {
+          "edgeStyle": "solid"
+        },
+        "id": "reactflow__edge-SHTSvMDqI7X1_ZT7-m--nz2-cUOfvOlQ_0Uu1VX3i67kJy2",
+        "selected": false,
+        "selectable": true,
+        "focusable": true
+      },
+      {
+        "style": {
+          "strokeDasharray": "0",
+          "strokeLinecap": "round",
+          "strokeWidth": 3.5,
+          "stroke": "#2b78e4"
+        },
+        "source": "cUOfvOlQ_0Uu1VX3i67kJ",
+        "sourceHandle": "z2",
+        "target": "y1SFX7uvWaCy4OYBnECLu",
+        "targetHandle": "w2",
+        "data": {
+          "edgeStyle": "solid"
+        },
+        "id": "reactflow__edge-cUOfvOlQ_0Uu1VX3i67kJz2-2kKHuQZScu7hCDgQWxl5uw2",
+        "selected": false,
+        "type": "smoothstep",
+        "selectable": true,
+        "focusable": true
+      },
+      {
+        "style": {
+          "strokeDasharray": "0",
+          "strokeLinecap": "round",
+          "strokeWidth": 3.5,
+          "stroke": "#2b78e4"
+        },
+        "source": "_aA6Hp4KkgJeptqo8oKTg",
+        "sourceHandle": "z2",
+        "target": "HGhnbMg6jh6cAmUH4DtOx",
+        "targetHandle": "w1",
+        "data": {
+          "edgeStyle": "solid"
+        },
+        "id": "reactflow__edge-_aA6Hp4KkgJeptqo8oKTgz2-HGhnbMg6jh6cAmUH4DtOxw1",
+        "selected": false,
+        "type": "smoothstep",
+        "selectable": true,
+        "focusable": true
+      },
+      {
+        "style": {
+          "strokeDasharray": "0",
+          "strokeLinecap": "round",
+          "strokeWidth": 3.5,
+          "stroke": "#2b78e4"
+        },
+        "source": "y1SFX7uvWaCy4OYBnECLu",
+        "sourceHandle": "x2",
+        "target": "863KMXcFJzInvTp_-Ldmz",
+        "targetHandle": "z1",
+        "data": {
+          "edgeStyle": "solid"
+        },
+        "id": "reactflow__edge-y1SFX7uvWaCy4OYBnECLux2-2kKHuQZScu7hCDgQWxl5uz1",
+        "selected": false,
+        "type": "smoothstep",
+        "selectable": true,
+        "focusable": true
+      },
+      {
+        "style": {
+          "strokeDasharray": "0",
+          "strokeLinecap": "round",
+          "strokeWidth": 3.5,
+          "stroke": "#2b78e4"
+        },
+        "source": "863KMXcFJzInvTp_-Ldmz",
+        "sourceHandle": "y2",
+        "target": "rFXupYpUFfp7vZO8zh614",
+        "targetHandle": "z2",
+        "data": {
+          "edgeStyle": "solid"
+        },
+        "id": "reactflow__edge-863KMXcFJzInvTp_-Ldmzy2-2kKHuQZScu7hCDgQWxl5uz2",
+        "selected": false,
+        "selectable": true,
+        "focusable": true
+      },
+      {
+        "style": {
+          "strokeDasharray": "0",
+          "strokeLinecap": "round",
+          "strokeWidth": 3.5,
+          "stroke": "#2b78e4"
+        },
+        "source": "rFXupYpUFfp7vZO8zh614",
+        "sourceHandle": "y2",
+        "target": "2kKHuQZScu7hCDgQWxl5u",
+        "targetHandle": "w1",
+        "data": {
+          "edgeStyle": "solid"
+        },
+        "id": "reactflow__edge-rFXupYpUFfp7vZO8zh614y2-2kKHuQZScu7hCDgQWxl5uw1",
+        "selected": false,
+        "type": "smoothstep",
+        "selectable": true,
+        "focusable": true
+      },
+      {
+        "style": {
+          "strokeDasharray": "0",
+          "strokeLinecap": "round",
+          "strokeWidth": 3.5,
+          "stroke": "#2b78e4"
+        },
+        "source": "2kKHuQZScu7hCDgQWxl5u",
+        "sourceHandle": "x2",
+        "target": "sVXZrBCsiSzWBBYWTm-nQ",
+        "targetHandle": "w1",
+        "data": {
+          "edgeStyle": "solid"
+        },
+        "id": "reactflow__edge-2kKHuQZScu7hCDgQWxl5ux2-sVXZrBCsiSzWBBYWTm-nQw1",
+        "selected": false,
+        "type": "smoothstep",
+        "selectable": true,
+        "focusable": true
+      }
+    ],
+    "dimensions": {
+      "width": 1003,
+      "height": 2224
+    },
+    "relatedRoadmaps": [
+      "frontend",
+      "backend",
+      "devops",
+      "react",
+      "nodejs",
+      "docker"
+    ],
+    "seo": {
+      "title": "Full Stack Developer Roadmap",
+      "description": "Learn to become a modern full stack developer using this roadmap. Community driven, articles, resources, guides, interview questions, quizzes for modern full stack development.",
+      "keywords": [
+        "javascript roadmap 2025",
+        "full stack roadmap 2025",
+        "full stack developer roadmap 2025",
+        "guide to becoming a mern developer",
+        "guide to becoming a full stack developer",
+        "full stack developer",
+        "full stack engineer",
+        "full stack skills",
+        "full stack development",
+        "full stack development skills",
+        "full stack development skills test",
+        "full stack roadmap",
+        "full stack engineer roadmap",
+        "full stack developer roadmap",
+        "become a full stack developer",
+        "full stack developer career path",
+        "javascript developer",
+        "modern javascript developer",
+        "node developer",
+        "skills for full stack development",
+        "learn full stack development",
+        "what is full stack development",
+        "full stack developer quiz",
+        "full stack developer interview questions"
+      ],
+      "_id": "68c40824166b018f83df2f1b"
+    }
+  }
+}
