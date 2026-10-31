@@ -24,6 +24,23 @@ export function EmbedWrapper({ section, children }: EmbedWrapperProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const lastHeightRef = useRef<number>(0);
 
+  // Eliminate all window/document scrollbars when rendered inside an iframe
+  useEffect(() => {
+    if (typeof window === "undefined" || window.self === window.top) return;
+
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.scrollbarWidth = "none";
+    document.body.style.scrollbarWidth = "none";
+
+    return () => {
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
+      document.documentElement.style.scrollbarWidth = "";
+      document.body.style.scrollbarWidth = "";
+    };
+  }, []);
+
   useEffect(() => {
     if (typeof window === "undefined" || window.self === window.top) return;
 
