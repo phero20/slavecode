@@ -8,6 +8,8 @@ import {
   getSitemapSystemDesignLessons,
   getSitemapCompanyTags,
   getSitemapUsers,
+  getSitemapProjects,
+  getSitemapRoadmaps,
 } from "@/services/queries/seo.queries";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -20,6 +22,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 1.0,
+    },
+    {
+      url: `${baseUrl}/projects`,
+      lastModified: new Date(),
+      changeFrequency: "daily",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/resources`,
+      lastModified: new Date(),
+      changeFrequency: "daily",
+      priority: 0.9,
     },
     {
       url: `${baseUrl}/academy`,
@@ -112,6 +126,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       systemDesignLessons,
       companyTags,
       users,
+      projects,
+      roadmaps,
     ] = await Promise.all([
       getSitemapProblems(),
       getSitemapAcademyTracks(),
@@ -119,6 +135,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       getSitemapSystemDesignLessons(),
       getSitemapCompanyTags(),
       getSitemapUsers(),
+      getSitemapProjects(),
+      getSitemapRoadmaps(),
     ]);
 
     // Practice Problems
@@ -177,6 +195,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.5,
     }));
 
+    // Developer Projects
+    const projectPages: MetadataRoute.Sitemap = projects.map((project) => ({
+      url: `${baseUrl}/projects/${project.slug}`,
+      lastModified: new Date(project.updatedAt || new Date()),
+      changeFrequency: "weekly",
+      priority: 0.7,
+    }));
+
+    // Developer Roadmaps
+    const roadmapPages: MetadataRoute.Sitemap = roadmaps.map((roadmap) => ({
+      url: `${baseUrl}/resources/${roadmap.slug}`,
+      lastModified: new Date(roadmap.updatedAt || new Date()),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    }));
+
     dynamicPages = [
       ...problemPages,
       ...trackPages,
@@ -185,6 +219,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       ...companyPages,
       ...companyProblemPages,
       ...userPages,
+      ...projectPages,
+      ...roadmapPages,
     ];
 
   } catch (error) {

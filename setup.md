@@ -95,7 +95,7 @@ SlaveCode uses a hybrid infrastructure strategy to balance flexibility, relation
 
 ### 🗄️ Databases & Caching
 1.  **PostgreSQL (Neon/Relational)**: Managed via **Drizzle ORM**. High-integrity data (user profiles, points/stats, activity tracking).
-2.  **MongoDB (Document - Atlas Cloud)**: Managed via **Mongoose**. Stores the vast competitive programming problem bank, complex test cases, archived match logs, and the migrated Academy curriculum.
+2.  **MongoDB (Document - Atlas Cloud)**: Managed via **Mongoose**. Stores the vast competitive programming problem bank, complex test cases, archived match logs, the migrated Academy curriculum, Developer Roadmaps & Topic nodes, and community-submitted Projects & Learning Resources.
 3.  **Redis / Valkey (In-Memory)**: The "glue" for real-time. Manages lobby states, match timers, and inter-service messaging via Pub/Sub.
 
 ### 🛡️ Authentication
@@ -104,9 +104,8 @@ SlaveCode uses a hybrid infrastructure strategy to balance flexibility, relation
 ### ⚙️ Execution Engine
 5.  **Judge0 (Dockerized Sandbox)**: The core code execution engine. It safely compiles and runs user submissions against hidden test cases inside isolated sandboxes to prevent malicious code from harming the server. 
 
-### 🧠 AI Integrations (One API Gateway)
-6.  **One API Gateway (Gemini, Groq, GPT, Deepseek and more)**: Acts as the centralized, unified router for all AI features in the system. It load-balances and manages API credentials, routing requests to: AI models used for heavy operations like system design diagram analysis, chat history, and problem importing/rewriting.
-    High-speed fallback models for instant evaluations.
+### 🧠 AI Integrations (New API Gateway)
+6.  **New API Gateway (Gemini, Groq, GPT, DeepSeek, and more)**: Acts as the centralized, unified reverse proxy router (NewAPI) for all AI features in the system. It load-balances and manages API credentials, routing requests to LLM models for heavy operations like system design diagram analysis, AI copilot chat history, and problem importing/rewriting.
 7.  **Unified AI Judging**: If Judge0 fails a submission due to strict formatting differences (e.g. trailing whitespaces) or does not support a specific language, the Hono API falls back to evaluating logical correctness using these gateway models with an automated multi-stage fallback queue.
 
 ---

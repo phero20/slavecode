@@ -42,5 +42,15 @@ export const registerSeoRoutes = (
     seoController.action(seoController.getSitemapUsers, { requireAuth: false })
   );
 
+  seoApp.get(
+    "/sitemap/projects",
+    seoController.action(seoController.getSitemapProjects, { requireAuth: false })
+  );
+
+  seoApp.get(
+    "/sitemap/roadmaps",
+    seoController.action(seoController.getSitemapRoadmaps, { requireAuth: false })
+  );
+
   app.route("/seo", seoApp);
 };

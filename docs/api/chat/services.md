@@ -1,6 +1,6 @@
 # Chat Services
 
-The `ChatService` handles the heavy lifting of maintaining conversational state, ensuring data security, and interfacing with the external One API Engine.
+The `ChatService` handles the heavy lifting of maintaining conversational state, ensuring data security, and interfacing with the external New API Gateway Engine.
 
 **File**: [api/src/services/chat/chat.service.ts](../../../api/src/services/chat/chat.service.ts)
 

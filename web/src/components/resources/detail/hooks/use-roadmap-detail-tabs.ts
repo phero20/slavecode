@@ -74,10 +74,25 @@ export function useRoadmapDetailTabs(
     window.scrollTo(0, 0);
   }, []);
 
+  // Reset active tab on unmount so re-entering always defaults to the visual roadmap canvas
+  useEffect(() => {
+    return () => {
+      setStoreActiveTab(roadmap.slug, "roadmap");
+    };
+  }, [roadmap.slug, setStoreActiveTab]);
+
   // Synchronize tab from URL search parameters on mount or URL changes
   useEffect(() => {
     const tabParam = searchParams.get("tab");
-    if (!tabParam) return;
+    if (!tabParam) {
+      if (
+        useResourceStore.getState().activeTabByRoadmap[roadmap.slug] &&
+        useResourceStore.getState().activeTabByRoadmap[roadmap.slug] !== "roadmap"
+      ) {
+        setStoreActiveTab(roadmap.slug, "roadmap");
+      }
+      return;
+    }
 
     if (allowedTabs.has(tabParam)) {
       setStoreActiveTab(roadmap.slug, tabParam);

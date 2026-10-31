@@ -22,7 +22,7 @@ sequenceDiagram
     participant Worker as Submission Worker
     participant ExecSvc as Execution Service
     participant Judge0 as Judge0 Engine
-    participant OneAPI as One API Gateway
+    participant NewAPI as New API Gateway
     participant Postgres as PostgreSQL
 
     %% 1. Initial Submission Phase (Synchronous)
@@ -60,8 +60,8 @@ sequenceDiagram
 
     %% AI Audit (Conditional)
     alt Driver Verdict is Suspicious (e.g. Partial Match)
-        ExecSvc->>OneAPI: Audit Output using LLM (Gemini,Gpt,Groq,Deepseek and more)
-        OneAPI-->>ExecSvc: Return Audited Status (e.g. ACCEPTED or WRONG_ANSWER)
+        ExecSvc->>NewAPI: Audit Output using LLM (Gemini,Gpt,Groq,Deepseek and more)
+        NewAPI-->>ExecSvc: Return Audited Status (e.g. ACCEPTED or WRONG_ANSWER)
     end
     
     ExecSvc-->>Worker: Return ExecutionResults (overallStatus)
@@ -132,4 +132,47 @@ sequenceDiagram
         GoHub-->>P2: Final Results & Rating Delta
     end
 
+```
+
+---
+
+## 3. Community Resource Submission & Voting Flow
+
+This sequence diagrams how users contribute learning resources and developer projects to roadmaps, and how community votes are processed atomically and synced across the UI.
+
+```mermaid
+sequenceDiagram
+    autonumber
+    
+    actor User as Client (Next.js)
+    participant API as Hono API Gateway
+    participant ResSvc as Roadmap Resource Service
+    participant Mongo as MongoDB (Mongoose)
+    participant Redis as Redis Cache
+    participant Postgres as PostgreSQL (Votes/Activity)
+
+    %% 1. Resource Submission Phase
+    User->>API: POST /resources (title, url, type, roadmapIds)
+    API->>ResSvc: createResource(payload, userId)
+    ResSvc->>Mongo: Check duplicate URL in roadmap
+    alt URL already exists
+        Mongo-->>ResSvc: Found existing resource
+        ResSvc-->>API: Conflict Error (Duplicate URL)
+        API-->>User: 409 Conflict
+    else Valid & New URL
+        ResSvc->>Mongo: Insert Resource { status: "pending", upvotes: 0 }
+        Mongo-->>ResSvc: Created RoadmapResource
+        ResSvc-->>API: 201 Created
+        API-->>User: 201 Created (Pending Moderation)
+    end
+
+    %% 2. Community Upvote Flow
+    User->>API: POST /votes (targetType: "resource", targetId)
+    API->>ResSvc: voteResource(resourceId, userId, direction)
+    ResSvc->>Postgres: Record / Toggle user vote record
+    ResSvc->>Mongo: Atomic $inc { upvotes: +1 }
+    ResSvc->>Redis: Invalidate resource cache (roadmap list)
+    Mongo-->>ResSvc: Updated Upvote Count
+    ResSvc-->>API: 200 OK { upvotes: N }
+    API-->>User: Instant UI Cache Sync (Optimistic update confirmed)
 ```

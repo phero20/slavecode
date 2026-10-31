@@ -6,6 +6,25 @@ By isolating mutations in these hooks, the components remain clean and only have
 
 ## Files
 
+### `use-project.mutations.ts`
+Manages the developer projects lifecycle.
+- **`useCreateProject`**: Submits a new project proposal. Invalidates project catalog and popular project queries on success.
+- **`useUpdateProject`**: Updates project specifications, checklists, and metadata. Triggers cache invalidation across catalog, popular, and roadmap projects.
+- **`useDeleteProject`**: Deletes a project and invalidates related roadmap and catalog queries.
+
+### `use-roadmap-resource.mutations.ts`
+Manages community learning resource contributions.
+- **`useCreateRoadmapResource`**: Submits a learning resource or playlist URL for moderation.
+- **`useUpdateRoadmapResource`**: Edits an existing resource submission.
+- **`useDeleteRoadmapResource`**: Deletes a community resource.
+
+### `use-vote.mutations.ts`
+Handles universal polymorphic voting across the platform.
+- **`useToggleVote`**: Toggles upvotes (+1) or downvotes (-1) on projects, roadmaps, solutions, and resources with optimistic UI updates for instant feedback.
+
+### `use-upload.mutations.ts`
+- **`useUploadImage`**: Uploads image assets (preview thumbnails, screenshots, bug report attachments) to Cloudinary and returns secure CDN URLs.
+
 ### `use-academy.mutations.ts`
 Handles user progress in the Academy feature.
 - **`useSaveExerciseProgress`**: Calls the backend to mark a specific exercise as completed within a track. Invalidates the `academy-progress` query cache on success to instantly reflect the checkmark in the UI.
@@ -23,7 +42,7 @@ Manages the multiplayer lifecycle.
 - **`useCreateSolution`**: Submits a new markdown solution for a problem.
 - **`useUpdateSolution`**: Edits an existing solution.
 - **`useDeleteSolution`**: Removes a solution.
-- **`useVoteSolution`**: Handles the upvote/downvote toggle logic. Optimistically updates the cache before the server responds to make the UI feel instant.
+- **`useVoteSolution`**: Handles the legacy solution-specific upvote/downvote toggle logic with optimistic caching.
 
 ### `use-submission.mutations.ts`
 - **`useSubmitCode`**: The core execution hook. POSTs raw code to the Execution Engine. On success, it frequently triggers polling in the queries layer to track execution status (PENDING -> RUNNING -> ACCEPTED).

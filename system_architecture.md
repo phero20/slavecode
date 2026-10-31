@@ -21,7 +21,7 @@ flowchart TB
     %% --------------------------------
     subgraph ThirdParty ["External Services (3rd Party)"]
         Clerk("Clerk\n(Auth & Webhooks)")
-        OneAPI("One API Gateway\n(Gemini,Gpt,Groq,Deepseek and more)")
+        NewAPI("New API Gateway\n(Gemini,Gpt,Groq,Deepseek and more)")
         Cloudinary("Cloudinary\n(Image Hosting)")
         ExternalContests("Codeforces / LeetCode\n(External APIs)")
         Judge0("Judge0 API\n(Code Execution Sandbox)")
@@ -72,7 +72,7 @@ flowchart TB
 
     %% API to Databases
     API -- "User Profiles, Stats, Categories, Solutions" --> Postgres
-    API -- "Problems, Submissions, System Design, Academy" --> Mongo
+    API -- "Problems, Submissions, System Design, Academy, Roadmaps, Projects, Resources" --> Mongo
     API -- "Caching" --> Redis
     API -- "Upload Images" --> Cloudinary
     API -- "Enqueue Job" --> Redis
@@ -84,7 +84,7 @@ flowchart TB
     SubWorker -- "1. Fetch Hidden Tests" --> Mongo
     SubWorker -- "2. Evaluate Code" --> Judge0
     SubWorker -- "2b. Fallback Compile" --> Wandbox
-    SubWorker -- "3. Fallback AI Judge" --> OneAPI
+    SubWorker -- "3. Fallback AI Judge" --> NewAPI
     SubWorker -- "4. Save Results" --> Mongo
     SubWorker -- "5. Update Stats" --> Postgres
     SubWorker -- "6. Publish Event" --> Redis
@@ -101,7 +101,7 @@ flowchart TB
     Redis -- "PubSub Updates (LEADERBOARD)" --> GoArena
     
     %% AI Flows (Excalidraw / Chat)
-    API -- "Chat History / Diagrams" --> OneAPI
+    API -- "Chat History / Diagrams" --> NewAPI
 ```
 
 ---
@@ -113,13 +113,13 @@ The frontend is a monolithic Next.js App Router application. It serves the React
 
 ### 2. External Services
 - **Clerk**: Handles all user authentication. The frontend gets JWT tokens from Clerk, and the Hono API verifies them. Clerk also sends background Webhooks to the API to sync user creations/deletions into our PostgreSQL database.
-- **One API Gateway**: The central AI proxy. Used heavily by `AiAddSolveService` (routing to Gemini,Groq,GPT,Deepseek and more) to evaluate text-based code, generate educational solutions, and power the System Design AI Chat assistant.
+- **New API Gateway**: The central AI proxy (NewAPI). Used heavily by `AiAddSolveService` (routing to Gemini, Groq, GPT, DeepSeek, and more) to evaluate text-based code, generate educational solutions, and power the System Design AI Chat assistant.
 - **Cloudinary**: Used to store images (like bug report screenshots or user avatars).
 - **Codeforces/LeetCode**: APIs scraped by the background Contest worker to populate the global event calendar.
 - **Judge0 & Wandbox**: External Remote Code Execution (RCE) sandbox APIs. The workers send untrusted user code to these services securely, and they return the `stdout`, `stderr`, and `compile_output`.
 
 ### 3. Microservices (Backend)
-- **Hono API Server (Bun)**: The primary gateway. It handles CRUD operations, single-player problem fetching, taxonomy routing, and enqueuing heavy jobs.
+- **Hono API Server (Bun)**: The primary gateway. It handles CRUD operations, single-player problem fetching, taxonomy routing, developer roadmaps and projects APIs, and enqueuing heavy jobs.
 - **Golang Arena Server**: A highly concurrent WebSocket server dedicated strictly to the multiplayer "Arena" battles. It uses Goroutines and Channels to handle thousands of real-time players without blocking.
 - **BullMQ Background Workers**: These run asynchronously off the Bun event loop:
   - **Submission Worker**: The heaviest pipeline. It takes code, fetches hidden tests, sends it to the Sandboxed Execution Engine, updates Postgres stats, and publishes Pub/Sub events back to the Go server.
@@ -128,7 +128,7 @@ The frontend is a monolithic Next.js App Router application. It serves the React
 
 ### 4. Data Layer
 - **PostgreSQL**: The source of truth for highly structured, relational data. Stores Users, Follows, Stats, Leaderboards, Taxonomy (Categories), and Solutions.
-- **MongoDB**: Used for massive, unstructured, or heavily nested data. Stores the core Problem definitions, megabytes of Hidden Test Cases, every historical Code Submission, and dynamic JSON payloads (Academy Tracks, Excalidraw documents).
+- **MongoDB**: Used for massive, unstructured, or heavily nested data. Stores the core Problem definitions, megabytes of Hidden Test Cases, every historical Code Submission, dynamic JSON payloads (Academy Tracks, Excalidraw documents), Developer Roadmaps (`roadmaps`, `roadmap_topics`), Developer Projects (`roadmap_projects`), and Community Resources (`roadmap_resources`).
 - **Redis**: The most critical real-time bus. It acts as:
   1. The message broker for BullMQ.
   2. The high-speed memory store for the Go Arena Server (using Lua scripts for atomic locks).

@@ -29,6 +29,7 @@ flowchart TB
             ProblemMgmt["«Component»\nProblem & Taxonomy Engine"]:::component
             SocialMgmt["«Component»\nSocial & Stats Engine"]:::component
             SysDesignMgmt["«Component»\nSystem Design Engine"]:::component
+            ResourceMgmt["«Component»\nRoadmaps, Projects & Resources Engine"]:::component
         end
         
         BullMQ["«Component»\nJob Queue Manager\n(BullMQ)"]:::component
@@ -41,7 +42,7 @@ flowchart TB
 
     %% Execution & AI Tier
     subgraph Execution ["Execution & AI Tier"]
-        AIProvider["«External Component»\nOne API Gateway\n(Gemini,Gpt,Groq,Deepseek and more)"]:::external
+        AIProvider["«External Component»\nNew API Gateway\n(Gemini,GPT,Groq,DeepSeek and more)"]:::external
         Judge0["«External Component»\nJudge0 API\n(Primary Code Execution)"]:::external
         Wandbox["«External Component»\nWandbox API\n(Fallback Sandbox)"]:::external
     end
@@ -67,16 +68,21 @@ flowchart TB
     APIGateway --> ProblemMgmt
     APIGateway --> SocialMgmt
     APIGateway --> SysDesignMgmt
+    APIGateway --> ResourceMgmt
     APIGateway -- "Enqueues Async Jobs" --> BullMQ
 
     %% Subsystem DB Dependencies
     ProblemMgmt -- "Problems & Tests" --> Mongo
     SocialMgmt -- "Profiles & Leaderboard" --> PG
     SysDesignMgmt -- "Saved Diagrams" --> Mongo
+    ResourceMgmt -- "Roadmaps, Topics, Projects, Resources" --> Mongo
+    ResourceMgmt -- "Polymorphic Votes" --> PG
+    ResourceMgmt -- "Multi-tier Cache (TTL & Invalidation)" --> Redis
 
     %% Subsystem to AI
     SysDesignMgmt -- "Prompts (Tutor / Graph Generation)" --> AIProvider
     ProblemMgmt -- "Auto-Solve Generation" --> AIProvider
+    ResourceMgmt -- "Roadmap Topic AI Tutor" --> AIProvider
 
     %% BullMQ Workers
     BullMQ -- "Evaluate Code" --> Judge0
@@ -104,8 +110,9 @@ flowchart TB
    - **Problem & Taxonomy Engine**: Manages reading/writing curriculum data.
    - **Social & Stats Engine**: Calculates ELO, leaderboards, streaks, and user relationships.
    - **System Design Engine**: Manages Excalidraw JSON schemas and interacts with AI for layout resolution.
+   - **Roadmaps, Projects & Resources Engine**: Manages developer career roadmaps, React Flow graph node topics, real-world portfolio projects, community learning resource submissions, and polymorphic upvoting.
 5. **Job Queue Manager (BullMQ)**: A critical component that decouples slow tasks (code compilation) from the fast API response cycle.
 6. **Execution APIs (Judge0 & Wandbox)**: External sandboxed environments that securely compile and run untrusted user code against hidden test cases.
-7. **One API Gateway**: The centralized gateway over Gemini,Groq,GPT,Deepseek and more used for AI-judging, chat tutoring, and diagram generation.
+7. **New API Gateway**: The centralized gateway over Gemini, GPT, Groq, DeepSeek, and more used for AI-judging, chat tutoring, and diagram generation.
 8. **Golang Multiplayer Hub**: A standalone, highly-concurrent engine dedicated solely to managing live WebSocket traffic for the Arena mode.
-9. **Databases**: Postgres (structured social data), Mongo (large JSON documents/test cases), and Redis (pub/sub state and caching).
+9. **Databases**: Postgres (structured social data & votes), Mongo (large JSON documents/test cases/roadmaps/projects), and Redis (pub/sub state and multi-tier caching).

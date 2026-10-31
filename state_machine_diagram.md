@@ -95,3 +95,40 @@ stateDiagram-v2
     class WAITING,LOBBY,PLAYING warn
 ```
 
+---
+
+## 3. Community Resource & Project Moderation Lifecycle
+
+Community learning resources (`RoadmapResource`) and developer projects (`RoadmapProject`) transition through moderation before becoming visible to all platform users.
+
+```mermaid
+stateDiagram-v2
+    %% Styling
+    classDef terminal fill:#2d3748,color:white,font-weight:bold,stroke:#4a5568,stroke-width:2px
+    classDef success fill:#276749,color:white,font-weight:bold,stroke:#48bb78,stroke-width:2px
+    classDef error fill:#9b2c2c,color:white,font-weight:bold,stroke:#f56565,stroke-width:2px
+    classDef warn fill:#744210,color:white,font-weight:bold,stroke:#d69e2e,stroke-width:2px
+
+    [*] --> PENDING : User Submits Resource or Project
+    
+    state "Moderation & Review" as Review {
+        PENDING --> APPROVED : Admin Approves Submission
+        PENDING --> REJECTED : Admin Rejects (Reason Provided)
+    }
+
+    state "Live Community Lifecycle" as Live {
+        APPROVED --> UPDATED : Author or Admin Edits Details
+        UPDATED --> APPROVED : Changes Validated / Re-approved
+        APPROVED --> ARCHIVED : Outdated / Deprecated Content
+        UPDATED --> ARCHIVED : Flagged as Broken / Dead Link
+    }
+
+    REJECTED --> [*]
+    ARCHIVED --> [*]
+
+    %% Apply Classes
+    class APPROVED success
+    class REJECTED error
+    class PENDING,UPDATED warn
+    class ARCHIVED terminal
+```

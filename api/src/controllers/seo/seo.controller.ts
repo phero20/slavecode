@@ -40,4 +40,14 @@ export class SeoController extends BaseController {
     const users = await this.seoService.getUsersSitemapData();
     return { users };
   }
+
+  async getSitemapProjects(_req: ControllerRequest<never, never, never>) {
+    const projects = await this.seoService.getProjectsSitemapData();
+    return { projects };
+  }
+
+  async getSitemapRoadmaps(_req: ControllerRequest<never, never, never>) {
+    const roadmaps = await this.seoService.getRoadmapsSitemapData();
+    return { roadmaps };
+  }
 }

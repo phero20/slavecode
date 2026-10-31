@@ -10,7 +10,7 @@
 
 Master algorithms, system design, and interview prep. Join the ultimate all-in-one coding academy and real-time arena to prove your engineering excellence.
 
-Master your skills with a comprehensive platform designed for growth. Access over **11,000+ coding problems**, explore our **Academy** supporting **80 languages**, and follow structured **DSA roadmaps**. Prepare for interviews with **460+ company-specific questions**, dive into **System Design** with detailed concepts and a fully-featured AI-Powered Workspace, and more.
+Master your skills with a comprehensive platform designed for growth. Access over **11,000+ coding problems**, explore our **Academy** supporting **80+ languages**, and follow structured **DSA and Developer Roadmaps**. Build real-world portfolio **Projects**, prepare for interviews with **460+ company-specific questions**, dive into **System Design** with detailed concepts and an AI-Powered Workspace, and more.
 
 <p align="center">
   <b>🏅 Officially Recognized & Featured by <a href="https://github.com/judge0/judge0#:~:text=SlaveCode" target="_blank">Judge0</a></b><br/>
@@ -31,13 +31,13 @@ Master your skills with a comprehensive platform designed for growth. Access ove
 *   **Memory Store & Pub/Sub**: Redis / Valkey (Aiven hosted, powers queues, Go session locks, and worker communications)
 *   **Authentication**: Clerk Identity Management (OAuth, Edge Route cryptographic JWT checks)
 *   **Sandboxed Code Execution**: Judge0 (Dockerized sandbox) & Wandbox API (Alternative remote compilation)
-*   **AI Gateway Routing**: Google Gemini,Gpt,Deepseek, Groq Cloud and more (centralized proxy gateway routing, using One API Gateway)
+*   **AI Gateway Routing**: Google Gemini, GPT, DeepSeek, Groq Cloud and more (centralized proxy gateway routing, using New API Gateway)
 
 ---
 
 ## 💻 Platform Features
 
-SlaveCode is more than just a code submission site — it is a complete competitive programmer's ecosystem. Here is every feature available from the platform navigation, in order:
+SlaveCode is more than just a code submission site — it is a complete competitive programmer's and software engineer's ecosystem. Here is every feature available from the platform navigation, in order:
 
 ---
 
@@ -46,13 +46,28 @@ Master programming languages through structured, exercise-driven learning tracks
 
 ---
 
-### 🗺️ Roadmap — [slavecode.codes/roadmap](https://slavecode.codes/roadmap)
-Stop guessing what to learn next. The interactive DSA Roadmap guides you through every concept of Data Structures and Algorithms in a highly structured, logical sequence. Navigate through clearly defined subtopics from basic Arrays to complex Trees and Tries, with each topic paired with targeted practice problems. Track your true mastery as you conquer every node on the path — from basics through Booleans, Strings, If-Else Statements, to Numbers and beyond.
+### 🗺️ DSA Roadmap — [slavecode.codes/roadmap](https://slavecode.codes/roadmap)
+Stop guessing what to learn next in competitive programming. The interactive DSA Roadmap guides you through every concept of Data Structures and Algorithms in a highly structured, logical sequence. Navigate through clearly defined subtopics from basic Arrays to complex Trees and Tries, with each topic paired with targeted practice problems. Track your true mastery as you conquer every node on the path — from basics through Booleans, Strings, If-Else Statements, to Numbers and beyond.
 
 ---
 
 ### 💻 Problems — [slavecode.codes/problems](https://slavecode.codes/problems)
 A curated bank of algorithmic and language-specific problems ranging from introductory exercises to advanced competitive programming challenges. Each problem is paired with hidden test cases evaluated by Judge0 sandboxes, with automatic AI judging fallbacks for edge cases. Track your solutions, language performance, and solution votes. Problems are filterable by difficulty, category, company, and programming language.
+
+---
+
+### ⚔️ Arena — [slavecode.codes/arena](https://slavecode.codes/arena)
+The multiplayer competitive battleground. **Host or join a coding match** in real time — select problems from the extensive catalog to host a custom coding match, or enter a pin code to join an active match. Compete against up to 50 challengers simultaneously with a live leaderboard. Arena Points and global rankings are awarded based on your final rank and execution speed. The real-time match state is powered by a dedicated Golang WebSocket server using Redis Pub/Sub for instant leaderboard broadcasting.
+
+---
+
+### 🗺️ Developer Roadmaps & Resources — [slavecode.codes/resources](https://slavecode.codes/resources)
+Interactive role-based and skill-based roadmaps covering Frontend, Backend, DevOps, AI, and System Architecture. Visualized via dynamic canvas maps with rich subtopic nodes, learning milestones, and community-curated learning materials (videos, documentation, playlists, and courses). Community members can submit resources, upvote top-quality guides, and explore dedicated topic tabs with AI Tutor assistance.
+
+---
+
+### 🛠️ Developer Projects — [slavecode.codes/projects](https://slavecode.codes/projects)
+Bridge the gap between algorithmic theory and real-world software engineering. Explore curated portfolio-grade projects categorized across difficulty tiers (Beginner, Intermediate, and Advanced). Each project comes with structured architectural specifications, detailed requirements, implementation checklists, bonus challenges, recommended tech stacks, and community submission showcases.
 
 ---
 
@@ -63,11 +78,6 @@ Master system design through structured, in-depth learning tracks covering **56 
 
 ### 🏢 Companies — [slavecode.codes/companies](https://slavecode.codes/companies)
 Explore **460+ top tech company profiles** including Google, Meta, Amazon, Apple, Microsoft, Oracle, Netflix, Uber, Airbnb, Adobe, TCS, Infosys, and many more. Each company profile surfaces real interview questions that you can solve directly in the built-in code editor while tracking your solve history and success stats per company over time.
-
----
-
-### ⚔️ Arena — [slavecode.codes/arena](https://slavecode.codes/arena)
-The multiplayer competitive battleground. **Host or join a coding match** in real time — select problems from the extensive catalog to host a custom coding match, or enter a pin code to join an active match. Compete against up to 50 challengers simultaneously with a live leaderboard. Arena Points and global rankings are awarded based on your final rank and execution speed. The real-time match state is powered by a dedicated Golang WebSocket server using Redis Pub/Sub for instant leaderboard broadcasting.
 
 ---
 
@@ -131,7 +141,7 @@ Deep-dive architectural guides and specs for specific subcomponents:
 *   **[Submissions Engine Guide](docs/api/submissions/index.md)**: Details submissions, evaluators, and results caching.
 *   **[Problems Bank Spec](docs/api/problems/index.md)**: Documents problem definitions, taxonomy parsing, and test assets.
 *   **[Multiplayer WebSocket Rooms API](docs/api/arena/index.md)**: Manages lobby creation and match status updates.
-*   **[AI Copilot & Diagram Chat](docs/api/system-design/index.md)**: Explains One API Gateway LLM routing.
+*   **[AI Copilot & Diagram Chat](docs/api/system-design/index.md)**: Explains New API Gateway LLM routing.
 *   **[Academy Learning & Tracks](docs/api/academy/index.md)**: Covers curriculum and locking mechanics.
 *   **[Background Jobs & Workers](docs/api/workers/index.md)**: Explains BullMQ queues for submissions, contest sync, and cleanup.
 *   **[User Accounts & Statistics](docs/api/user/index.md)**: Manages identity metadata and stats aggregation.

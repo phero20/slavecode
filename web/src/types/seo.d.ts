@@ -26,3 +26,13 @@ export interface SitemapUser {
   username: string;
   updatedAt: string;
 }
+
+export interface SitemapProject {
+  slug: string;
+  updatedAt?: string;
+}
+
+export interface SitemapRoadmap {
+  slug: string;
+  updatedAt?: string;
+}

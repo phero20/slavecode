@@ -61,7 +61,27 @@ Interview prep categorized by tech companies.
 ## 🏆 Contests & Leaderboard
 
 - **`/contests`**: Calendar of upcoming external coding contests (Codeforces, LeetCode) synced via the Contest Worker.
-- **`/leaderboard`**: The global ranking page for the platform, sorted by points or streaks.
+- **`/leaderboard`**: The global ranking page for the platform, sorted by points or streaks with high-performance O(log N) Redis-backed pagination.
+
+---
+
+## 🛠️ Developer Projects (`/projects`)
+
+Curated real-world and portfolio-building software engineering projects.
+
+- **`/projects`**: Directory of developer projects filterable by difficulty (`beginner`, `intermediate`, `advanced`) and technical topics.
+- **`/projects/[slug]`**: Project specification workspace with overview, detailed technical requirements, interactive progress checklists, bonus challenges, and community repository submissions.
+- **`/projects/new`**: Submission portal for users and creators to submit new project ideas and specifications.
+
+---
+
+## 🗺️ Developer Roadmaps & Resources (`/resources`)
+
+Interactive role-based and skill-based developer career roadmaps with learning resources.
+
+- **`/resources`**: Directory of role-based (Frontend, Backend, DevOps, AI, etc.) and skill-based roadmaps with category filtering and search.
+- **`/resources/[slug]`**: Interactive roadmap canvas powered by React Flow with visual nodes and connecting edges, slide-over topic details, curated resources (docs, video playlists, articles), and real-time AI tutor guidance.
+- **`/resources/new`**: Community resource submission portal for submitting documentation, courses, articles, and video playlists with validation and moderation workflows.
 
 ---
 
@@ -96,5 +116,5 @@ Interactive architecture diagrams and tutorials.
 ## 🔧 Misc
 
 - **`/report-bug`**: Feedback and issue submission form.
-- **`/roadmap`**: Platform feature roadmap.
+- **`/roadmap`**: Interactive DSA & Algorithm Roadmap for structured coding interview prep.
 - **`/privacy` / `/terms`**: Legal compliance pages.

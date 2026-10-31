@@ -56,7 +56,7 @@ export function LeaderboardClient({ initialData }: LeaderboardClientProps) {
   const refetch = isSearching ? refetchSearch : refetchLeaderboard;
 
   const handleNextPage = () => {
-    if (leaderboardData?.entries && leaderboardData.entries.length === limit) {
+    if (leaderboardData && offset + limit < leaderboardData.total) {
       setOffset(offset + limit);
     }
   };
@@ -101,6 +101,7 @@ export function LeaderboardClient({ initialData }: LeaderboardClientProps) {
                   <PaginationContent className="border border-border/60 rounded-lg p-1 bg-card/40 backdrop-blur-sm">
                     <PaginationItem>
                       <PaginationPrevious
+                        id="leaderboard-prev-btn"
                         onClick={() => {
                           handlePrevPage();
                         }}
@@ -127,6 +128,7 @@ export function LeaderboardClient({ initialData }: LeaderboardClientProps) {
                           pages.push(
                             <PaginationItem key={i}>
                               <PaginationLink
+                                id={`leaderboard-page-${i}-btn`}
                                 isActive={currentPage === i}
                                 onClick={() => {
                                   setOffset((i - 1) * limit);
@@ -152,11 +154,12 @@ export function LeaderboardClient({ initialData }: LeaderboardClientProps) {
 
                     <PaginationItem>
                       <PaginationNext
+                        id="leaderboard-next-btn"
                         onClick={() => {
                           handleNextPage();
                         }}
                         className={cn(
-                          leaderboardData.entries.length < limit &&
+                          offset + limit >= leaderboardData.total &&
                             "pointer-events-none opacity-50",
                           "cursor-pointer",
                         )}

@@ -5,6 +5,8 @@ import { AcademyTrackModel } from "../../mongo/models/academymodels/academy-trac
 import { AcademyExerciseModel } from "../../mongo/models/academymodels/academy-exercise.model";
 import { SystemDesignTopicModel } from "../../mongo/models/system-design-topic.model";
 import { CompanyModel } from "../../mongo/models/company.model";
+import { RoadmapProjectModel } from "../../mongo/models/roadmap-project.model";
+import { RoadmapModel } from "../../mongo/models/roadmap.model";
 
 export class SeoRepository {
   /**
@@ -86,6 +88,40 @@ export class SeoRepository {
       return allUsers;
     } catch (e: any) {
       console.error("Error fetching users for sitemap:", e);
+      return [];
+    }
+  }
+
+  /**
+   * Fetches all approved project slugs and updatedAt for sitemap.
+   */
+  async getProjectsForSitemap() {
+    try {
+      const projects = await RoadmapProjectModel.find({ status: "approved" })
+        .select("slug updatedAt")
+        .lean()
+        .exec();
+      return projects;
+    } catch (e: any) {
+      console.error("Error fetching projects for sitemap:", e);
+      return [];
+    }
+  }
+
+  /**
+   * Fetches all active roadmap slugs and updatedAt for sitemap.
+   */
+  async getRoadmapsForSitemap() {
+    try {
+      const roadmaps = await RoadmapModel.find({
+        $or: [{ status: "published" }, { status: { $exists: false } }],
+      })
+        .select("slug updatedAt")
+        .lean()
+        .exec();
+      return roadmaps;
+    } catch (e: any) {
+      console.error("Error fetching roadmaps for sitemap:", e);
       return [];
     }
   }

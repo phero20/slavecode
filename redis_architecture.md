@@ -8,6 +8,11 @@ Redis serves as the central nervous system for Coding Arena. It acts as an ultra
 | :--- | :--- | :--- | :--- | :--- |
 | `arena:room:{roomId}` | JSON String | Arena (Go) & API | 24 Hours | Stores the entire JSON state of a multiplayer room (players, host, settings, match state). Updates are handled via Atomic Lua scripts in Go to prevent race conditions during concurrent updates. |
 | `arena:user_room:{userId}` | String | Arena (Go) | 24 Hours | O(1) lookup to find which room a user is currently in. Automatically prevents users from joining multiple rooms at the same time. |
+| `leaderboard:global` | Sorted Set (ZSET) | API (Hono) | Persistent | Stores all user scores and IDs for `O(log N)` global rank lookups and high-speed paginated range queries (`zrevrange`). |
+| `user:meta:{userId}` | Hash | API (Hono) | 7 Days | Caches essential user metadata (username, avatarUrl, fullName, totalSolved) to enrich leaderboard listings in a single round-trip without touching PostgreSQL. |
+| `resource:roadmaps:*`, `resource:roadmap:*`, `resource:categories`, `resource:topic:*` | JSON String | API (Hono) | 24 Hours | Caches full developer roadmaps, React Flow graph node definitions, topic details, and roadmap categories to serve `/resources` with sub-millisecond response times. |
+| `projects:catalog:*`, `projects:roadmap:*`, `projects:detail:*`, `projects:categories`, `projects:popular:*` | JSON String | API (Hono) | 30m – 1 Hour | Caches paginated developer project directories, difficulty filter results, and project specs. Invalidated non-blockingly via `redis.scanStream` upon user submission or admin approval. |
+| `resources:roadmap:*`, `resources:detail:*`, `resources:popular:*` | JSON String | API (Hono) | 30m – 1 Hour | Caches curated external learning resources, video playlists, and documentation links. Automatically refreshed on upvotes and moderation events. |
 | `academy:solved:{userId}:*` | String | API (Hono) | Cleared on solve | Caches which academy tracks a user has solved to significantly speed up profile and track loading times. |
 | `company:*` | JSON String | API (Hono) | 24 Hours | Caches aggregated company problems and tags to relieve database pressure. |
 | `bull:submission-evaluation:*`| List / Hash | API Workers | Removed on complete | BullMQ queue for processing code executions. Configured with a Smart Backoff Strategy to handle Azure VM cold starts. |
@@ -62,7 +67,9 @@ graph TD
     %% Redis Cluster Container
     subgraph RedisCluster [Redis Environment]
         
-        subgraph Caching [Key-Value Caches]
+        subgraph Caching [Key-Value Caches & Rankings]
+            CacheLeaderboard[leaderboard:global<br/>ZSET + user:meta:*]:::cache
+            CacheRes[resource:* / projects:* / resources:*<br/>Roadmaps & Projects Cache]:::cache
             CacheLLM[llm:* / diagram:*]:::cache
             CacheAc[academy:solved:*]:::cache
             CacheCo[company:*]:::cache

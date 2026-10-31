@@ -34,4 +34,12 @@ export class SeoService {
   async getUsersSitemapData() {
     return this.seoRepository.getUsersForSitemap();
   }
+
+  async getProjectsSitemapData() {
+    return this.seoRepository.getProjectsForSitemap();
+  }
+
+  async getRoadmapsSitemapData() {
+    return this.seoRepository.getRoadmapsForSitemap();
+  }
 }

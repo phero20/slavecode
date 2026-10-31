@@ -190,7 +190,6 @@ export const useResourceStore = create<ResourceStoreState>()(
       storage: createJSONStorage(() => sessionStorage),
       partialize: (state) => ({
         openTopicsByRoadmap: state.openTopicsByRoadmap,
-        activeTabByRoadmap: state.activeTabByRoadmap,
         projectDifficultyByRoadmap: state.projectDifficultyByRoadmap,
         resourceTypeByRoadmap: state.resourceTypeByRoadmap,
         resourceSortByRoadmap: state.resourceSortByRoadmap,

@@ -1,10 +1,10 @@
 # Database Entity-Relationship Diagrams (ERD)
 
-This document provides a highly accurate ERD generated directly from the deep analysis of the codebase schemas. It is split into our two primary databases: PostgreSQL (Relational) and MongoDB (Document).
+This document provides a highly accurate ERD generated directly from the deep analysis of the codebase schemas. It is split into our two primary databases: PostgreSQL (Relational) and MongoDB (Document), followed by Cross-Database Linkages.
 
 ## PostgreSQL (Drizzle ORM)
 
-The Postgres database acts as the single source of truth for users, social connections, stats, leaderboards, and structured hierarchy.
+The Postgres database acts as the single source of truth for users, social connections, stats, leaderboards, votes, and structured hierarchy.
 
 ```mermaid
 erDiagram
@@ -118,6 +118,14 @@ erDiagram
         integer voteType
         timestamp createdAt
     }
+    votes {
+        uuid userId PK,FK
+        text targetType PK "project | solution | roadmap | resource"
+        text targetId PK "References Mongo or Postgres target"
+        integer voteType "1 for upvote, -1 for downvote"
+        timestamp createdAt
+        timestamp updatedAt
+    }
     workspaces {
         uuid id PK
         uuid userId FK
@@ -169,6 +177,7 @@ erDiagram
     users ||--o{ follows : "following_id"
     users ||--o{ solutions : "writes"
     users ||--o{ solution_votes : "casts"
+    users ||--o{ votes : "casts"
     users ||--o{ workspaces : "owns"
     
     solutions ||--o{ solution_votes : "receives"
@@ -181,7 +190,7 @@ erDiagram
 
 ## MongoDB (Mongoose)
 
-MongoDB handles unstructured, heavy, or heavily nested data. Since MongoDB is schema-less by nature, this diagram represents the Mongoose application-level schema validations.
+MongoDB handles unstructured, heavy, graph-based, or heavily nested data (Problems, Academy, Roadmaps, Projects, Resources). Since MongoDB is schema-less by nature, this diagram represents the Mongoose application-level schema definitions.
 
 ```mermaid
 erDiagram
@@ -292,14 +301,115 @@ erDiagram
         Date createdAt
         Date updatedAt
     }
+    RoadmapCategory {
+        String categoryId "Unique"
+        String title
+        Number count
+        Number order
+        Array sections "Array of RoadmapCategorySection"
+        Date createdAt
+        Date updatedAt
+    }
+    Roadmap {
+        String slug "Unique"
+        Object title "card, page"
+        String description
+        String type "role|skill"
+        Array categories
+        Number nodesCount
+        Array nodes "React Flow nodes"
+        Array edges "React Flow edges"
+        Object dimensions "width, height"
+        Array relatedRoadmaps
+        Object seo
+        String status "draft|published"
+        Date createdAt
+        Date updatedAt
+    }
+    RoadmapTopic {
+        String roadmapSlug "Index"
+        String nodeId "Index"
+        String topicSlug
+        String title
+        String description
+        Array resources "Array of ResourceItem"
+        String content
+        Date createdAt
+        Date updatedAt
+    }
+    RoadmapProject {
+        String slug "Unique"
+        String title
+        String description
+        String difficulty "beginner|intermediate|advanced"
+        Array roadmapIds "Index"
+        Array topics
+        Array skills
+        Number order
+        String type
+        Object content "overview, markdown, previewImage, requirements, checklist, techStack"
+        String origin "official|community"
+        String status "pending|approved|rejected|archived|updated"
+        Object submittedBy "userId, username, fullName, avatarUrl"
+        Object review "reviewedBy, rejectionReason, adminNotes"
+        Object stats "startedCount, completedCount, upvotesCount"
+        Date createdAt
+        Date updatedAt
+    }
+    RoadmapResource {
+        String title
+        String description
+        String url
+        String thumbnailUrl
+        String type "YouTube Playlist|Video|Documentation|Course|Article"
+        String author
+        Array roadmapIds "Index"
+        Number order
+        String origin "official|community"
+        String status "pending|approved|rejected|archived"
+        Object submittedBy "userId, username, fullName, avatarUrl"
+        Object review "reviewedBy, rejectionReason, adminNotes"
+        Object stats "upvotesCount, viewsCount"
+        Date createdAt
+        Date updatedAt
+    }
 
+    %% Problem & Arena Relationships
     Problem ||--o| ProblemTest : "problem_id"
     Problem ||--o{ Submission : "problemId"
     Problem ||--o{ ArenaRoom : "problems"
     ArenaRoom ||--o{ ArenaMatch : "room_id"
     ArenaMatch ||--o{ ArenaSubmission : "match_id"
     Company ||--o{ Problem : "problem_ids"
+
+    %% Academy Relationships
     AcademyTrack ||--o| AcademyConfig : "slug"
     AcademyTrack ||--o{ AcademyConcept : "trackSlug"
     AcademyTrack ||--o{ AcademyExercise : "trackSlug"
+
+    %% Roadmaps, Projects & Resources Relationships
+    RoadmapCategory ||--o{ Roadmap : "categorizes"
+    Roadmap ||--o{ RoadmapTopic : "roadmapSlug"
+    Roadmap ||--o{ RoadmapProject : "roadmapIds"
+    Roadmap ||--o{ RoadmapResource : "roadmapIds"
 ```
+
+## Cross-Database Linkages (PostgreSQL ⇄ MongoDB)
+
+While PostgreSQL and MongoDB operate as decoupled databases, logical foreign references span between them:
+
+| Source (PostgreSQL) | Reference Field | Target (MongoDB) | Target Key | Purpose |
+| :--- | :--- | :--- | :--- | :--- |
+| `user_solved_problems` | `problemId` | `Problem` | `problem_id` | Tracks which user solved which algorithm problem |
+| `user_solved_languages` | `problemId` | `Problem` | `problem_id` | Tracks languages used per solved problem |
+| `user_academy_exercises` | `trackSlug`, `exerciseSlug` | `AcademyExercise` | `trackSlug`, `exerciseSlug` | User completion progress in Academy tracks |
+| `category_problems` | `problemId` | `Problem` | `problem_id` | Custom curator categories grouping algorithm problems |
+| `solutions` | `problemId` | `Problem` | `problem_id` | User community solutions attached to a problem |
+| `votes` | `targetId` (`targetType='roadmap'`) | `Roadmap` | `slug` | User upvotes/downvotes on developer roadmaps |
+| `votes` | `targetId` (`targetType='project'`) | `RoadmapProject` | `slug` | User upvotes/downvotes on developer projects |
+| `votes` | `targetId` (`targetType='resource'`) | `RoadmapResource` | `_id` | User upvotes/downvotes on community resources |
+| `votes` | `targetId` (`targetType='solution'`) | `solutions` (Postgres) | `id` | User upvotes/downvotes on solutions |
+| `RoadmapProject` | `submittedBy.userId` | `users` (Postgres) | `id` | Identifies author of community submitted projects |
+| `RoadmapResource` | `submittedBy.userId` | `users` (Postgres) | `id` | Identifies author of community submitted resources |
+| `Submission` | `userId` | `users` (Postgres) | `id` | Links code run submissions back to the user profile |
+| `ArenaMatch` | `players[].user_id` | `users` (Postgres) | `id` | Links battle match participants back to user records |

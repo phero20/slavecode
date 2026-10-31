@@ -1,6 +1,6 @@
 "use client";
 
-import React, { memo } from "react";
+import React, { memo, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink, Globe } from "lucide-react";
@@ -16,17 +16,28 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { VoteControl } from "@/components/shared/VoteControl";
 import { ResourceOwnerActions } from "./ResourceOwnerActions";
 import { useResourcePreview } from "./use-resource-preview";
+import { tones } from "@/lib/tones";
 import { cn } from "@/lib/utils";
 import type { RoadmapResourceItem } from "@/types/roadmap-resource";
+
+function hashSeed(seed: string): number {
+  let hash = 0;
+  for (let index = 0; index < seed.length; index += 1) {
+    hash = (hash * 33 + seed.charCodeAt(index)) >>> 0;
+  }
+  return hash;
+}
 
 export interface RoadmapResourceCardProps {
   resource: RoadmapResourceItem;
   className?: string;
+  index?: number;
 }
 
 export const RoadmapResourceCard = memo(function RoadmapResourceCard({
   resource,
   className,
+  index,
 }: RoadmapResourceCardProps) {
   const {
     domain,
@@ -38,6 +49,14 @@ export const RoadmapResourceCard = memo(function RoadmapResourceCard({
     onImageLoad,
     onImageError,
   } = useResourcePreview(resource.url, resource.thumbnailUrl);
+
+  const tone = useMemo(() => {
+    const seed =
+      typeof index === "number"
+        ? `${index}:${resource.title || resource.id || ""}`
+        : resource.id || resource.title || resource.url;
+    return tones[hashSeed(seed) % tones.length];
+  }, [resource.id, resource.title, resource.url, index]);
 
   const handleCardClick = (e: React.MouseEvent) => {
     if (
@@ -55,12 +74,14 @@ export const RoadmapResourceCard = memo(function RoadmapResourceCard({
       id={`resource-card-${resource.id}`}
       onClick={handleCardClick}
       className={cn(
-        "group relative flex flex-col justify-between overflow-hidden cursor-pointer h-full bg-card [content-visibility:auto] [contain-intrinsic-size:auto_340px] border-2 border-border/40 transition-colors duration-200 hover:border-primary/50",
+        "group relative flex flex-col justify-between overflow-hidden cursor-pointer h-full bg-card [content-visibility:auto] [contain-intrinsic-size:auto_340px] border-2 border-border/40 transition-all duration-200",
+        tone.hoverBorder,
+        tone.ring,
         className
       )}
     >
       <div className="p-2 sm:p-2.5 pb-0 relative z-0 pointer-events-none">
-        <div className="relative w-full aspect-video overflow-hidden rounded-lg border border-border bg-muted/20 shrink-0">
+        <div className="relative w-full aspect-video overflow-hidden rounded-lg border border-border/60 group-hover:border-border bg-muted/20 shrink-0 transition-colors duration-200">
           {isImageLoading && (
             <div className="absolute inset-0 flex items-center justify-center bg-muted/30 z-10">
               <Image
@@ -86,7 +107,13 @@ export const RoadmapResourceCard = memo(function RoadmapResourceCard({
             />
           ) : !isImageLoading ? (
             <div className="w-full h-full flex flex-col items-center justify-center bg-muted/30 p-4">
-              <div className="h-12 w-12 rounded-xl bg-background border border-border flex items-center justify-center p-2 mb-2">
+              <div
+                className={cn(
+                  "h-12 w-12 rounded-xl bg-background border flex items-center justify-center p-2 mb-2 transition-colors",
+                  tone.chipBorder,
+                  tone.chipBg
+                )}
+              >
                 {faviconUrl && !faviconError ? (
                   <img
                     src={faviconUrl}
@@ -96,7 +123,7 @@ export const RoadmapResourceCard = memo(function RoadmapResourceCard({
                     loading="lazy"
                   />
                 ) : (
-                  <Globe className="w-6 h-6 text-muted-foreground" />
+                  <Globe className={cn("w-6 h-6", tone.accent)} />
                 )}
               </div>
               <span className="text-xs font-medium text-foreground font-mono truncate max-w-[85%]">
@@ -114,7 +141,12 @@ export const RoadmapResourceCard = memo(function RoadmapResourceCard({
               {resource.type && (
                 <Badge
                   variant="outline"
-                  className="rounded-full border px-2.5 py-0.5 text-xs font-semibold"
+                  className={cn(
+                    "rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors",
+                    tone.chipBg,
+                    tone.chipBorder,
+                    tone.accent
+                  )}
                 >
                   {resource.type}
                 </Badge>
@@ -132,12 +164,22 @@ export const RoadmapResourceCard = memo(function RoadmapResourceCard({
                   className="shrink-0"
                 />
               )}
-              <ExternalLink className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition-colors" />
+              <ExternalLink
+                className={cn(
+                  "h-3.5 w-3.5 text-muted-foreground transition-colors",
+                  tone.hoverAccent
+                )}
+              />
             </div>
           </div>
 
           <div className="space-y-1">
-            <CardTitle className="text-base sm:text-lg font-bold tracking-tight text-foreground line-clamp-1 group-hover:text-primary transition-colors">
+            <CardTitle
+              className={cn(
+                "text-base sm:text-lg font-bold tracking-tight text-foreground line-clamp-1 transition-colors",
+                tone.hoverAccent
+              )}
+            >
               {resource.title}
             </CardTitle>
             {resource.description ? (
@@ -154,7 +196,7 @@ export const RoadmapResourceCard = memo(function RoadmapResourceCard({
       </CardHeader>
 
       {resource.submittedBy?.username || resource.origin === "community" ? (
-        <CardFooter className="py-3 mt-auto flex items-center justify-between gap-2 border-t">
+        <CardFooter className="py-3 mt-auto flex items-center justify-between gap-2 border-t border-border/50 group-hover:border-border transition-colors">
           {resource.submittedBy?.username ? (
             <Link
               href={`/u/${resource.submittedBy.username}`}

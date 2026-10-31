@@ -63,7 +63,7 @@ export const UserSearch = ({ onSelect }: UserSearchProps) => {
           </div>
         </PopoverTrigger>
         <PopoverContent
-          className="p-1 w-84 border-border bg-background"
+          className="p-1 w-84 border-border bg-background mt-2"
           align="start"
           sideOffset={8}
         >

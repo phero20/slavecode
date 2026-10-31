@@ -6,7 +6,9 @@ import type {
   SitemapAcademyExercise, 
   SitemapSystemDesignLesson, 
   SitemapCompanyTag, 
-  SitemapUser 
+  SitemapUser,
+  SitemapProject,
+  SitemapRoadmap
 } from "@/types/seo";
 
 export async function getSitemapProblems(): Promise<SitemapProblem[]> {
@@ -55,4 +57,20 @@ export async function getSitemapUsers(): Promise<SitemapUser[]> {
     throw new Error(response.data.message || "Failed to fetch sitemap users");
   }
   return response.data.data.users;
+}
+
+export async function getSitemapProjects(): Promise<SitemapProject[]> {
+  const response = await apiClient.get<ApiResponse<{ projects: SitemapProject[] }>>("/seo/sitemap/projects");
+  if (!response.data.success || !response.data.data) {
+    throw new Error(response.data.message || "Failed to fetch sitemap projects");
+  }
+  return response.data.data.projects;
+}
+
+export async function getSitemapRoadmaps(): Promise<SitemapRoadmap[]> {
+  const response = await apiClient.get<ApiResponse<{ roadmaps: SitemapRoadmap[] }>>("/seo/sitemap/roadmaps");
+  if (!response.data.success || !response.data.data) {
+    throw new Error(response.data.message || "Failed to fetch sitemap roadmaps");
+  }
+  return response.data.data.roadmaps;
 }

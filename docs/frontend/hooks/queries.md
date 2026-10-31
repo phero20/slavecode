@@ -12,6 +12,12 @@ These hooks define strict query keys, caching behavior, and stale times.
 - **`use-taxonomy.queries.ts`**: Fetches algorithm categories (Arrays, Trees, etc.).
 - **`use-contest.queries.ts`**: Fetches upcoming external contests (LeetCode, Codeforces) synced by the Contest Worker.
 
+### Roadmaps, Projects & Learning Resources
+- **`use-resource.queries.ts`**: Fetches role and skill-based developer roadmaps, React Flow canvas nodes/edges, topic details, and roadmap category lists for `/resources`.
+- **`use-project.queries.ts`**: Fetches developer projects with difficulty filtering (`beginner`, `intermediate`, `advanced`), project categories, popular projects, and detailed project specifications for `/projects`.
+- **`use-roadmap-resource.queries.ts`**: Fetches curated external learning resources, video playlists, and documentation links mapped to specific roadmaps.
+- **`use-vote.queries.ts`**: Fetches authenticated user vote statuses and aggregated upvote/downvote statistics for polymorphic targets (`project`, `solution`, `roadmap`, `resource`).
+
 ### Social & Interaction Queries
 - **`use-follow.queries.ts`** & **`use-follow.mutations.ts`**: Fetches followers/following lists and handles the follow/unfollow toggle.
 - **`use-social-registry.ts`**: Fetches public user registries for the community page.

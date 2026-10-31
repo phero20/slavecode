@@ -24,7 +24,7 @@ flowchart TD
     FetchMongo --> LangCheck{"Is Language Supported\nby Judge0/Wandbox?"}:::decision
     
     %% AI Code Judge Path
-    LangCheck -- No --> RunAIJudge["Run via AiCodeJudgeService\n(One API Gemini,Gpt,Groq,Deepseek and more)"]:::process
+    LangCheck -- No --> RunAIJudge["Run via AiCodeJudgeService\n(New API Gemini,GPT,Groq,DeepSeek and more)"]:::process
     RunAIJudge --> SaveResult
     
     %% Standard Execution Path
@@ -104,4 +104,64 @@ flowchart TD
     CalcProgress --> End(["Return UI State"]):::startEnd
     MarkLocked --> End
 
+```
+
+---
+
+## 3. Community Resource & Project Submission & Moderation Flow
+
+This diagram maps out the validation, storage, deduplication, administrative review, and multi-tier cache invalidation process when users contribute new learning resources or projects.
+
+```mermaid
+flowchart TD
+    %% Styling
+    classDef startEnd fill:#2c5282,stroke:#4299e1,stroke-width:2px,color:#fff,rx:20px;
+    classDef process fill:#2d3748,stroke:#4a5568,stroke-width:2px,color:#fff;
+    classDef decision fill:#744210,stroke:#d69e2e,stroke-width:2px,color:#fff;
+    classDef db fill:#276749,stroke:#48bb78,stroke-width:2px,color:#fff;
+
+    Submit(["User Submits Resource or Project"]):::startEnd --> AuthCheck{"Is User\nAuthenticated?"}:::decision
+    
+    AuthCheck -- No --> Return401["Return 401 Unauthorized"]:::process
+    Return401 --> EndFlow(["Request Terminated"]):::startEnd
+    
+    AuthCheck -- Yes --> ValidateSchema["Validate Zod Schema\n(URL, title, difficulty, techStack)"]:::process
+    ValidateSchema --> CheckFormat{"Valid Schema\n& Safe URLs?"}:::decision
+    
+    CheckFormat -- No --> Return400["Return 400 Bad Request"]:::process
+    Return400 --> EndFlow
+    
+    CheckFormat -- Yes --> CheckDuplicates["Query MongoDB for Duplicate URL or Slug"]:::process
+    CheckDuplicates --> CheckExists{"Already Exists in DB?"}:::decision
+    
+    CheckExists -- Yes --> Return409["Return 409 Conflict\n(Already Submitted)"]:::process
+    Return409 --> EndFlow
+    
+    CheckExists -- No --> CheckRole{"User is Admin\nor SuperAdmin?"}:::decision
+    
+    CheckRole -- Yes --> SetApproved["Set status = 'approved'"]:::process
+    CheckRole -- No --> SetPending["Set status = 'pending'"]:::process
+    
+    SetPending --> AttachUser["Attach Submitter Profile (Postgres Users)\n& Save Document to MongoDB"]:::process
+    SetApproved --> AttachUser
+    
+    AttachUser --> WriteMongo[("MongoDB\nroadmap_resources\nroadmap_projects")]:::db
+    
+    WriteMongo --> StatusBranch{"Initial Status?"}:::decision
+    
+    StatusBranch -- Pending --> NotifyAdmin["Queue in Admin Moderation Panel"]:::process
+    NotifyAdmin --> AdminDecision{"Admin Review Action"}:::decision
+    
+    AdminDecision -- Reject --> MarkRejected["Set status = 'rejected'\n+ Add rejectionReason"]:::process
+    MarkRejected --> UpdateDoc[("Update MongoDB")]:::db
+    UpdateDoc --> DonePending(["Notify User"]):::startEnd
+    
+    AdminDecision -- Approve --> SetApprovedState["Set status = 'approved'"]:::process
+    SetApprovedState --> UpdateDocApprove[("Update MongoDB")]:::db
+    
+    StatusBranch -- Approved --> InvalidateRedis
+    UpdateDocApprove --> InvalidateRedis["Scan & Invalidate Redis Caches\n(redis.scanStream 'projects:*' / 'resources:*')"]:::process
+    
+    InvalidateRedis --> InvalidateClient["Invalidate React Query Keys\n(Instant UI Sync for all active users)"]:::process
+    InvalidateClient --> Complete(["Submission Live & Searchable"]):::startEnd
 ```

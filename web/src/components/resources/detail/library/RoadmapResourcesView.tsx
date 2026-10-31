@@ -284,10 +284,11 @@ export function RoadmapResourcesView({
           }
         >
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-1">
-            {filteredResources.map((resource) => (
+            {filteredResources.map((resource, idx) => (
               <RoadmapResourceCard
                 key={resource.id}
                 resource={resource}
+                index={idx}
               />
             ))}
           </div>

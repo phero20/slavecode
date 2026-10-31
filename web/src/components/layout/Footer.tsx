@@ -15,29 +15,52 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-const footerLinks = [
+interface FooterLinkItem {
+  label: string;
+  href: string;
+  icon?: React.ReactNode;
+}
+
+interface FooterSection {
+  title: string;
+  links: FooterLinkItem[];
+}
+
+const footerLinks: FooterSection[] = [
   {
-    title: "Learn & Practice",
+    title: "DSA & Practice",
     links: [
-      { label: "Academy", href: "/academy/tracks" },
       { label: "Problems", href: "/problems" },
-      { label: "Roadmap", href: "/roadmap" },
+      { label: "DSA Roadmap", href: "/roadmap" },
+      { label: "Arena", href: "/arena" },
+      { label: "Company Questions", href: "/companies" },
+    ],
+  },
+  {
+    title: "Resources & Learn",
+    links: [
+      { label: "Developer Roadmaps", href: "/resources" },
+      { label: "Developer Projects", href: "/projects" },
+      { label: "Academy", href: "/academy/tracks" },
       { label: "System Design", href: "/systemdesign" },
-      { label: "Companies", href: "/companies" },
     ],
   },
   {
     title: "Compete & Tools",
     links: [
-      { label: "Arena", href: "/arena" },
       { label: "Contests", href: "/contests" },
       { label: "Compilers", href: "/compilers" },
+      { label: "Leaderboard", href: "/leaderboard" },
     ],
   },
   {
     title: "Legal & Support",
     links: [
-      { label: "Report an Issue", href: "/report-bug", icon: <Bug className="w-4 h-4 text-difficulty-medium" /> },
+      {
+        label: "Report an Issue",
+        href: "/report-bug",
+        icon: <Bug className="w-4 h-4 text-difficulty-medium" />,
+      },
       { label: "Privacy Policy", href: "/privacy" },
       { label: "Terms of Service", href: "/terms" },
       { label: "Contact Us", href: "mailto:slavecode.codes@gmail.com" },
@@ -84,56 +107,65 @@ export const Footer = () => {
   return (
     <footer className="w-full border-t border-border bg-background py-10 md:py-16">
       <Container className="">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 lg:gap-12">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-10">
           {/* Brand & Description */}
-          <div className="md:col-span-2 space-y-3">
-           <Link href="/" className="flex items-center group">
-            <Image
-              src="/logos/logo.png"
-              alt="SlaveCode Logo"
-              width={50}
-              height={40}
-              className="object-contain -mr-1"
-            />
-            <span className="text-xl font-bold tracking-tight">
-              SlaveCode<span className="text-primary">.</span>
-            </span>
-          </Link>
-            <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-              Standardize your coding journey. From basic academy courses and
-              guided roadmaps to advanced system design, company interview prep,
-              and real-time coding arenas. The all-in-one platform to master
-              algorithms and prove your engineering excellence.
+          <div className="col-span-2 md:col-span-3 lg:col-span-2 space-y-3.5">
+            <Link id="footer-logo-link" href="/" className="flex items-center group w-fit">
+              <Image
+                src="/logos/logo.png"
+                alt="SlaveCode Logo"
+                width={50}
+                height={40}
+                className="object-contain -mr-1"
+              />
+              <span className="text-xl font-bold tracking-tight">
+                SlaveCode<span className="text-primary">.</span>
+              </span>
+            </Link>
+            <p className="text-sm text-muted-foreground mb-4 leading-relaxed max-w-sm">
+              Standardize your coding journey. From interactive academy courses,
+              guided roadmaps, and developer projects to advanced system design,
+              company interview prep, and real-time coding arenas.
             </p>
-            <Button variant="outline" className="transition-colors" asChild>
-                <Link 
-                  href="https://github.com/judge0/judge0#showcase" 
-                  target="_blank"
-                  className="flex items-center gap-2"
-                >
-                  <Award className="w-4 h-4 text-primary" />
-                  <span>Officially Featured by <span className="font-bold text-primary">Judge0</span></span>
-                </Link>
-              </Button>
+            <Button
+              id="footer-judge0-btn"
+              variant="outline"
+              className="transition-colors text-xs sm:text-sm h-9"
+              asChild
+            >
+              <Link 
+                href="https://github.com/judge0/judge0#showcase" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2"
+              >
+                <Award className="w-4 h-4 text-primary" />
+                <span>
+                  Officially Featured by <span className="font-bold text-primary">Judge0</span>
+                </span>
+              </Link>
+            </Button>
           </div>
 
+          {/* Navigation Section Columns */}
           {footerLinks.map((section) => (
-            <div key={section.title}>
-              <h4 className="font-semibold mb-4 text-foreground">
+            <div key={section.title} className="col-span-1">
+              <h4 className="font-semibold mb-4 text-sm tracking-tight text-foreground">
                 {section.title}
               </h4>
-              <ul className="space-y-3 text-sm text-muted-foreground">
+              <ul className="space-y-2.5 text-sm text-muted-foreground">
                 {section.links.map((link) => (
                   <li key={link.label}>
                     <Link
+                      id={`footer-link-${link.label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
                       href={link.href}
                       title={link.label}
                       className={`hover:text-primary transition-colors ${
-                        link.icon ? "flex items-center gap-2" : ""
+                        link.icon ? "flex items-center gap-1.5" : ""
                       }`}
                     >
                       {link.icon && link.icon}
-                      {link.icon ? <span>{link.label}</span> : link.label}
+                      <span>{link.label}</span>
                     </Link>
                   </li>
                 ))}
@@ -146,9 +178,9 @@ export const Footer = () => {
         <div className="mt-12 pt-6 border-t border-border/50 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
           <p>© {new Date().getFullYear()} SlaveCode. All rights reserved.</p>
           <div className="flex items-center gap-4">
-            
             {deferredPrompt && (
               <Button
+                id="footer-install-app-btn"
                 size="lg"
                 variant="default"
                 onClick={handleInstallClick}
@@ -162,6 +194,7 @@ export const Footer = () => {
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Link
+                    id="footer-github-btn"
                     href="https://github.com/phero20/slavecode"
                     target="_blank"
                     rel="noopener noreferrer"

@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { getLeaderboard, searchLeaderboard } from "@/services/queries/stats.queries";
 import { LeaderboardResponse, LeaderboardEntry } from "@/types/stats";
 
@@ -11,7 +11,8 @@ export function useLeaderboard(limit = 50, offset = 0, initialData?: Leaderboard
     queryKey: ["leaderboard", { limit, offset }],
     queryFn: () => getLeaderboard(limit, offset),
     staleTime: 1000 * 60 * 5, // 5 minutes
-    initialData: initialData,
+    initialData: offset === 0 ? initialData : undefined,
+    placeholderData: keepPreviousData,
   });
 }
 

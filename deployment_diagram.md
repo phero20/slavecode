@@ -54,7 +54,7 @@ flowchart TB
     %% --------------------------------
     subgraph SaaS ["Third-Party SaaS"]
         Clerk("Clerk\n(Identity & Auth)"):::saas
-        OneAPIGateway("One API Gateway\n(Gemini,Gpt,Groq,Deepseek and more)"):::saas
+        NewAPIGateway("New API Gateway\n(Gemini,GPT,Groq,DeepSeek and more)"):::saas
     end
 
     %% ==========================================
@@ -87,8 +87,8 @@ flowchart TB
     Workers -- "HTTP Post (Untrusted Code)" --> Judge0
 
     %% Backend to AI SaaS
-    HonoAPI -- "HTTPS REST API" --> OneAPIGateway
-    Workers -- "HTTPS REST API" --> OneAPIGateway
+    HonoAPI -- "HTTPS REST API" --> NewAPIGateway
+    Workers -- "HTTPS REST API" --> NewAPIGateway
 
 ```
 
@@ -116,4 +116,4 @@ Rather than hosting databases manually on VMs, the data layer uses specialized m
 
 ### 5. Third-Party SaaS
 - **Clerk**: Handles all user authentication and identity verification at the edge.
-- **One API Gateway**: The unified AI proxy dashboard that routes LLM requests to Google Gemini,Groq,GPT,Deepseek and more allowing key rotation, load-balancing, and caching.
+- **New API Gateway**: The high-performance AI proxy gateway that routes LLM requests to Google Gemini, GPT, Groq, DeepSeek, and more, providing key rotation, intelligent load-balancing, and caching.

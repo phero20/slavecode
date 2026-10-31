@@ -471,6 +471,8 @@ classDiagram
     }
     class SeoRepository {
         +getProblemsForSitemap()
+        +getProjectsForSitemap()
+        +getRoadmapsForSitemap()
     }
     class SystemClockService {
         +now()
@@ -495,3 +497,189 @@ classDiagram
 
 ---
 
+## Developer Roadmaps, Projects, Resources & Votes Domain
+
+```mermaid
+classDiagram
+    class ResourceController {
+        -resourceService
+        -roadmapProjectService
+        -roadmapResourceService
+        +getRoadmaps()
+        +getRoadmapBySlug()
+        +getCategories()
+        +getTopicByNodeId()
+        +getTopicsByRoadmap()
+        +getProjectsByRoadmap()
+        +getProjectBySlug()
+        +getAllProjects()
+        +getPopularProjects()
+        +getProjectCategories()
+        +getUserProjects()
+        +createProject()
+        +updateProject()
+        +deleteProject()
+        +getResourcesByRoadmap()
+        +getResourceById()
+        +getAllResources()
+        +getUserResources()
+        +createResource()
+        +updateResource()
+        +deleteResource()
+    }
+
+    class VoteController {
+        -voteService
+        +toggleVote()
+        +getVoteStats()
+    }
+
+    class ResourceService {
+        -resourceRepository
+        -roadmapTopicRepository
+        +getAllRoadmaps()
+        +getRoadmapBySlug()
+        +getCategories()
+        +getTopicByNodeId()
+        +getTopicsByRoadmap()
+        +getTopicBySlug()
+    }
+
+    class RoadmapProjectService {
+        -roadmapProjectRepository
+        -userRepository
+        +getProjectsByRoadmap()
+        +getProjectBySlug()
+        +getAllProjects()
+        +getPopularProjects()
+        +getProjectCategories()
+        +getUserProjects()
+        +createProject()
+        +updateProject()
+        +deleteProject()
+    }
+
+    class RoadmapResourceService {
+        -roadmapResourceRepository
+        -userRepository
+        +getResourcesByRoadmap()
+        +getResourceById()
+        +getAllResources()
+        +getUserResources()
+        +createResource()
+        +updateResource()
+        +deleteResource()
+    }
+
+    class VoteService {
+        -voteRepository
+        +toggleVote()
+        +getUserVote()
+        +getVoteStats()
+        +deleteVotesForTarget()
+    }
+
+    class ResourceCache {
+        -rawResourceService
+        -CACHE_TTL
+        +getAllRoadmaps()
+        +getRoadmapBySlug()
+        +getCategories()
+        +getTopicByNodeId()
+        +getTopicsByRoadmap()
+        +getTopicBySlug()
+    }
+
+    class RoadmapProjectCache {
+        -rawProjectService
+        -CACHE_TTL_DETAIL
+        -CACHE_TTL_LIST
+        +getProjectsByRoadmap()
+        +getProjectBySlug()
+        +getAllProjects()
+        +getPopularProjects()
+        +getProjectCategories()
+        +getUserProjects()
+        +createProject()
+        +updateProject()
+        +deleteProject()
+        +invalidateProjectCaches()
+    }
+
+    class RoadmapResourceCache {
+        -rawResourceService
+        -CACHE_TTL_DETAIL
+        -CACHE_TTL_LIST
+        +getResourcesByRoadmap()
+        +getResourceById()
+        +getAllResources()
+        +getUserResources()
+        +createResource()
+        +updateResource()
+        +deleteResource()
+        +invalidateResourceCaches()
+    }
+
+    class ResourceRepository {
+        +getAllRoadmaps()
+        +getRoadmapBySlug()
+        +getCategories()
+        +searchRoadmaps()
+    }
+
+    class RoadmapTopicRepository {
+        +getTopicByNodeId()
+        +getTopicsByRoadmap()
+        +getTopicBySlug()
+    }
+
+    class RoadmapProjectRepository {
+        +getProjectsByRoadmap()
+        +findBySlug()
+        +getAllProjects()
+        +getPopularProjects()
+        +getProjectCategories()
+        +getUserProjects()
+        +createProject()
+        +updateProject()
+        +deleteProject()
+    }
+
+    class RoadmapResourceRepository {
+        +getResourcesByRoadmap()
+        +findById()
+        +getAllResources()
+        +getUserResources()
+        +createResource()
+        +updateResource()
+        +deleteResource()
+    }
+
+    class VoteRepository {
+        -clock
+        +getUserVote()
+        +getUserVotesForTargets()
+        +upsertVote()
+        +deleteVote()
+        +getVoteCounts()
+        +deleteVotesForTarget()
+    }
+
+    %% Relationships
+    ResourceController --> ResourceCache
+    ResourceController --> RoadmapProjectCache
+    ResourceController --> RoadmapResourceCache
+    VoteController --> VoteService
+
+    ResourceCache --> ResourceService
+    RoadmapProjectCache --> RoadmapProjectService
+    RoadmapResourceCache --> RoadmapResourceService
+
+    ResourceService --> ResourceRepository
+    ResourceService --> RoadmapTopicRepository
+    RoadmapProjectService --> RoadmapProjectRepository
+    RoadmapResourceService --> RoadmapResourceRepository
+    VoteService --> VoteRepository
+```
+
+---

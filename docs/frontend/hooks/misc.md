@@ -15,8 +15,11 @@ The remaining directories and top-level files in `src/hooks/` cover specific app
 - **`use-debounce.ts`**: Classic hook to delay the execution of a function or state update (used heavily for the code editor autosave and user search).
 - **`use-is-mounted.ts`**: Simple boolean flag to prevent Hydration mismatches between Server Side Rendering (Next.js) and the Client.
 
-## Top-Level Hooks
-- **`useChat.ts`**: A secondary variant of the AI chat hook, possibly for global chat or non-system-design contexts.
+## Top-Level & Form Hooks
+- **`use-project-form.ts`**: Binds the project submission and edit form (`/projects/new`) to `react-hook-form`, manages dynamic requirement and checklist items, and validates inputs via Zod.
+- **`use-project-pagination.ts`**: Manages URL state, pagination offsets, and active difficulty tabs for `/projects` catalogs.
+- **`use-roadmap-resource-form.ts`**: Binds the community resource submission modal (`/resources/new`) with automatic URL parsing and category mapping.
+- **`useChat.ts`**: A secondary variant of the AI chat hook, used for global chat and AI tutor contexts.
 - **`use-report-bug-form.ts`**: Manages the multi-step bug reporting modal, including dragging and dropping image attachments to Cloudinary.
 - **`use-arena-pagination.ts` / `use-solution-pagination.ts`**: Standard pagination logic to handle page numbers and row counts for tables.
 - **`use-tracks-filter.ts`**: UI state management for filtering the Academy Tracks by "In Progress" or "Completed".
