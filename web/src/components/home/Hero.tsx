@@ -9,11 +9,25 @@ import { Container } from "@/components/shared/Container";
 import { HeroWorkspaceDemo } from "./HeroWorkspaceDemo";
 import dynamic from "next/dynamic";
 import { Button } from "../ui/button";
+import { cn } from "@/lib/utils";
 const SideRays = dynamic(() => import("./ParticleNetwork"), { ssr: false });
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-export const Hero = () => {
+interface HeroProps {
+  isEmbedded?: boolean;
+}
+
+export const Hero = ({ isEmbedded: propIsEmbedded }: HeroProps = {}) => {
+  const [isEmbedded, setIsEmbedded] = useState(propIsEmbedded ?? false);
+
+  useEffect(() => {
+    if (propIsEmbedded !== undefined) {
+      setIsEmbedded(propIsEmbedded);
+    } else if (typeof window !== "undefined" && window.self !== window.top) {
+      setIsEmbedded(true);
+    }
+  }, [propIsEmbedded]);
   const [rayOpacity, setRayOpacity] = useState(0.5);
 
   useEffect(() => {
@@ -26,7 +40,14 @@ export const Hero = () => {
   }, []);
 
   return (
-    <section className="relative pt-24 md:pt-36 pb-20 overflow-hidden bg-background min-h-screen flex flex-col justify-center">
+    <section
+      className={cn(
+        "relative overflow-hidden bg-background flex flex-col justify-center",
+        isEmbedded
+          ? "pt-8 md:pt-14 pb-14 min-h-0 h-auto"
+          : "pt-24 md:pt-36 pb-20 min-h-screen"
+      )}
+    >
       {/* Dynamic Background */}
       <SideRays
         speed={3}
