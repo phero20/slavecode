@@ -33,6 +33,9 @@ import { registerSeoRoutes } from "./seo/seo.routes";
 import { registerReportBugRoutes } from "./report-bug/report-bug.routes";
 import { registerReportBugAdminRoutes } from "./report-bug/report-bug.admin.routes";
 import { registerResourceRoutes } from "./resources/resource.routes";
+import { registerResourceAdminRoutes } from "./resources/resource.admin.routes";
+import { registerRoadmapResourceAdminRoutes } from "./resources/roadmap-resource.admin.routes";
+import { registerRoadmapProjectAdminRoutes } from "./resources/roadmap-project.admin.routes";
 import { registerUploadRoutes } from "./common/upload.routes";
 import { registerVoteRoutes } from "./votes/vote.routes";
 
@@ -75,6 +78,9 @@ export const registerRoutes = (app: Hono<AppEnv>) => {
     reportBugAdminController,
     cacheAdminController,
     resourceController,
+    resourceAdminController,
+    roadmapResourceAdminController,
+    roadmapProjectAdminController,
     uploadController,
     voteController,
     authMiddleware,
@@ -269,6 +275,24 @@ export const registerRoutes = (app: Hono<AppEnv>) => {
   registerResourceRoutes(v1, {
     resourceController,
     authMiddleware,
+  });
+
+  registerResourceAdminRoutes(v1, {
+    resourceAdminController,
+    authMiddleware,
+    authorizationMiddleware,
+  });
+
+  registerRoadmapResourceAdminRoutes(v1, {
+    roadmapResourceAdminController,
+    authMiddleware,
+    authorizationMiddleware,
+  });
+
+  registerRoadmapProjectAdminRoutes(v1, {
+    roadmapProjectAdminController,
+    authMiddleware,
+    authorizationMiddleware,
   });
 
   registerUploadRoutes(v1, {

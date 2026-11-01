@@ -15,7 +15,6 @@ import { type ICradle } from "../../libs/awilix-container";
 
 const logger = createLogger("resource-cache");
 
-
 export class ResourceCache implements IResourceService {
   private readonly CACHE_TTL = 86400; // 24 hours
   private readonly rawResourceService: ResourceService;
@@ -195,5 +194,68 @@ export class ResourceCache implements IResourceService {
 
     return data;
   }
-}
 
+  /**
+   * Helper to invalidate roadmap cache keys and patterns non-blockingly using SCAN
+   */
+  async invalidateRoadmapCaches(slug?: string): Promise<void> {
+    try {
+      const keysToDelete: string[] = ["resource:categories"];
+      if (slug) {
+        const cleanSlug = slug.toLowerCase().trim();
+        keysToDelete.push(`resource:roadmap:${cleanSlug}`);
+        keysToDelete.push(`resource:roadmap:${cleanSlug}:topics`);
+      }
+
+      let cursor = "0";
+      do {
+        const [nextCursor, matchedKeys] = await redis.scan(
+          cursor,
+          "MATCH",
+          "resource:roadmaps:*",
+          "COUNT",
+          100
+        );
+        cursor = nextCursor;
+        if (matchedKeys.length > 0) {
+          keysToDelete.push(...matchedKeys);
+        }
+      } while (cursor !== "0");
+
+      if (keysToDelete.length > 0) {
+        await redis.del(...Array.from(new Set(keysToDelete)));
+      }
+    } catch (err) {
+      logger.error({ err, slug }, "Error invalidating roadmap caches");
+    }
+  }
+
+  /**
+   * Helper to invalidate category cache
+   */
+  async invalidateCategoryCaches(): Promise<void> {
+    try {
+      const keysToDelete: string[] = ["resource:categories"];
+      let cursor = "0";
+      do {
+        const [nextCursor, matchedKeys] = await redis.scan(
+          cursor,
+          "MATCH",
+          "resource:roadmaps:*",
+          "COUNT",
+          100
+        );
+        cursor = nextCursor;
+        if (matchedKeys.length > 0) {
+          keysToDelete.push(...matchedKeys);
+        }
+      } while (cursor !== "0");
+
+      if (keysToDelete.length > 0) {
+        await redis.del(...Array.from(new Set(keysToDelete)));
+      }
+    } catch (err) {
+      logger.error({ err }, "Error invalidating category caches");
+    }
+  }
+}

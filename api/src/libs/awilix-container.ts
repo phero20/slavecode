@@ -134,6 +134,18 @@ import { type ReportBugAdminService } from "../services/report-bug/report-bug.ad
 import { type ReportBugController } from "../controllers/report-bug/report-bug.controller";
 import { type ReportBugAdminController } from "../controllers/report-bug/report-bug.admin.controller";
 import { type IResourceRepository } from "../repositories/resources/resource.repository";
+import {
+  type IResourceAdminRepository,
+  type IResourceAdminService,
+} from "../types/resources/resource.admin.types";
+import {
+  type IRoadmapResourceAdminRepository,
+  type IRoadmapResourceAdminService,
+} from "../types/resources/roadmap-resource.admin.types";
+import {
+  type IRoadmapProjectAdminRepository,
+  type IRoadmapProjectAdminService,
+} from "../types/resources/roadmap-project.admin.types";
 import { type IRoadmapTopicRepository } from "../repositories/resources/roadmap-topic.repository";
 import { type IRoadmapProjectRepository } from "../repositories/resources/roadmap-project.repository";
 import { type IRoadmapResourceRepository } from "../types/resources/roadmap-resource.types";
@@ -150,6 +162,9 @@ import { type ResourceCache } from "../cache/resources/resource.cache";
 import { type RoadmapProjectCache } from "../cache/resources/roadmap-project.cache";
 import { type RoadmapResourceCache } from "../cache/resources/roadmap-resource.cache";
 import { type ResourceController } from "../controllers/resources/resource.controller";
+import { type ResourceAdminController } from "../controllers/resources/resource.admin.controller";
+import { type RoadmapResourceAdminController } from "../controllers/resources/roadmap-resource.admin.controller";
+import { type RoadmapProjectAdminController } from "../controllers/resources/roadmap-project.admin.controller";
 import { type UploadController } from "../controllers/common/upload.controller";
 import { type ICloudinaryService } from "../services/common/cloudinary.service";
 import { type CacheAdminService } from "../services/system/cache.admin.service";
@@ -222,6 +237,9 @@ export interface ICradle {
   roadmapTopicRepository: IRoadmapTopicRepository;
   roadmapProjectRepository: IRoadmapProjectRepository;
   roadmapResourceRepository: IRoadmapResourceRepository;
+  resourceAdminRepository: IResourceAdminRepository;
+  roadmapResourceAdminRepository: IRoadmapResourceAdminRepository;
+  roadmapProjectAdminRepository: IRoadmapProjectAdminRepository;
   voteRepository: IVoteRepository;
 
   // Services (Primary/Cached)
@@ -283,6 +301,9 @@ export interface ICradle {
   resourceService: IResourceService;
   roadmapProjectService: IRoadmapProjectService;
   roadmapResourceService: IRoadmapResourceService;
+  resourceAdminService: IResourceAdminService;
+  roadmapResourceAdminService: IRoadmapResourceAdminService;
+  roadmapProjectAdminService: IRoadmapProjectAdminService;
   voteService: IVoteService;
 
   // Raw Services
@@ -364,6 +385,9 @@ export interface ICradle {
   reportBugAdminController: ReportBugAdminController;
   cacheAdminController: CacheAdminController;
   resourceController: ResourceController;
+  resourceAdminController: ResourceAdminController;
+  roadmapResourceAdminController: RoadmapResourceAdminController;
+  roadmapProjectAdminController: RoadmapProjectAdminController;
   uploadController: UploadController;
   voteController: VoteController;
 

@@ -31,6 +31,9 @@ import { ResourceRepository } from "../../repositories/resources/resource.reposi
 import { RoadmapTopicRepository } from "../../repositories/resources/roadmap-topic.repository";
 import { RoadmapProjectRepository } from "../../repositories/resources/roadmap-project.repository";
 import { RoadmapResourceRepository } from "../../repositories/resources/roadmap-resource.repository";
+import { ResourceAdminRepository } from "../../repositories/resources/resource.admin.repository";
+import { RoadmapResourceAdminRepository } from "../../repositories/resources/roadmap-resource.admin.repository";
+import { RoadmapProjectAdminRepository } from "../../repositories/resources/roadmap-project.admin.repository";
 import { VoteRepository } from "../../repositories/votes/vote.repository";
 
 /**
@@ -70,5 +73,8 @@ export const repositoriesRegistry = {
   roadmapTopicRepository: asClass(RoadmapTopicRepository).singleton(),
   roadmapProjectRepository: asClass(RoadmapProjectRepository).singleton(),
   roadmapResourceRepository: asClass(RoadmapResourceRepository).singleton(),
+  resourceAdminRepository: asClass(ResourceAdminRepository).singleton(),
+  roadmapResourceAdminRepository: asClass(RoadmapResourceAdminRepository).singleton(),
+  roadmapProjectAdminRepository: asClass(RoadmapProjectAdminRepository).singleton(),
   voteRepository: asClass(VoteRepository).singleton(),
 };

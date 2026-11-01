@@ -228,7 +228,7 @@ export class RoadmapResourceCache implements IRoadmapResourceService {
   /**
    * Helper to invalidate resource cache keys and patterns non-blockingly using SCAN
    */
-  private async invalidateResourceCaches(id?: string): Promise<void> {
+  public async invalidateResourceCaches(id?: string): Promise<void> {
     try {
       const keysToDelete: string[] = [];
 

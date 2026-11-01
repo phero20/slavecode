@@ -45,6 +45,9 @@ import { ReportBugController } from "../../controllers/report-bug/report-bug.con
 import { ReportBugAdminController } from "../../controllers/report-bug/report-bug.admin.controller";
 import { CacheAdminController } from "../../controllers/system/cache.admin.controller";
 import { ResourceController } from "../../controllers/resources/resource.controller";
+import { ResourceAdminController } from "../../controllers/resources/resource.admin.controller";
+import { RoadmapResourceAdminController } from "../../controllers/resources/roadmap-resource.admin.controller";
+import { RoadmapProjectAdminController } from "../../controllers/resources/roadmap-project.admin.controller";
 import { UploadController } from "../../controllers/common/upload.controller";
 import { VoteController } from "../../controllers/votes/vote.controller";
 
@@ -98,6 +101,9 @@ export const controllersRegistry = {
   taxonomyAdminController: asClass(TaxonomyAdminController).singleton(),
   cacheAdminController: asClass(CacheAdminController).singleton(),
   resourceController: asClass(ResourceController).singleton(),
+  resourceAdminController: asClass(ResourceAdminController).singleton(),
+  roadmapResourceAdminController: asClass(RoadmapResourceAdminController).singleton(),
+  roadmapProjectAdminController: asClass(RoadmapProjectAdminController).singleton(),
   uploadController: asClass(UploadController).singleton(),
   voteController: asClass(VoteController).singleton(),
 };

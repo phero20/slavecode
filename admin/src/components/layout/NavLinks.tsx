@@ -27,6 +27,16 @@ export const navItems = [
       { name: "Exercises", href: "/academy/exercises" },
     ],
   },
+    {
+    name: "Resources",
+    href: "/resources",
+    subpages: [
+      { name: "Categories", href: "/resources/categories" },
+      { name: "Roadmaps", href: "/resources/roadmaps" },
+      { name: "Learning Items", href: "/resources/items" },
+      { name: "Projects", href: "/resources/projects" },
+    ],
+  },
   { name: "Roadmap", href: "/roadmap" },
   { name: "Problems", href: "/problems" },
   { 

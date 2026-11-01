@@ -309,7 +309,7 @@ export class RoadmapProjectCache implements IRoadmapProjectService {
   /**
    * Helper to invalidate project cache keys and patterns non-blockingly using SCAN
    */
-  private async invalidateProjectCaches(slug?: string): Promise<void> {
+  public async invalidateProjectCaches(slug?: string): Promise<void> {
     try {
       const keysToDelete: string[] = ["projects:categories"];
 

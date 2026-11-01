@@ -12,6 +12,7 @@ import { NavbarActions } from "./NavbarActions";
 import { MobileMenu } from "./MobileMenu";
 import { UserSearch } from "./UserSearch";
 import { shouldHide } from "./shouldHide";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -69,15 +70,25 @@ export const Navbar = () => {
 
           {/* Mobile Profile/Menu Trigger */}
           <div className="lg:hidden flex items-center gap-1">
-            <Link
-              href="https://github.com/phero20/slavecode"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors p-2"
-              aria-label="GitHub Repository"
-            >
-              <Github className="w-4 h-4" />
-            </Link>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Link
+                    id="footer-github-btn"
+                    href="https://github.com/phero20/slavecode"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-foreground transition-colors p-2"
+                    aria-label="GitHub Repository"
+                  >
+                    <Github className="w-6 h-6" />
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent alignOffset={40}>
+                  <p>Give SlaveCode repository a star</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
 
             <MobileMenu 
               sections={navSections}
@@ -91,15 +102,25 @@ export const Navbar = () => {
         
         {/* Absolute GitHub Icon outside the container (Far right edge) */}
         <div className="absolute right-4 top-1/2 -translate-y-1/2 hidden min-[1390px]:flex items-center">
-          <Link
-            href="https://github.com/phero20/slavecode"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-foreground transition-colors p-2"
-            aria-label="GitHub Repository"
-          >
-            <Github className="w-5 h-5" />
-          </Link>
+           <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Link
+                    id="footer-github-btn"
+                    href="https://github.com/phero20/slavecode"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-foreground transition-colors p-2"
+                    aria-label="GitHub Repository"
+                  >
+                    <Github className="w-6 h-6" />
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent alignOffset={40}>
+                  <p>Give SlaveCode repository a star</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
         </div>
       </nav>
     </>

@@ -62,6 +62,9 @@ import { ResourceService } from "../../services/resources/resource.service";
 import { RoadmapProjectService } from "../../services/resources/roadmap-project.service";
 import { RoadmapResourceService } from "../../services/resources/roadmap-resource.service";
 import { VoteService } from "../../services/votes/vote.service";
+import { ResourceAdminService } from "../../services/resources/resource.admin.service";
+import { RoadmapResourceAdminService } from "../../services/resources/roadmap-resource.admin.service";
+import { RoadmapProjectAdminService } from "../../services/resources/roadmap-project.admin.service";
 // --- Caches (Decorators) ---
 import { ProblemCache } from "../../cache/problems/problem.cache";
 import { ProblemTestCache } from "../../cache/problems/problem-test.cache";
@@ -225,5 +228,8 @@ export const servicesRegistry = {
   roadmapResourceService: asFunction(
     ({ roadmapResourceCache }: ICradle) => roadmapResourceCache,
   ).singleton(),
+  resourceAdminService: asClass(ResourceAdminService).singleton(),
+  roadmapResourceAdminService: asClass(RoadmapResourceAdminService).singleton(),
+  roadmapProjectAdminService: asClass(RoadmapProjectAdminService).singleton(),
   voteService: asClass(VoteService).singleton(),
 };

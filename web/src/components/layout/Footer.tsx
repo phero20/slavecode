@@ -205,7 +205,7 @@ export const Footer = () => {
                   </Link>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>Please give SlaveCode repository a star</p>
+                  <p>Give SlaveCode repository a star</p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
