@@ -1,4 +1,4 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient, keepPreviousData } from "@tanstack/react-query";
 import {
   roadmapProjectAdminService,
   type RoadmapProject,
@@ -47,6 +47,7 @@ export const useAdminProjects = (filter?: AdminProjectFilter) => {
   const query = useQuery({
     queryKey: ["admin-roadmap-projects", filter],
     queryFn: () => roadmapProjectAdminService.getAllProjects(filter),
+    placeholderData: keepPreviousData,
   });
 
   return {

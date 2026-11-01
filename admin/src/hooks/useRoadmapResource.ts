@@ -1,4 +1,4 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient, keepPreviousData } from "@tanstack/react-query";
 import {
   roadmapResourceAdminService,
   type RoadmapResource,
@@ -47,6 +47,7 @@ export const useAdminResources = (filter?: AdminResourceFilter) => {
   const query = useQuery({
     queryKey: ["admin-roadmap-resources", filter],
     queryFn: () => roadmapResourceAdminService.getAllResources(filter),
+    placeholderData: keepPreviousData,
   });
 
   return {

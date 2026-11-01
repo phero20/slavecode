@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import {
   Search,
+  Loader2,
   Eye,
   Edit,
   Trash2,
@@ -88,7 +89,8 @@ interface ResourceItemsListProps {
 }
 
 export function ResourceItemsList({ onEdit, onView }: ResourceItemsListProps) {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchInput, setSearchInput] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const [selectedStatus, setSelectedStatus] = useState<string>("all");
   const [selectedOrigin, setSelectedOrigin] = useState<string>("all");
   const [selectedRoadmap, setSelectedRoadmap] = useState<string>("all");
@@ -96,9 +98,17 @@ export function ResourceItemsList({ onEdit, onView }: ResourceItemsListProps) {
   const [page, setPage] = useState<number>(1);
   const pageSize = 20;
 
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearch(searchInput.trim());
+      setPage(1);
+    }, 400);
+    return () => clearTimeout(handler);
+  }, [searchInput]);
+
   // Filters passed to the backend query
   const queryFilter = {
-    search: searchQuery.trim() || undefined,
+    search: debouncedSearch || undefined,
     status:
       selectedStatus !== "all"
         ? (selectedStatus as AdminResourceStatus)
@@ -113,8 +123,7 @@ export function ResourceItemsList({ onEdit, onView }: ResourceItemsListProps) {
     limit: pageSize,
   };
 
-  const { resources, pagination, isLoading, isError, error } =
-    useAdminResources(queryFilter);
+  const { resources, pagination, isLoading, isFetching, isError, error } = useAdminResources(queryFilter);
   const { stats } = useAdminResourceStats();
   const { roadmaps } = useDeveloperRoadmaps();
   const { moderateResource, deleteResource, isModerating, isDeleting } =
@@ -230,14 +239,7 @@ export function ResourceItemsList({ onEdit, onView }: ResourceItemsListProps) {
   };
 
   return (
-    <QueryState
-      isLoading={isLoading}
-      isError={isError}
-      error={error}
-      loadingMessage="Loading learning resources..."
-      errorTitle="Failed to load resources"
-    >
-      <div className="flex flex-col h-full min-h-0 space-y-4 p-1">
+    <div className="flex flex-col h-full min-h-0 space-y-4 p-1">
         {/* Quick Stats Strip */}
         <div className="grid grid-cols-2 sm:grid-cols-6 gap-2 shrink-0">
           <div
@@ -333,13 +335,13 @@ export function ResourceItemsList({ onEdit, onView }: ResourceItemsListProps) {
               id="resource-search-input"
               type="search"
               placeholder="Search by title, author, URL, or submitter..."
-              className="pl-8 bg-transparent"
-              value={searchQuery}
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
-                setPage(1);
-              }}
+              className="pl-8 pr-8 bg-transparent"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
             />
+            {isFetching && (
+              <Loader2 className="absolute right-2.5 top-3 h-4 w-4 animate-spin text-muted-foreground" />
+            )}
           </div>
 
           {/* Status Filter */}
@@ -442,10 +444,17 @@ export function ResourceItemsList({ onEdit, onView }: ResourceItemsListProps) {
         </div>
 
         {/* Data Table */}
-        {!resources || resources.length === 0 ? (
-          <EmptyState
-            message={
-              searchQuery ||
+        <QueryState
+          isLoading={isLoading && !resources.length}
+          isError={isError}
+          error={error}
+          loadingMessage="Loading learning resources..."
+          errorTitle="Failed to load resources"
+        >
+          {!resources || resources.length === 0 ? (
+            <EmptyState
+              message={
+                debouncedSearch ||
               selectedStatus !== "all" ||
               selectedOrigin !== "all" ||
               selectedRoadmap !== "all" ||
@@ -455,7 +464,7 @@ export function ResourceItemsList({ onEdit, onView }: ResourceItemsListProps) {
             }
           />
         ) : (
-          <div className="rounded-md border flex-1 min-h-0 overflow-auto">
+          <div className={`rounded-md border flex-1 min-h-0 overflow-auto transition-opacity duration-200 ${isFetching ? "opacity-60" : "opacity-100"}`}>
             <Table>
               <TableHeader className="sticky top-0 z-10 bg-background/95 backdrop-blur">
                 <TableRow>
@@ -707,6 +716,7 @@ export function ResourceItemsList({ onEdit, onView }: ResourceItemsListProps) {
             </Table>
           </div>
         )}
+        </QueryState>
 
         {/* Pagination Bar */}
         {pagination.totalPages > 1 && (
@@ -834,6 +844,5 @@ export function ResourceItemsList({ onEdit, onView }: ResourceItemsListProps) {
           </DialogContent>
         </Dialog>
       </div>
-    </QueryState>
   );
 }

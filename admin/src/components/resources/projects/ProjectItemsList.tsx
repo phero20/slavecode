@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import {
   Search,
+  Loader2,
   Eye,
   Edit,
   Trash2,
@@ -89,7 +90,8 @@ interface ProjectItemsListProps {
 }
 
 export function ProjectItemsList({ onEdit, onView }: ProjectItemsListProps) {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchInput, setSearchInput] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const [selectedStatus, setSelectedStatus] = useState<string>("all");
   const [selectedOrigin, setSelectedOrigin] = useState<string>("all");
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>("all");
@@ -98,9 +100,17 @@ export function ProjectItemsList({ onEdit, onView }: ProjectItemsListProps) {
   const [page, setPage] = useState<number>(1);
   const pageSize = 20;
 
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearch(searchInput.trim());
+      setPage(1);
+    }, 400);
+    return () => clearTimeout(handler);
+  }, [searchInput]);
+
   // Filters passed to the backend query
   const queryFilter = {
-    search: searchQuery.trim() || undefined,
+    search: debouncedSearch || undefined,
     status:
       selectedStatus !== "all"
         ? (selectedStatus as AdminProjectStatus)
@@ -119,8 +129,7 @@ export function ProjectItemsList({ onEdit, onView }: ProjectItemsListProps) {
     limit: pageSize,
   };
 
-  const { projects, pagination, isLoading, isError, error, refetch } =
-    useAdminProjects(queryFilter);
+  const { projects, pagination, isLoading, isFetching, isError, error, refetch } = useAdminProjects(queryFilter);
   const { stats, refetch: refetchStats } = useAdminProjectStats();
   const { roadmaps } = useDeveloperRoadmaps();
   const { moderateProject, deleteProject, isModerating, isDeleting } =
@@ -186,7 +195,8 @@ export function ProjectItemsList({ onEdit, onView }: ProjectItemsListProps) {
   };
 
   const handleResetFilters = () => {
-    setSearchQuery("");
+    setSearchInput("");
+    setDebouncedSearch("");
     setSelectedStatus("all");
     setSelectedOrigin("all");
     setSelectedDifficulty("all");
@@ -196,7 +206,7 @@ export function ProjectItemsList({ onEdit, onView }: ProjectItemsListProps) {
   };
 
   const hasActiveFilters =
-    searchQuery !== "" ||
+    Boolean(debouncedSearch || searchInput) ||
     selectedStatus !== "all" ||
     selectedOrigin !== "all" ||
     selectedDifficulty !== "all" ||
@@ -293,14 +303,7 @@ export function ProjectItemsList({ onEdit, onView }: ProjectItemsListProps) {
   };
 
   return (
-    <QueryState
-      isLoading={isLoading}
-      isError={isError}
-      error={error}
-      loadingMessage="Loading roadmap projects..."
-      errorTitle="Failed to load projects"
-    >
-      <div className="flex flex-col h-full min-h-0 space-y-4 p-1">
+    <div className="flex flex-col h-full min-h-0 space-y-4 p-1">
         {/* Quick Stats Strip */}
         <div className="grid grid-cols-2 sm:grid-cols-6 gap-2 shrink-0">
           <div
@@ -420,13 +423,13 @@ export function ProjectItemsList({ onEdit, onView }: ProjectItemsListProps) {
               id="project-search-input"
               type="search"
               placeholder="Search by title, slug, submitter..."
-              className="pl-8 bg-transparent"
-              value={searchQuery}
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
-                setPage(1);
-              }}
+              className="pl-8 pr-8 bg-transparent"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
             />
+            {isFetching && (
+              <Loader2 className="absolute right-2.5 top-3 h-4 w-4 animate-spin text-muted-foreground" />
+            )}
           </div>
 
           {/* Status Filter */}
@@ -557,7 +560,14 @@ export function ProjectItemsList({ onEdit, onView }: ProjectItemsListProps) {
         </div>
 
         {/* Table Content */}
-        <div className="flex-1 min-h-0 border rounded-lg overflow-auto bg-card">
+        <QueryState
+          isLoading={isLoading && !projects.length}
+          isError={isError}
+          error={error}
+          loadingMessage="Loading roadmap projects..."
+          errorTitle="Failed to load projects"
+        >
+          <div className={`flex-1 min-h-0 border rounded-lg overflow-auto bg-card transition-opacity duration-200 ${isFetching ? "opacity-60" : "opacity-100"}`}>
           <Table>
             <TableHeader className="sticky top-0 bg-card z-10">
               <TableRow>
@@ -829,6 +839,7 @@ export function ProjectItemsList({ onEdit, onView }: ProjectItemsListProps) {
             </TableBody>
           </Table>
         </div>
+        </QueryState>
 
         {/* Pagination & Footer */}
         {pagination.totalPages > 1 && (
@@ -993,7 +1004,6 @@ export function ProjectItemsList({ onEdit, onView }: ProjectItemsListProps) {
           </AlertDialogContent>
         </AlertDialog>
       </div>
-    </QueryState>
   );
 }
 
