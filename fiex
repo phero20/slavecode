@@ -1,1 +1,143 @@
 
+Problem 1: Manual Regex & String Surgery to Rescue Broken JSON
+The Exact Proof in Your Code:
+In api/src/services/ai/llm.service.ts:
+ts
+const body = {
+  model: modelName,
+  messages: [ ... ],
+  temperature: opts.temperature ?? 0,
+  max_tokens: opts.maxTokens ?? 5000,
+};
+There is no response_format specified.
+In llm.service.ts: Lines 104–161 contain ~60 lines of manual string manipulation:
+Line 116–119: Counts unescaped quotes with regex and manually appends " if odd (cleaned += '"').
+Line 121–125: Strips trailing commas and patches LaTeX backslashes.
+Line 132–160: Loops character-by-character maintaining a braceStack counter, and on line 159 writes: cleaned += "}".repeat(braceStack); to force-close truncated JSON!
+The Real-World Bug: Whenever a model slightly modifies its output (e.g., adds conversational text before the JSON, or truncates mid-array), your manual string surgery attempts to "guess" where braces close. When it guesses wrong, JSON.parse crashes with a fatal error: CRITICAL: LLM returned invalid JSON.
+How to Solve It:
+Add response_format: { type: "json_object" } directly inside the request payload body in llm.service.ts.
+Because NewAPI and models like Groq, Gemini, and DeepSeek support native JSON Mode, the model's output decoder is constrained to emit strictly valid JSON.
+You can safely delete the fragile 60 lines of brace-counting and quote-patching logic.
+Problem 2: Algorithmic TLE Cheating & False "ACCEPTED" Verdicts
+The Exact Proof in Your Code:
+In api/src/libs/prompts/ai-code-judge.prompt.ts:
+Line 10: "DYNAMIC EXECUTION SIMULATION ONLY: Do NOT perform general static code analysis or review the code for theoretical bugs or potential loops that do not trigger. You must strictly simulate the execution of the code line-by-line using the EXACT input provided in the testcase."
+Line 11: "ACTUAL HANG TIMEOUTS ONLY: You should only mark a testcase as TLE if the code execution would actually loop indefinitely or hang when run with the specific input of that testcase."
+The Real-World Bug:
+Say a problem is LeetCode "Two Sum" or "Subarray Sum" with input constraint 
+𝑁
+=
+10
+5
+N=10
+5
+. An optimal solution requires 
+𝑂
+(
+𝑁
+)
+O(N) or 
+𝑂
+(
+𝑁
+log
+⁡
+𝑁
+)
+O(NlogN).
+A user submits a naive 
+𝑂
+(
+𝑁
+2
+)
+O(N
+2
+) brute-force double loop.
+Because sample testcases are small (e.g. [2, 7, 11, 15] where 
+𝑁
+=
+4
+N=4), the double loop only runs 6 iterations.
+Because Line 10 forbids static complexity analysis and Line 11 says "only mark TLE if it actually loops indefinitely", the AI marks the test case as ACCEPTED!
+In a real sandbox judge, 
+𝑁
+=
+10
+5
+N=10
+5
+ hits the 1.0-second Linux CPU timer and fails with TLE. But an LLM cannot simulate 
+100
+,
+000
+100,000 items (it would blow the prompt to millions of tokens), so brute-force code slips through with a false ACCEPTED.
+How to Solve It:
+In ai-code-judge.prompt.ts, instruct the AI to analyze asymptotic Big-O time and space complexity against the problem's stated constraints.
+Add time_complexity and will_tle_on_max_constraints to the JSON schema.
+If the user's complexity exceeds the problem's time budget (e.g. 
+𝑂
+(
+𝑁
+2
+)
+O(N
+2
+) on 
+𝑁
+=
+10
+5
+N=10
+5
+), return TIME_LIMIT_EXCEEDED immediately through analytical deduction.
+Problem 3: Monolithic Prompt Token Truncation on "Submit"
+The Exact Proof in Your Code:
+In api/src/services/submissions/execution.service.ts: Lines 124–143 combine all public AND hidden test cases into a single array (allCases), and lines 159–168 pass all of them into a single aiCodeJudgeService.runSamples() call.
+In api/src/libs/prompts/ai-code-judge.prompt.ts: Line 17 explicitly says: "- CONCISE THINKING RULE: ... Do not write step-by-step logs for every test case, otherwise you will hit the token limit and get cut off." Whoever wrote this prompt already experienced this exact bug!
+The Real-World Bug: When a problem has 15 to 25 hidden test cases, asking an LLM to output verdicts, stdout, stderr, and explanations for all 25 cases causes the output to hit the max_tokens: 5000 ceiling. The response cuts off midway through test case #14, producing incomplete JSON (which is why llm.service.ts had to add the brace repair hack!).
+How to Solve It:
+"Run" Mode (Samples): Keep it as 1 single fast call (only 2–3 public tests).
+"Submit" Mode (All Cases): Chunk the test cases into small batches (e.g. 3–4 tests per batch). Send them in parallel using Promise.all(), then merge the results. No single request ever exceeds the token limit, and execution finishes faster.
+Problem 4: Dead Judge0 / Driver Branching & Redis Heartbeats
+The Exact Proof in Your Code:
+In api/src/services/judge/driver-judge-execution.service.ts:
+ts
+const SUPPORTED_LANGUAGE_IDS = new Set([
+  "62", // Java
+  // "71", Python (commented out)
+  // "54", C++ (commented out)
+  // "50", C (commented out)
+  // "63", JS (commented out)
+  // "74", TS (commented out)
+  ...
+]);
+In api/src/workers/submission/evaluator.ts and execution.service.ts: The code branches: supportsLanguage(languageId) ? driverJudge.evaluate(...) : aiJudge.runSamples(...)
+In execution.service.ts and line 176–180: await redis.set("judge0:last_active", Date.now().toString());
+The Real-World Bug: Because you want a 100% AI judge, having this half-enabled Judge0 code creates two problems:
+Submissions in Java (62) go to Judge0 (which may fail if your Judge0 VM is inactive), while all other languages go to AI.
+Dead Redis commands keep pinging an auto-shutdown timer for a VM you don't even want to run.
+How to Solve It:
+Remove the driverJudgeExecutionService.supportsLanguage(...) condition.
+Direct all submissions (including Java) straight to aiJudgeCache 
+→
+→ aiCodeJudgeService.
+Clean up the unused Redis Judge0 heartbeat calls.
+Problem 5: Non-Existent Models in ai.config.ts Causing Wasted Fallback Delays
+The Exact Proof in Your Code:
+In api/src/configs/ai.config.ts:
+Line 10: { provider: "groq", model: "openai/gpt-oss-120b" }
+Line 13: { provider: "gemini", model: "gemini-3.6-flash" }
+Line 22: { provider: "gemini", model: "gemini-3.8-flash" }
+Line 25: { provider: "groq", model: "openai/gpt-oss-20b" }
+In api/src/services/ai/unified-llm.service.ts: It loops through AI_CONFIG.order1 sequentially. It tries Step 1, catches error, logs a warning, tries Step 2, catches error, etc.
+The Real-World Bug:
+Google has never released a model named gemini-3.6-flash or gemini-3.8-flash. (Google's lineup is Gemini 1.5, Gemini 2.0 Flash, and Gemini 2.5 Flash).
+Unless your NewAPI has explicit custom alias rewrites mapping these fantasy names, NewAPI returns 404 Model Not Found or 400 Bad Request.
+Your system wastes 500ms–1500ms catching errors and hopping through failed fallback steps before it finally hits a model that actually exists (like gemini-2.5-flash on line 16).
+How to Solve It:
+Replace the model strings in ai.config.ts with real, production-ready models available in your NewAPI:
+Primary (Groq): llama-3.3-70b-versatile or qwen-2.5-coder-32b.
+Fallback (Google): gemini-2.5-flash or gemini-2.0-flash.
+Every call will succeed on the first attempt with zero wasted fallback latency.
