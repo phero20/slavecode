@@ -24,8 +24,6 @@ export const Hero = ({ isEmbedded: propIsEmbedded }: HeroProps = {}) => {
   useEffect(() => {
     if (propIsEmbedded !== undefined) {
       setIsEmbedded(propIsEmbedded);
-    } else if (typeof window !== "undefined" && window.self !== window.top) {
-      setIsEmbedded(true);
     }
   }, [propIsEmbedded]);
   const [rayOpacity, setRayOpacity] = useState(0.5);

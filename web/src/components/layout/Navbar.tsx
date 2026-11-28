@@ -17,14 +17,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isEmbedded, setIsEmbedded] = useState(false);
   const pathname = usePathname();
-
-  useEffect(() => {
-    if (typeof window !== "undefined" && window.self !== window.top) {
-      setIsEmbedded(true);
-    }
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -32,7 +25,7 @@ export const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  if (isEmbedded || shouldHide(pathname)) return null;
+  if (shouldHide(pathname)) return null;
 
   return (
     <>
